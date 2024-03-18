@@ -24,3 +24,6 @@ def resume_project(request):
 
 def resume_person(request):
     return render(request, 'itmo_hh/resume_person.html')
+
+def page_of_project(request):
+    return render(request, 'itmo_hh/page_of_project.html')

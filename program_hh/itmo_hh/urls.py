@@ -12,5 +12,6 @@ urlpatterns = [
     path('project', project, name='project'),
     path('summary', summary, name='summary'),
     path('resume_project', resume_project, name='resume_project'),
-    path('resume_person', resume_person, name='resume_person')
+    path('resume_person', resume_person, name='resume_person'),
+    path('page_of_project', page_of_project, name='page_of_project')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
