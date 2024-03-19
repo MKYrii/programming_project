@@ -5,8 +5,82 @@
         <meta charset="UTF-8">
         <title>Personal_account</title>
         <link rel="stylesheet" type="text/css" href="{% static 'itmo_hh/css/personal_account.css' %}" />
+        <style>
+            body{
+                background-image: url("{% static 'itmo_hh/img/backend_building.png' %}");
+                background-size: 100%;
+                font-size: 24px;
+                font-weight: 200;
+                color: #393e46;
+            }
+            .bottom{
+
+            }
+
+            #articles{
+                width: 1300px;
+                height: 515px;
+                background-color: #FFFFFF;
+                border-radius: 20px;
+                margin-left: 100px;
+            }
+
+            .redaction{
+                margin-left: 1070px;
+            }
+
+            .redaction a{
+                position: absolute;
+                top: 40px;
+                right: 210px;
+            }
+
+
+            .logo{
+                margin-left: 105px;
+            }
+            .top{
+                margin-top: 50 px;
+                margin-bottom: 50px;
+                padding-top: 15px;
+            }
+
+            .topics{
+                margin-bottom: 50px;
+                text-align: center;
+            }
+
+            .resume, .offers, .replies{
+                width: 500px;
+                height: 490px;
+                background-color: #FFFFFF;
+                border-radius: 20px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-right: 30px;
+                padding-left: 30px;
+                margin-left: 50px;
+                margin-right: 50px;
+                border: 2px solid #000000;
+            }
+        </style>
     </head>
     <body>
-        <h1>Personal</h1>
+        <div class="top">
+            <span class="logo">
+                <img src="{% static 'itmo_hh/img/itmo_logotip.png' %}" alt=":(">
+            </span>
+            <span class="redaction">
+                <a href="#" style="color: #000000;"><u>Редактировать</u></a><img src="{% static 'itmo_hh/img/person.png' %}" alt="person">
+            </span>
+        </div>
+        <div class="bottom">
+            <div class="topics">
+                <span class="resume"><a href="#" style="color: #393e46; text-decoration: none">Мои резюме</a></span>
+                <span class="offers"><a href="#" style="color: #393e46; text-decoration: none">Мои предложения</a></span>
+                <span class="replies"><a href="#" style="color: #393e46; text-decoration: none">Мои отклики</a></span>
+            </div>
+            <div id="articles"></div>
+        </div>
     </body>
 </html>
