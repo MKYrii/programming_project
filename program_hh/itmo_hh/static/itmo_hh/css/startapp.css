@@ -1,0 +1,58 @@
+body{
+    background-image: url("../img/backend_building.png");
+    background-size: 100%;
+    font-size: 24px;
+    font-weight: 200;
+    color: #393e46;
+}
+
+.top_line {
+	background: white;
+	height: 50px;
+	width: 100%;
+	border-radius: 25px;
+}
+
+ .left_top, .right_top {
+    float: left;
+    width: 30%; 
+
+ }
+
+.right_top {
+    text-align: right; 
+}
+
+.top_button1, .top_button2 {
+	width: 40px; 
+	height: 40px;
+/*	background-color: white;
+	border-color: black;*/
+	border-radius: 50%;
+	position: relative;
+	left: 120%;
+	margin-top: 5px;
+	margin-left: 15px;
+	border: none;
+}
+
+.top_button1 {
+	background-image: url("../img/person.png");
+	background-size: 100%;
+
+}
+
+.top_button2 {
+	background-image: url("../img/settings.png");
+	background-size: 100%;
+}
+
+.p1 {
+	border-bottom: 2px solid black;
+	width: 30%;
+	font-weight: normal;
+	font-family: Calibri;
+	text-indent: 20px;
+	margin-left: 40px;
+}
+
