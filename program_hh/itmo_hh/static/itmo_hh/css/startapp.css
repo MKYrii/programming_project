@@ -8,23 +8,18 @@ body{
 
 .filters {
 	background: #4169E1;
-	height: 665px;
+	height: 675px;
 	width: 25%;
 	border-radius: 10px;
 }
 .filters .in_filters{
+	border-bottom: 2px solid black;
 	font-weight: normal;
 	font-family: Calibri;
 	font-size: 24px;
-	text-align: center;
+	color: #000000;
+	margin-left: 140px;
 	
-}
-
-.puncts_filters{
-	font-weight: normal;
-	font-family: Calibri;
-	font-size: 24px;
-	padding-left: 3%;
 }
 
 .top_line {
@@ -84,4 +79,22 @@ body{
   height: 100%;
   display: flex;
   flex-flow: row nowrap;
+}
+
+.experiance{
+	padding-left: 10px;
+}
+
+.experiance span{
+	color: #000000;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 20px;
+}
+.experiance_form{
+	color: #000000;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 16px;
+	margin-bottom: 10px;	
 }

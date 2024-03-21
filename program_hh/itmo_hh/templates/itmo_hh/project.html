@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Startapp</title>
     <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/startapp.css" />
+    <script type="text/javascript" src="../../static/itmo_hh/js/drop_down.js"></script>
 </head>
 <body>
 
@@ -17,11 +18,29 @@
 		</div>
 	</div>
 	<div class="filters">
-		<p class="p1">Вакансии: проекты</p>
-		<p class="in_filters">Фильтры</p>
-		<p class="puncts_filters">Требуемый опыт ></p>
-		<p class="puncts_filters">Сфера деятельности ></p>
-		<p class="puncts_filters">Требуемый уровень образования ></p>
+		<span class="in_filters" style="margin-top: 100px;">Фильтры</span>
+		<span class="p1">Вакансии: проекты</sapn>
+
+		<div class="experiance">
+			<span class="option_head">Требуемый опыт ></span>
+			<form id="experienceForm" class="experiance_form">
+				<label><input type="checkbox" name="experiance" value="no_experiance"> Нет опыта</label><br>
+				<label><input type="checkbox" name="experiance" value="less_then_1">Меньше года</label><br>
+				<label><input type="checkbox" name="experiance" value="from_1_yo_3">От 1 до 3</label><br>
+				<label><input type="checkbox" name="experiance" value="from_3_yo_5">От 3 до 5</label><br>
+				<label><input type="checkbox" name="experiance" value="5_and_more">5+</label>
+			</form>
+
+			<span class="option_head">Сфера деятельности ></span><br>
+
+			<span class="option_head">Требуймый уровень образования ></span>
+			<form class="experiance_form">
+				<label><input type="checkbox" name="education" value="bakalavr">Бакалавр</label><br>
+				<label><input type="checkbox" name="education" value="magistr">Магистр</label><br>
+				<label><input type="checkbox" name="education" value="aspiranr">Аспирант</label><br>
+			</form>
+		</div>
+
 	</div>
 
 </body>
