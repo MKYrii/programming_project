@@ -6,6 +6,16 @@ body{
     color: #393e46;
 }
 
+.filters {
+	background: #1324ff;
+	flex-grow: 2;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 24px;
+	text-align: center;
+	border-radius: 10px;
+}
+
 .top_line {
 	background: white;
 	height: 50px;
@@ -16,7 +26,8 @@ body{
  .left_top, .right_top {
     float: left;
     width: 30%; 
-
+	font-weight: normal;
+	font-family: Calibri;
  }
 
 .right_top {
@@ -26,8 +37,6 @@ body{
 .top_button1, .top_button2 {
 	width: 40px; 
 	height: 40px;
-/*	background-color: white;
-	border-color: black;*/
 	border-radius: 50%;
 	position: relative;
 	left: 120%;
@@ -52,7 +61,17 @@ body{
 	width: 30%;
 	font-weight: normal;
 	font-family: Calibri;
+	font-size: 24px;
 	text-indent: 20px;
-	margin-left: 40px;
+	flex-grow: 8;
+	margin-left: 50px;
+	margin-top: 9px;
+	max-height: 40px;
 }
 
+.flex_container {
+	width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
