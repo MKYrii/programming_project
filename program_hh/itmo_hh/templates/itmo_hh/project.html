@@ -7,25 +7,22 @@
 </head>
 <body>
 
-<div class="top_line">
-	<div class="left_top">
-		<img  src="../../static/itmo_hh/img/itmo_logotip.png">
+	<div class="top_line">
+		<div class="left_top">
+			<img  src="../../static/itmo_hh/img/itmo_logotip.png">
+		</div>
+		<div class="right_top">
+			<a href="{% url 'personal_account' %}"><button class="top_button1"></button></a>
+			<button class="top_button2"></button>
+		</div>
 	</div>
-	<div class="right_top">
-		<a href="{% url 'personal_account' %}"><button class="top_button1"></button></a>
-		<button class="top_button2"></button>
+	<div class="filters">
+		<p class="p1">Вакансии: проекты</p>
+		<p class="in_filters">Фильтры</p>
+		<p class="puncts_filters">Требуемый опыт ></p>
+		<p class="puncts_filters">Сфера деятельности ></p>
+		<p class="puncts_filters">Требуемый уровень образования ></p>
 	</div>
-</div>
-<div class="flex_container">
 
-<div class="filters"> Фильтры 
-<br>
-   чота еще
-<br>
-   чота еще
-</div>
-<div class="p1">  Вакансии: проекты </div>
-
-</div>
 </body>
 </html>

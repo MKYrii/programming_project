@@ -8,12 +8,6 @@ body{
 
 .filters {
 	background: #1324ff;
-	flex-grow: 2;
-	font-weight: normal;
-	font-family: Calibri;
-	font-size: 24px;
-	text-align: center;
-	border-radius: 10px;
 }
 
 .top_line {
@@ -64,8 +58,8 @@ body{
 	font-family: Calibri;
 	font-size: 24px;
 	text-indent: 20px;
-	flex-grow: 8;
-	margin-left: 50px;
+	flex-grow: 20;
+	margin-left: 500px;
 	margin-top: 9px;
 	max-height: 40px;
 }
