@@ -27,10 +27,10 @@ def resume_person(request):
     if request.method == "POST":
         form = AddResumePerson(request.POST)
         if form.is_valid():
-            print(form)
+            print(form.cleaned_data)
     else:
         form = AddResumePerson()
-    return render(request, 'itmo_hh/resume_person.html', {'form': form, 'title': 'Создание резюме'})
+    return render(request, 'itmo_hh/resume_person.html', {'form': form, 'title': 'Создать резюме/ личное резюме'})
 
 def page_of_project(request):
     return render(request, 'itmo_hh/page_of_project.html')

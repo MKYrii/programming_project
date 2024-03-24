@@ -14,8 +14,12 @@ class AddResumePerson(forms.Form):
         ('aspirantyra', 'Аспирантура')
     )
     name = forms.CharField(max_length=255, label='ФИО')
-    sex = forms.MultipleChoiceField(label='Пол', choices=(('men', 'Мужчина'), ('women', 'Женщина')), widget=forms.CheckboxSelectMultiple())
-    borth = forms.DateField(label='День рождения')
+    sex = forms.MultipleChoiceField(label='Пол', choices=(('men', 'Мужчина'), ('women', 'Женщина')),
+                                    widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-inside'}))
+
+    borth = forms.DateField(label='День рождения',
+                            input_formats=['%d/%m/%Y', '%d/%m/%y', '%d.%m.%Y', '%d.%m.%y'])
+
     photo = forms.ImageField(required=False, label='Фото')
     napravlenie = forms.CharField(label='Направление обучения')  #forms.ModelChoiceField queryset=Napravlenie.objects.all()
     education_level = forms.ChoiceField(choices=education_level_choice, label='Уровень образования')
