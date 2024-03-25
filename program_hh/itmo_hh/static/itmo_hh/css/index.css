@@ -53,15 +53,6 @@ button:hover {
     background: #FFFFFF;
 }
 
-/* Логотип русский на белой плашке 3 */
-.logo {
-    position: absolute;
-    width: 152px;
-    height: 49px;
-    left: 75px;
-    top: 38px;
-}
-
 /* Rectangle 13 */
 .top_menu {
     position: absolute;
@@ -80,11 +71,33 @@ button:hover {
     position: absolute;
     width: 1174px;
     height: 85px;
-    left: 0px;
-    top: 0px;
+    left: 41px;
+    top: 20px;
 
     background: #FFFEFE;
     border-radius: 45px;
+}
+
+/* Логотип русский на белой плашке 3 */
+.logo {
+    width: 152px;
+    height: 49px;
+    left: 34px;
+    top: 18px;
+}
+
+/* Rectangle 5 */
+
+.logo_frame {
+    position: absolute;
+    width: 179px;
+    height: 58px;
+    left: 21px;
+    top: 14px;
+
+    background: #FFFCFC;
+    border: 2px solid #313D35;
+    border-radius: 30px;
 }
 
 
@@ -127,4 +140,234 @@ button:hover {
     background-image: url("/programming_project/program_hh/itmo_hh/static/itmo_hh/img/backend_building.png");
 }
 
+/* Rectangle 13 */
+.footer {
+    position: absolute;
+    width: 1280px;
+    height: 126px;
+    left: 0px;
+    top: 714px;
 
+    background: #ebebeb;
+}
+
+
+/* Найди проект, команду для конкурса, стартапа, хакатона или репетитора */
+.right_text {
+    position: absolute;
+    width: 256px;
+    height: 189px;
+    left: 970px;
+    top: 544px;
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: right;
+    letter-spacing: 0.05em;
+
+    color: #000000;
+}
+
+
+
+/* Rectangle 6 */
+
+.resume_frame {
+    position: absolute;
+    width: 233px;
+    height: 58px;
+    left: 1012px;
+    top: 675px;
+
+    background: #FFFCFC;
+    border: 2px solid #313D35;
+    border-radius: 30px;
+}
+
+
+/* Создать резюме */
+
+.resume_text {
+
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+
+    color: rgba(0, 0, 0, 0.53);
+}
+
+
+
+/* Поиск проектов для вашей карьеры в ITMO HUNTER */
+
+.text_header {
+
+    position: absolute;
+    width: 1040px;
+    height: 224px;
+    left: 0px;
+    top: 0px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 48px;
+    line-height: 58px;
+    letter-spacing: 0.05em;
+
+    color: #FFFFFF;
+
+    border: 0.5px solid #FFFFFF;
+}
+
+
+
+/* Frame 1 */
+
+.projects_frame {
+    position: absolute;
+    width: 780px;
+    height: 231px;
+    left: 60px;
+    top: 571px;
+}
+
+
+/* Frame 4 */
+
+.frame_3 {
+    position: absolute;
+    width: 232px;
+    height: 207px;
+    left: 548px;
+    top: 0px;
+}
+
+
+/* Rectangle 17 */
+
+.picture_3 {
+    position: absolute;
+    width: 232px;
+    height: 171px;
+    left: 0px;
+    top: 0px;
+
+    background: url("/programming_project/program_hh/itmo_hh/static/itmo_hh/img/backend_building.png");
+    border-radius: 45px;
+}
+
+
+/* Вакансии: стартапы */
+
+.text_3 {
+
+    position: absolute;
+    width: 209px;
+    height: 24px;
+    left: 0px;
+    top: 183px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+
+    color: #000000;
+}
+
+
+
+/* Frame 3 */
+.frame_2 {
+    position: absolute;
+    width: 232px;
+    height: 226px;
+    left: 274px;
+    top: 0px;
+}
+
+
+/* Rectangle 18 */
+
+.picture_2 {
+    position: absolute;
+    width: 232px;
+    height: 171px;
+    left: 0px;
+    top: 0px;
+
+    background: url("/programming_project/program_hh/itmo_hh/static/itmo_hh/img/backend_building.png");
+    border-radius: 45px;
+}
+
+/* Команды для участия в конкурсах */
+
+.text_2 {
+    position: absolute;
+    width: 232px;
+    height: 48px;
+    left: 0px;
+    top: 178px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+
+    color: #000000;
+}
+
+
+/* Frame 2 */
+
+.frame_1 {
+    position: absolute;
+    width: 232px;
+    height: 231px;
+    left: 0px;
+    top: 0px;
+}
+
+
+
+/* Rectangle 16 */
+.picture_1 {
+    position: absolute;
+    width: 232px;
+    height: 171px;
+    left: 0px;
+    top: 0px;
+
+    background: url("/programming_project/program_hh/itmo_hh/static/itmo_hh/img/backend_building.png");
+    border-radius: 45px;
+}
+
+/* Проекты студентов и выпускников */
+
+.text_1 {
+    position: absolute;
+    width: 217px;
+    height: 48px;
+    left: 0px;
+    top: 183px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+
+    color: #000000;
+}
