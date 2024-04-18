@@ -16,14 +16,24 @@
         </svg></a>
     </div>
     <div class="resume">
-        <fotm method="POST" action="{% url 'personal_account' %}">
+        <form action="{% url 'resume_person' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <div class="form-error">{{ form.non_field_errors }}</div>
             {% for f in form %}
-                <p><label class="form-label" for="f.id_for_label">{{ f.label }}:</label>{{ f }}</p>
-                <div class="form-error">{{ f.errors }}</div>
+                <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+                <div class="form-error">{{ form.errors }}</div>
             {% endfor %}
             <button type="submit" class="make">Создать</button>
-        </fotm>
+        </form>
+        {% if form.errors %}
+            <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 </body>
 </html>

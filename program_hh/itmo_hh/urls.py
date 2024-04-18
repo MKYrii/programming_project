@@ -6,12 +6,19 @@ from .views import *
 
 urlpatterns = [
     path("", index, name='home'),
-    path("personal_account", personal_account, name='personal_account'),
+    path("personal_account", PersonalAccount.as_view(), name='personal_account'),
     path('registration', registration, name='registration'),
-    path('startapp', startapp, name='startapp'),
-    path('project', project, name='project'),
+    path('startapp', Startapp.as_view(), name='startapp'),
+    path('project', Projects.as_view(), name='project'),
     path('summary', summary, name='summary'),
     path('resume_project', resume_project, name='resume_project'),
     path('resume_person', resume_person, name='resume_person'),
-    path('page_of_project', page_of_project, name='page_of_project')
+    path('project/<int:project_id>/', PageOfProject.as_view(), name='project'),
+    path('my_offers', MyOffers.as_view(), name='my_offers'),
+    path('my_otclics', MyOtclics.as_view(), name='my_otclics'),
+    path('competitions', Competitions.as_view(), name='competitions'),
+    path('resume/<int:resume_id>/', ResumePage.as_view(), name='resume'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

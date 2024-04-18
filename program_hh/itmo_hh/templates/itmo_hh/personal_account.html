@@ -17,11 +17,21 @@
         </div>
         <div class="bottom">
             <div class="topics">
-                <span class="resume"><a href="#" style="color: #393e46; text-decoration: none">Мои резюме</a></span>
-                <span class="offers"><a href="#" style="color: #393e46; text-decoration: none">Мои предложения</a></span>
-                <span class="replies"><a href="#" style="color: #393e46; text-decoration: none">Мои отклики</a></span>
+                <span class="resume"><a href="{% url 'personal_account' %}" style="color: #393e46; text-decoration: none">Мои резюме</a></span>
+                <span class="offers"><a href="{% url 'my_offers' %}" style="color: #393e46; text-decoration: none">Мои предложения</a></span>
+                <span class="replies"><a href="{% url 'my_otclics' %}" style="color: #393e46; text-decoration: none">Мои отклики</a></span>
             </div>
-            <div id="articles"></div>
+            <div id="articles" style="padding-top: 10px;">
+                {% block content %}
+                    {% for resume in resumes %}
+                    <span class="res_block">
+                        <a href="{{ resume.get_absolute_url }}" class="res_title">{{resume.title}}</a>
+                        <span style="padding-top: 2px; padding-bottom: 5px; font-size: 20px;">{{resume.time_published}}</span>
+                    </span>
+                        <p style="margin-left: 20px; margin-bottom: 30px; font-size: 20px;">{{resume.content|linebreaksbr|truncatewords:30}}</p>
+                    {% endfor %}
+                {% endblock %}
+            </div>
         </div>
     </body>
 </html>

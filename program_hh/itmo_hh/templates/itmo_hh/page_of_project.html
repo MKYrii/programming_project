@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Project {{project.name}}</title>
 </head>
 <body>
-
+    {% if project.photo != '#' %}
+        <img src="{{project.photo.url}}" alt=":(">
+    {% endif %}
+     <p>{{project.title}}</p>
+     <p>{{projrct.applied_users}}</p>
+     <p>{{project.header}}</p>
+     <p>{{project.sphere}}</p>
+     <p>{{project.education_level}}</p>
+     <p>{{project.experience}}</p>
+     <p>{{project.content}}</p>
+     <p>{{project.file}}</p>
+    
 </body>
 </html>

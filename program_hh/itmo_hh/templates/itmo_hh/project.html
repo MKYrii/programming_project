@@ -17,30 +17,55 @@
 			<button class="top_button2"></button>
 		</div>
 	</div>
-	<div class="filters">
-		<span class="in_filters" style="margin-top: 100px;">Фильтры</span>
-		<span class="p1">Вакансии: проекты</sapn>
 
-		<div class="experiance">
-			<span class="option_head">Требуемый опыт ></span>
-			<form id="experienceForm" class="experiance_form">
-				<label><input type="checkbox" name="experiance" value="no_experiance"> Нет опыта</label><br>
-				<label><input type="checkbox" name="experiance" value="less_then_1">Меньше года</label><br>
-				<label><input type="checkbox" name="experiance" value="from_1_yo_3">От 1 до 3</label><br>
-				<label><input type="checkbox" name="experiance" value="from_3_yo_5">От 3 до 5</label><br>
-				<label><input type="checkbox" name="experiance" value="5_and_more">5+</label>
-			</form>
+	<div class="conteiner">
+		<div class="filters">
+			<span class="in_filters" style="margin-top: 150px;">Фильтры</span>
 
-			<span class="option_head">Сфера деятельности ></span><br>
+			<div class="experiance">
+				<span class="option_head">Требуемый опыт ></span>
+				<form id="experienceForm" class="experiance_form">
+					<label><input type="checkbox" name="experiance" value="no_experiance"> Нет опыта</label><br>
+					<label><input type="checkbox" name="experiance" value="less_then_1">Меньше года</label><br>
+					<label><input type="checkbox" name="experiance" value="from_1_yo_3">От 1 до 3</label><br>
+					<label><input type="checkbox" name="experiance" value="from_3_yo_5">От 3 до 5</label><br>
+					<label><input type="checkbox" name="experiance" value="5_and_more">5+</label>
+				</form>
 
-			<span class="option_head">Требуймый уровень образования ></span>
-			<form class="experiance_form">
-				<label><input type="checkbox" name="education" value="bakalavr">Бакалавр</label><br>
-				<label><input type="checkbox" name="education" value="magistr">Магистр</label><br>
-				<label><input type="checkbox" name="education" value="aspiranr">Аспирант</label><br>
-			</form>
+				<span class="option_head">Сфера деятельности ></span><br>
+
+				<span class="option_head">Требуймый уровень образования ></span>
+				<form class="experiance_form">
+					<label><input type="checkbox" name="education" value="bakalavr">Бакалавр</label><br>
+					<label><input type="checkbox" name="education" value="magistr">Магистр</label><br>
+					<label><input type="checkbox" name="education" value="aspiranr">Аспирант</label><br>
+				</form>
+			</div>
 		</div>
 
+		<div class="project">
+			<span class="p1">Вакансии: {{title}}</sapn>
+			<div class="project">
+				{% block content %}
+				{% for project in projects %}
+
+				{% if project.photo != '#' %}
+
+					<a href="{{project.get_absolute_url}}"><span class="project-title-p"><b>{{ project.title }}</b></span></a>
+					<span><img class="project-photo" src="{{project.photo.url}}" width="100%"></span>
+					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 30px;">{{ project.content|linebreaksbr|truncatewords:30 }}</pre>
+
+				{% else %}
+
+					<a href="{{project.get_absolute_url}}"><p class="project-title"><b>{{ project.title }}</b></p></a>
+					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 40px;">{{ project.content|linebreaksbr|truncatewords:30 }}</pre>
+
+				{% endif %}
+
+				{% endfor %}
+				{% endblock %}
+			</div>
+		</div>
 	</div>
 
 </body>
