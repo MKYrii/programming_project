@@ -5,10 +5,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("itmo_hh", "0003_rename_tittle_resumes_title"),
-    ]
-
     operations = [
         migrations.AlterField(
             model_name="startapps_and_projects",
