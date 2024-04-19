@@ -100,7 +100,12 @@ def resume_project(request):
             resume = form.save(commit=False)
             resume.user_id = request.user
             resume.save()
-            return redirect('project')
+            if resume.category_id == 2:
+                return redirect('project')
+            elif resume.category_id == 1:
+                return redirect('competitions')
+            else:
+                return redirect('startapp')
     else:
         print('eror2')
         form = AddResumeProject()
