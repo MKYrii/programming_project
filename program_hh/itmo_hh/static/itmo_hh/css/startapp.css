@@ -48,7 +48,7 @@ body{
 .top_button1{
 	background-image: url("../img/person.png");
 	background-size: 100%;
-	transition: 1s;
+	transition: 0.5s;
 }
 .top_button1:hover{
 	transform: scale(1.2);

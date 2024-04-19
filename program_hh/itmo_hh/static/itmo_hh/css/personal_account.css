@@ -73,3 +73,9 @@ body{
 .bottom{
     margin-top: -10px;
 }
+.itmo_home{
+    transition: 0.5s;
+}
+.itmo_home:hover{
+    transform: scale(1.2);
+}

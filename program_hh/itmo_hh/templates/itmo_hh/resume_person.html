@@ -8,7 +8,7 @@
 </head>
 <body>
     <div>
-        <span><img src="{% static 'itmo_hh/img/itmo_logotip.png' %}" alt=":(" class="image"></span>
+        <span><a href="{% url 'home' %}"><img src="{% static 'itmo_hh/img/itmo_logotip.png' %}" alt=":(" class="image"></span></a>
         <span class="title">{{title}}</span>
         <a href="{% url 'personal_account' %}"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi-x-circle" viewBox="0 0 16 16">
           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>

@@ -50,7 +50,7 @@ def registration(request):
 class Startapp(ListView):
     model = Startapps_and_projects
     template_name = 'itmo_hh/startapp.html'
-    context_object_name = 'projects_s'
+    context_object_name = 'projects'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -92,7 +92,7 @@ class Competitions(ListView):
 def summary(request):
     return render(request, 'itmo_hh/summary.html')
 
-
+@login_required
 def resume_project(request):
     if request.method == "POST":
         form = AddResumeProject(request.POST, request.FILES)
@@ -100,7 +100,7 @@ def resume_project(request):
             resume = form.save(commit=False)
             resume.user_id = request.user
             resume.save()
-            return redirect('personal_account')
+            return redirect('project')
     else:
         print('eror2')
         form = AddResumeProject()

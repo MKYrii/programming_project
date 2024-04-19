@@ -10,7 +10,7 @@
 
 	<div class="top_line">
 		<div class="left_top">
-			<img  src="../../static/itmo_hh/img/itmo_logotip.png">
+			<a href="{% url 'home' %}"><img  src="../../static/itmo_hh/img/itmo_logotip.png"></a>
 		</div>
 		<div class="right_top">
 			<a href="{% url 'personal_account' %}"><button class="top_button1"></button></a>
@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="project">
-			<span class="p1">Вакансии: {{title}}</span>
+			<span class="p1">Вакансии: {{title}}</sapn>
 			<div class="project">
 				{% block content %}
 				{% for project in projects %}
@@ -53,12 +53,12 @@
 
 					<a href="{{project.get_absolute_url}}"><span class="project-title-p"><b>{{ project.title }}</b></span></a>
 					<span><img class="project-photo" src="{{project.photo.url}}" width="100%"></span>
-					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 30px;">{{ project.content|linebreaksbr|truncatewords:30 }}</pre>
+					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 30px;">{{ project.content|linebreaksbr|truncatewords:50 }}</pre>
 
 				{% else %}
 
-					<a href="{{project.get_absolute_url}}"><p class="project-title"><b>{{ project.title }}</b></p></a>
-					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 40px;">{{ project.content|linebreaksbr|truncatewords:30 }}</pre>
+					<a href="{{ project.get_absolute_url }}"><p class="project-title"><b>{{ project.title }}</b></p></a>
+					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 40px;">{{ project.content|linebreaksbr|truncatewords:50 }}</pre>
 
 				{% endif %}
 
