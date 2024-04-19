@@ -1,10 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Project</title>
+    <link rel="stylesheet" href="{% static 'itmo_hh/css/resume_project.css' %}">
 </head>
 <body>
-
+    <div>
+        <span><img src="{% static 'itmo_hh/img/itmo_logotip.png' %}" alt=":(" class="image"></span>
+        <span class="title">{{title}}</span>
+        <a href="{% url 'personal_account' %}"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi-x-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        </svg></a>
+    </div>
+    <div class="resume">
+        <form action="{% url 'resume_project' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {% for f in form %}
+                <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+                <div class="form-error">{{ form.errors }}</div>
+            {% endfor %}
+            <button type="submit" class="make">Создать</button>
+        </form>
+        {% if form.errors %}
+            <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 </body>
 </html>

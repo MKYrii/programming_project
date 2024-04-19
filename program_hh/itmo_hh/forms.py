@@ -29,10 +29,21 @@ from .models import *
     content = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 10}), label='Описание')
     file = forms.FileField(required=False, label='Прикрепите файлы')'''
 
+
 class AddResumePerson(forms.ModelForm):
     class Meta:
         model = Resumes
         fields = ['title', 'FIO', 'sex', 'birthday', 'napravlenie', 'education_level', 'experience', 'sphere', 'content', 'file']
+
+        widgets = {
+            'content': forms.Textarea(attrs={'cols': 80, 'rows': 10}),
+        }
+
+
+class AddResumeProject(forms.ModelForm):
+    class Meta:
+        model = Startapps_and_projects
+        fields = ['title', 'photo', 'header', 'sphere', 'experience', 'education_level', 'category', 'content', 'applied_users', 'file']
 
         widgets = {
             'content': forms.Textarea(attrs={'cols': 80, 'rows': 10}),

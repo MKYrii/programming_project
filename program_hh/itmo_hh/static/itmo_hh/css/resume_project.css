@@ -1,0 +1,58 @@
+body{
+    background-image: url("../img/backend_building.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-size: 24px;
+    font-weight: 200;
+    color: #000000;
+}
+.bi-x-circle{
+    color: #000000;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    margin-left: 710px;
+}
+.bi-x-circle:hover{
+    background-color: #C0C0C0;
+}
+.image{
+    margin-left: 30px;
+}
+.title{
+    margin-left: 30px;
+}
+.resume{
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    margin-left: 210px;
+    margin-top: 30px;
+    margin-right: 210px;
+    padding-left: 30px;
+    padding-top: 5px;
+    height: 800px;
+}
+.make{
+    background-color: #87CEFA;
+    width: 200px;
+    height: 50px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.make:hover{
+    background-color: #6495ED;
+}
+
+.form-label{
+    font-size: 18px;
+    margin-right: 10px;
+}
+.form-inside{
+    font-size: 18px;
+    margin-left: 30px;
+}
+.form-error{
+    font-size: 24px;
+    color: #800000;
+}
