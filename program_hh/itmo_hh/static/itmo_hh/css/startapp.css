@@ -6,13 +6,23 @@ body{
     color: #393e46;
     background-repeat: no-repeat;
 }
-.filters .in_filters{
+.filters{
 	border-bottom: 2px solid black;
 	font-weight: normal;
 	font-family: Calibri;
 	font-size: 24px;
 	color: #000000;
 	margin-left: 140px;
+	
+}
+
+.in_filters{
+	border-bottom: 2px solid black;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 24px;
+	color: #000000;
+	margin-left: 34%;
 	
 }
 
@@ -34,7 +44,7 @@ body{
     text-align: right; 
 }
 
-.top_button1, .top_button2 {
+.top_button1, .dropbtn {
 	width: 40px; 
 	height: 40px;
 	border-radius: 50%;
@@ -54,9 +64,14 @@ body{
 	transform: scale(1.2);
 }
 
-.top_button2 {
+.top_button2, .dropbtn {
 	background-image: url("../img/settings.png");
 	background-size: 100%;
+	transition: 0.5s;
+}
+
+.dropbtn:hover{
+	transform: scale(1.2);
 }
 
 .p1 {
@@ -89,9 +104,7 @@ body{
 	margin-bottom: 10px;	
 }
 
-.contioner{
-	position: relative;
-}
+
 .filters, .project{
 	margin-top: 55px;
 	position: absolute;
@@ -134,3 +147,38 @@ body{
 	width: 15%;
 	margin-right: 10px;
 }
+
+.dropbtn {
+    width: 40px; 
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	left: 120%;
+	margin-top: 5px;
+	margin-left: 15px;
+	border: none;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}

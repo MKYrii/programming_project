@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Startapp</title>
-    <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/startapp.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/project.css" />
     <script type="text/javascript" src="../../static/itmo_hh/js/drop_down.js"></script>
 </head>
 <body>
@@ -14,9 +14,27 @@
 		</div>
 		<div class="right_top">
 			<a href="{% url 'personal_account' %}"><button class="top_button1"></button></a>
-			<button class="top_button2"></button>
+<!--			<button class="top_button2"></button>-->
+			
+			<a><button onclick="myFunction()" class="menu_button"></button></a>
+  				
+			
+
 		</div>
 	</div>
+
+	<div id="myDropdown" class="dropdown-content">
+			<p class="rz"></p>
+    		<a href="{% url 'resume_person' %}" class="dropdown-content">Создать резюме</a>
+    		<p class="rz"></p>
+    		<a href="{% url 'project' %}" class="dropdown-content">Поиск проектов</a>
+   			<p class="rz"></p>
+    		<a href="{% url 'personal_account' %}" class="dropdown-content">Ваши отклики</a>
+    		<p class="rz"></p>
+    		<a href="{% url 'home' %}" class="dropdown-content">Поиск участников</a>
+   			<p class="rz"></p>
+   			<!-- <a href="{% url 'home' %}" class="dropdown-content">Контакты</a> -->
+  	</div>
 
 	<div class="conteiner">
 		<div class="filters">
