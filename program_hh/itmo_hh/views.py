@@ -10,6 +10,7 @@ def index(request):
 
 
 class PersonalAccount(ListView):
+    paginate_by = 3
     model = Resumes
     template_name = 'itmo_hh/personal_account.html'
     context_object_name = 'resumes'
@@ -62,6 +63,8 @@ class Startapp(ListView):
 
 
 class Projects(ListView):
+    paginate_by = 15
+    paginate_orphans = 3
     model = Startapps_and_projects
     template_name = 'itmo_hh/project.html'
     context_object_name = 'projects'

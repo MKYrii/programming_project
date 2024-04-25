@@ -21,6 +21,8 @@ body{
 	height: 50px;
 	width: 100%;
 	border-radius: 25px;
+	position: fixed;
+	margin-right: 5px;
 }
 
  .left_top, .right_top {
@@ -94,7 +96,6 @@ body{
 }
 .filters, .project{
 	margin-top: 55px;
-	position: absolute;
 	top: 0;
 	width: 50%;
 	box-sizing: border-box;
@@ -108,8 +109,11 @@ body{
 	margin-left: 10px;
 	border-radius: 20px;
 	background-color: #4169E1;
+	position: fixed;
 }
 .project{
+	margin-top: 8px;
+	float: right;
 	width: 85%;
 	right: 0;
 	padding: 10px;
@@ -133,4 +137,33 @@ body{
 	float: left;
 	width: 15%;
 	margin-right: 10px;
+}
+
+
+/* Стили для пагинации */
+.paginator{
+	clear: both;
+	float: none;
+	margin-top: 10px;
+}
+.list-pages{
+	margin-left: 50%;
+}
+.list-pages span{
+	color: #000080;
+	text-decoration: none;
+	font-size: 20px;
+	display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    border: 3px solid #000080;
+    text-align: center;
+    margin-right: 5px;
+}
+.list-pages a{
+	color: #000080;
+	text-decoration: none;
+	font-size: 20px;
 }
