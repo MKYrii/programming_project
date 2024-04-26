@@ -1,28 +1,154 @@
-/* Main page */
-* {
+body{
+    background: linear-gradient(180deg, #4781F2 0%, rgba(0, 0, 0, 0) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, ##c2d1f0 98.87%);
+    background-image: url("../img/backend_building.png");
+    background-size: 100%;
+    font-size: 24px;
+    font-weight: 200;
+    color: #393e46;
+    background-repeat: no-repeat;
+    position: relative;
     margin: 0;
-    padding: 0;
 }
 
-button {
-    border: none;
-    cursor: pointer;
-    appearance: none;
-    background-color: inherit;
-    transition: transform .7s ease-in-out;
-    margin-left: 10px;
+
+.top_line {
+	background: white;
+	height: 50px;
+	width: 98%;
+	border-radius: 25px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 1%;
 }
 
-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px;
+ .left_top, .right_top {
+    float: left;
+    width: 30%;
+	font-weight: normal;
+	font-family: Calibri;
+ }
+
+.right_top {
+    text-align: right;
 }
 
-button:hover {
-    transform: rotate(360deg);
+.left_top {
+    margin-left: 1%;
 }
+
+.top_button1, .menu_button {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	left: 120%;
+	margin-top: 5px;
+	margin-left: 15px;
+	border: none;
+}
+
+.top_button1{
+	background-image: url("../img/person.png");
+	background-size: 100%;
+	transition: 0.5s;
+	z-index: 999;
+}
+.top_button1:hover{
+	transform: scale(1.2);
+}
+
+.menu_button {
+	background-image: url("../img/settings.png");
+	background-size: 100%;
+	transition: 0.5s;
+}
+
+.menu_button {
+    width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	left: 120%;
+	margin-top: 5px;
+	margin-left: 15px;
+	border: none;
+	z-index: 999;
+}
+
+.menu_button:hover, .menu_button:focus {
+    background-color: #2980B9;
+}
+
+.dropdown-content {
+	display: none;
+    background-color: white;
+    overflow: hidden;
+    position: absolute;
+    margin-left: 80%;
+  	width: 20%;
+	height: 100vh;
+	animation-name: line-to-rect;
+	animation-duration: 0.5s;
+	z-index: 10;
+	border-left: 2px solid black;
+}
+
+.dropdown-content a {
+    color: black;
+    display: block;
+	vertical-align: middle;
+	margin-left: 2px;
+	height: 40px;
+	width: 80%;
+	border-radius: 0px;
+	text-align: center;
+	text-decoration: none;
+	padding-top: 15px;
+	color: #000000;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 20px;
+	border-left: 2px solid white;
+}
+
+.fuktext {
+	margin-left: 50px;
+}
+
+.dropdown-content a:hover {
+	background-color: #e6e6e5;
+	border-left: 2px solid black;
+}
+
+.rz {
+	height: 50px;
+}
+
+
+.dropdown a:hover {
+	background-color: #ddd;
+}
+
+.show {display: block;}
+
+.menu_button:hover{
+	transform: scale(1.2);
+}
+
+@keyframes line-to-rect {
+  from {
+    width: 280px;
+    height: 100vh;
+    margin-left: 110%;
+  }
+  to {
+    width: 280px;
+    height: 100vh;
+    margin-left: 80%;
+  }
+}
+
 
 
 
@@ -38,6 +164,12 @@ button:hover {
     font-style: normal;
     font-size: 100px;
     line-height: 120px;
+
+    position: absolute;
+    width: 1040px;
+    height: 224px;
+    margin-top: 100px;
+    margin-left: 100px;
 }
 
 
@@ -76,79 +208,6 @@ button:hover {
 
     background: #FFFEFE;
     border-radius: 45px;
-}
-
-/* Логотип русский на белой плашке 3 */
-.logo {
-    width: 152px;
-    height: 49px;
-    left: 34px;
-    top: 18px;
-}
-
-/* Rectangle 5 */
-
-.logo_frame {
-    position: absolute;
-    width: 179px;
-    height: 58px;
-    left: 21px;
-    top: 14px;
-
-    background: #FFFCFC;
-    border: 2px solid #313D35;
-    border-radius: 30px;
-}
-
-
-/* settings button */
-
-.settings_button {
-    position: absolute;
-    width: 58px;
-    height: 58px;
-    left: 1090px;
-    top: 14px;
-
-    border: 2px solid #313D35;
-    border-radius: 30px;
-}
-
-/* register button */
-
-.register_button {
-    position: absolute;
-    width: 58px;
-    height: 58px;
-    left: 1025px;
-    top: 14px;
-
-    border: 2px solid #313D35;
-    border-radius: 30px;
-}
-
-/* p10164 1 */
-.backImage {
-    position: absolute;
-    width: 1280px;
-    height: 588px;
-    left: 0px;
-    top: 126px;
-
-    background: linear-gradient(180deg, #4781F2 0%, rgba(0, 0, 0, 0) 100%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #FFFFFF 98.87%);
-    background-image: url("/programming_project/program_hh/itmo_hh/static/itmo_hh/img/backend_building.png");
-}
-
-/* Rectangle 13 */
-.footer {
-    position: absolute;
-    width: 1280px;
-    height: 126px;
-    left: 0px;
-    top: 714px;
-
-    background: #ebebeb;
 }
 
 
@@ -203,39 +262,14 @@ button:hover {
 }
 
 
-
-/* Поиск проектов для вашей карьеры в ITMO HUNTER */
-
-.text_header {
-
-    position: absolute;
-    width: 1040px;
-    height: 224px;
-    left: 0px;
-    top: 0px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 200;
-    font-size: 48px;
-    line-height: 58px;
-    letter-spacing: 0.05em;
-
-    color: #FFFFFF;
-
-    border: 0.5px solid #FFFFFF;
-}
-
-
-
 /* Frame 1 */
 
 .projects_frame {
     position: absolute;
     width: 780px;
     height: 231px;
-    left: 60px;
-    top: 571px;
+    margin-top: 400px;
+    margin-left: 100px;
 }
 
 

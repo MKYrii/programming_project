@@ -3,35 +3,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'itmo_hh/css/index.css' %}" />
+    <script type="text/javascript" src="{% static 'itmo_hh/js/drop_down.js' %}"></script>
     <title>Main_page</title>
 </head>
 <body>
-    <div class="top_menu">
-        <div class="menu_frame">
-            <div class="logo_frame">
-                <span class="logo">
-                    <img width="152" height="49" src="../../static/itmo_hh/img/itmo_logotip.png">
-                </span :box-sizing :border-box>
-            </div>
-    
-            <button class="register_button"> <img src="../../static/itmo_hh/img/person.png" alt="buttonpng" />
-            </button :box-sizing :border-box>
-            <br>
-            <button class="settings_button"> <img width="58" height="58" src="../../static/itmo_hh/img/settings.png"
-                    alt="buttonpng" />
-            </button :box-sizing :border-box>
-        </div>
-    </div>
+    <!-- до 42 строчки код верхней полоски с 3 кнопками -->
+	<div class="top_line">
+		<div class="left_top">
+			<a href="{% url 'home' %}"><img  src="../../static/itmo_hh/img/itmo_logotip.png"></a>
+		</div>
+		<div class="right_top">
+			<a href="{% url 'personal_account' %}"><button class="top_button1"></button></a>
+<!--			<button class="top_button2"></button>-->
 
-    <div class="backImage">
-        <div class="footer"></div>
+			<a><button onclick="myFunction()" class="menu_button"></button></a>
+ 
+
+
+		</div>
+	</div>
+
+	<div id="myDropdown" class="dropdown-content">
+			<p class="rz"></p>
+			<a href="{% url 'login' %}" class="dropdown-content"><span class="fuktext">Вход в аккаунт</span></a>
+   			<p class="rz"></p>
+   			<a href="{% url 'register' %}" class="dropdown-content"><span class="fuktext">Регистрация</span></a>
+   			<p class="rz"></p>
+    		<a href="{% url 'resume_person' %}" class="dropdown-content"><span class="fuktext">Создать резюме</span></a>
+    		<p class="rz"></p>
+    		<a href="{% url 'project' %}" class="dropdown-content"><span class="fuktext">Поиск проектов</span></a>
+   			<p class="rz"></p>
+    		<a href="{% url 'personal_account' %}" class="dropdown-content"><span class="fuktext">Ваши отклики</span></a>
+    		<p class="rz"></p>
+    		<a href="{% url 'home' %}" class="dropdown-content"><span class="fuktext">Поиск участников</span></a>
+   			<p class="rz"></p>
+   			<!-- <a href="{% url 'home' %}" class="dropdown-content">Контакты</a> -->
+  	</div>
+
+    
         <h1 class="main_header">Поиск проектов <br> для вашей карьеры <br> в ITMO HUNTER</h1>
         <p class="right_text">Найди проект,<br> команду для конкурса,<br> стартапа, хакатона или<br> репетитора</p>
         <button class="resume_frame">
             <p class="resume_text">Создать резюме</p>
         </button box-sizing: border-box;>
-        <!--<p class="text_header">Поиск проектов для вашей карьеры в ITMO HUNTER</p>-->
         <div class="projects_frame">
             <div class="frame_3">
                 <span class="picture_3"></span>
@@ -44,11 +59,9 @@
             <div class="frame_1">
                 <span class="picture_1"></span>
                 <h2 class="text_1">Проекты студентов и выпускников</h2>
-<a href="{% url 'register' %}" style="z-index: 999;"><p>регистрация</p></a>
-<a href="{% url 'login' %}" style="z-index: 999;"><p>логинизация</p></a>
             </div>
         </div>
-    </div>
+    
 
 </body>
 </html>

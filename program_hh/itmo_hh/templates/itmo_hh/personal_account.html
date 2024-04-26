@@ -1,26 +1,49 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Personal_account</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'itmo_hh/css/personal_account.css' %}" />
+        <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/personal_account.css" />
+        <script type="text/javascript" src="../../static/itmo_hh/js/drop_down.js"></script>
     </head>
     <body>
-        <div class="top">
-            <span class="logo">
-                <a href="{% url 'home' %}"><img src="{% static 'itmo_hh/img/itmo_logotip.png' %}" alt=":("></a>
-            </span>
-            <span class="redaction">
-                <img src="{% static 'itmo_hh/img/person.png' %}" alt="person">
-            </span>
-        </div>
-        <div class="bottom">
-            <div class="topics">
+
+    <div class="top_line">
+		<div class="left_top">
+			<a href="{% url 'home' %}"><img  src="../../static/itmo_hh/img/itmo_logotip.png"></a>
+		</div>
+		<div class="right_top">
+			<a href="{% url 'personal_account' %}"><button class="top_button1"></button></a>
+<!--			<button class="top_button2"></button>-->
+
+			<a><button onclick="myFunction()" class="menu_button"></button></a>
+		</div>
+	</div>
+
+	<div id="myDropdown" class="dropdown-content">
+			<p class="rz"></p>
+			<a href="{% url 'login' %}" class="dropdown-content"><span class="fuktext">Вход в аккаунт</span></a>
+   			<p class="rz"></p>
+   			<a href="{% url 'register' %}" class="dropdown-content"><span class="fuktext">Регистрация</span></a>
+   			<p class="rz"></p>
+    		<a href="{% url 'resume_person' %}" class="dropdown-content"><span class="fuktext">Создать резюме</span></a>
+    		<p class="rz"></p>
+    		<a href="{% url 'project' %}" class="dropdown-content"><span class="fuktext">Поиск проектов</span></a>
+   			<p class="rz"></p>
+    		<a href="{% url 'personal_account' %}" class="dropdown-content"><span class="fuktext">Ваши отклики</span></a>
+    		<p class="rz"></p>
+    		<a href="{% url 'home' %}" class="dropdown-content"><span class="fuktext">Поиск участников</span></a>
+   			<p class="rz"></p>
+   			<!-- <a href="{% url 'home' %}" class="dropdown-content">Контакты</a> -->
+  	</div>
+
+        <!-- <div class="bott"> -->
+    <div class="btn_menu">
                 <span class="resume"><a href="{% url 'personal_account' %}" style="color: #393e46; text-decoration: none">Мои резюме</a></span>
                 <span class="offers"><a href="{% url 'my_offers' %}" style="color: #393e46; text-decoration: none">Мои предложения</a></span>
                 <span class="replies"><a href="{% url 'my_otclics' %}" style="color: #393e46; text-decoration: none">Мои отклики</a></span>
-            </div>
+    </div>
+            <br>
             <div id="articles" style="padding-top: 10px;">
                 {% block content %}
                     {% for resume in resumes %}
@@ -31,7 +54,7 @@
                         <p style="margin-left: 20px; margin-bottom: 30px; font-size: 20px;">{{resume.content|linebreaksbr|truncatewords:30}}</p>
                     {% endfor %}
                 {% endblock %}
-            </div>
-        </div>
+    </div>
+        <!-- </div> -->
     </body>
 </html>

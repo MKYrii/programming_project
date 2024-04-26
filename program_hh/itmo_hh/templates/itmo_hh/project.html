@@ -3,20 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Startapp</title>
-    <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/startapp.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/project.css" />
     <script type="text/javascript" src="../../static/itmo_hh/js/drop_down.js"></script>
 </head>
 <body>
-
+<!-- до 42 строчки код верхней полоски с 3 кнопками -->
 	<div class="top_line">
 		<div class="left_top">
 			<a href="{% url 'home' %}"><img  src="../../static/itmo_hh/img/itmo_logotip.png"></a>
 		</div>
 		<div class="right_top">
 			<a href="{% url 'personal_account' %}"><button class="top_button1"></button></a>
-			<button class="top_button2"></button>
+<!--			<button class="top_button2"></button>-->
+
+			<a><button onclick="myFunction()" class="menu_button"></button></a>
+
+
+
 		</div>
 	</div>
+
+	<div id="myDropdown" class="dropdown-content">
+			<p class="rz"></p>
+			<a href="{% url 'login' %}" class="dropdown-content"><span class="fuktext">Вход в аккаунт</span></a>
+   			<p class="rz"></p>
+   			<a href="{% url 'register' %}" class="dropdown-content"><span class="fuktext">Регистрация</span></a>
+   			<p class="rz"></p>
+    		<a href="{% url 'resume_person' %}" class="dropdown-content"><span class="fuktext">Создать резюме</span></a>
+    		<p class="rz"></p>
+    		<a href="{% url 'project' %}" class="dropdown-content"><span class="fuktext">Поиск проектов</span></a>
+   			<p class="rz"></p>
+    		<a href="{% url 'personal_account' %}" class="dropdown-content"><span class="fuktext">Ваши отклики</span></a>
+    		<p class="rz"></p>
+    		<a href="{% url 'home' %}" class="dropdown-content"><span class="fuktext">Поиск участников</span></a>
+   			<p class="rz"></p>
+   			<!-- <a href="{% url 'home' %}" class="dropdown-content">Контакты</a> -->
+  	</div>
+
 	<div class="conteiner">
 		<div class="filters">
 			<span class="in_filters" style="margin-top: 150px;">Фильтры</span>
