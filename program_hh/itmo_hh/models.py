@@ -4,6 +4,10 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 
+# class User(models.Model):
+#     name =
+
+
 class Resumes(models.Model):
     experience_choice = (
         ('no_experience', 'Нет опыта'),

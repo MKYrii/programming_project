@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django.contrib.auth.models import User
 
 '''class AddResumePerson(forms.Form):
     experience_choice = (
@@ -28,6 +29,21 @@ from .models import *
     sphere = forms.ModelChoiceField(queryset=Sphere.objects.all())
     content = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 10}), label='Описание')
     file = forms.FileField(required=False, label='Прикрепите файлы')'''
+
+
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Passwords don\'t match.')
+        return cd['password2']
 
 
 class AddResumePerson(forms.ModelForm):

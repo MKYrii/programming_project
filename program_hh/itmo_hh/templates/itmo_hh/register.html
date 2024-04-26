@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume</title>
+    <link rel="stylesheet" href="{% static 'itmo_hh/css/register.css' %}">
+</head>
+<body>
+
+{% block content %}
+    <h1 class="titl">новый пользователь</h1>
+    <div class="input_form">
+    <form action="{% url 'login' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for f in user_form %}
+        <div class="input-row">
+        <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label> <div class="form-input"> {{ f }} </div>
+        </div>
+        <br>
+        {% endfor %}
+        <button type="submit" class='submit_btn'>создать</button>
+    </form>
+    </div>
+{% endblock %}
+
+</body>

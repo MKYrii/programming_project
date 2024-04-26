@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +23,7 @@
             </button :box-sizing :border-box>
         </div>
     </div>
-    
+
     <div class="backImage">
         <div class="footer"></div>
         <h1 class="main_header">Поиск проектов <br> для вашей карьеры <br> в ITMO HUNTER</h1>
@@ -43,6 +44,8 @@
             <div class="frame_1">
                 <span class="picture_1"></span>
                 <h2 class="text_1">Проекты студентов и выпускников</h2>
+<a href="{% url 'register' %}" style="z-index: 999;"><p>регистрация</p></a>
+<a href="{% url 'login' %}" style="z-index: 999;"><p>логинизация</p></a>
             </div>
         </div>
     </div>

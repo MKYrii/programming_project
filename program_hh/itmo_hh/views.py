@@ -2,7 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from itmo_hh.forms import *
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.views import LoginView
+from itmo_hh.models import *
 
 
 def index(request):
@@ -139,3 +142,31 @@ class ResumePage(DetailView):
     template_name = 'itmo_hh/resume_page.html'
     context_object_name = 'resume'
     pk_url_kwarg = 'resume_id'
+
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.save()
+            return redirect('')
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'itmo_hh/register.html', {'user_form': user_form, 'title': 'регистрацияя'})
+
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'itmo_hh/login.html'
+    context_object_name = 'login'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'логин'
+        return context
+
+    def get_success_url(self):
+        return 'personal_account'
+

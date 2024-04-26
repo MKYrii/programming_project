@@ -18,6 +18,8 @@ urlpatterns = [
     path('my_otclics', MyOtclics.as_view(), name='my_otclics'),
     path('competitions', Competitions.as_view(), name='competitions'),
     path('resume/<int:resume_id>/', ResumePage.as_view(), name='resume'),
+    path('register', register, name='register'),
+    path('login', LoginUser.as_view(), name='login'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
