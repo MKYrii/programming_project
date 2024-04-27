@@ -68,6 +68,7 @@ class Projects(ListView):
     model = Startapps_and_projects
     template_name = 'itmo_hh/project.html'
     context_object_name = 'projects'
+    form = Filter_projects
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
