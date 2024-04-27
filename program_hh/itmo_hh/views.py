@@ -49,6 +49,8 @@ def registration(request):
 
 
 class Startapp(ListView):
+    paginate_by = 15
+    paginate_orphans = 3
     model = Startapps_and_projects
     template_name = 'itmo_hh/startapp.html'
     context_object_name = 'projects'
@@ -56,10 +58,24 @@ class Startapp(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'стартапы'
+        context['form'] = Filter_projects()
         return context
 
     def get_queryset(self):
-        return Startapps_and_projects.objects.filter(category_id=3)
+        qs = Startapps_and_projects.objects.filter(category_id=3)
+        form = Filter_projects(self.request.GET)
+        if form.is_valid():
+            experience = form.cleaned_data.get('experience')
+            education_level = form.cleaned_data.get('education_level')
+            sphere = form.cleaned_data.get('sphere')
+
+            if experience != 'none':
+                qs = qs.filter(experience=experience)
+            if education_level != 'none':
+                qs = qs.filter(education_level=education_level)
+            if sphere != '' and sphere != None and sphere != 'Не имеет значения':
+                qs = qs.filter(sphere=sphere)
+        return qs
 
 
 class Projects(ListView):
@@ -73,6 +89,7 @@ class Projects(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'проекты'
         context['form'] = Filter_projects()
+        context['pagename'] = 'project'
         return context
 
     def get_queryset(self):
@@ -99,10 +116,24 @@ class Competitions(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'конкурсы'
+        context['form'] = Filter_projects()
         return context
 
     def get_queryset(self):
-        return Startapps_and_projects.objects.filter(category_id=1)
+        qs = Startapps_and_projects.objects.filter(category_id=1)
+        form = Filter_projects(self.request.GET)
+        if form.is_valid():
+            experience = form.cleaned_data.get('experience')
+            education_level = form.cleaned_data.get('education_level')
+            sphere = form.cleaned_data.get('sphere')
+
+            if experience != 'none':
+                qs = qs.filter(experience=experience)
+            if education_level != 'none':
+                qs = qs.filter(education_level=education_level)
+            if sphere != '' and sphere != None and sphere != 'Не имеет значения':
+                qs = qs.filter(sphere=sphere)
+        return qs
 
 
 def summary(request):
@@ -123,7 +154,6 @@ def resume_project(request):
             else:
                 return redirect('startapp')
     else:
-        print('eror2')
         form = AddResumeProject()
     return render(request, 'itmo_hh/resume_project.html', {'form': form, 'title': 'Создать новый проект'})
 

@@ -19,10 +19,11 @@
 	</div>
 
 	<div>
+		{% block pagename %}
 		<div class="filters">
 			<span class="in_filters" style="margin-top: 150px;">Фильтры</span>
 
-			<form action="{% url 'project' %}" method="get">
+			<form action="" method="get">
 				{% csrf_token %}
 				<div class="form-error">{{ form.non_field_errors }}</div>
 				{% for f in form %}
@@ -32,7 +33,9 @@
 
 				<input class="filter-found-button-input" type="submit" value="Поиск">
 			</form>
+				<a href="{% url 'project' %}" style="text-decoration: none;"><button class="button-clear-filters">Отменить примененные фильтры</button></a>
 		</div>
+		{% endblock %}
 
 		<div class="project">
 			<span class="p1">Вакансии: {{title}}</span>

@@ -7,6 +7,23 @@
     <title>Personal_account_my_resumes</title>
     <link rel="stylesheet" type="text/css" href="{% static 'itmo_hh/css/startapp.css' %}" />
 </head>
+	{% block pagename %}
+	<div class="filters">
+			<span class="in_filters" style="margin-top: 150px;">Фильтры</span>
+
+			<form action="" method="get">
+				{% csrf_token %}
+				<div class="form-error">{{ form.non_field_errors }}</div>
+				{% for f in form %}
+					<p><label class="experiance" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+					<div class="form-error">{{ form.errors }}</div>
+				{% endfor %}
+
+				<input class="filter-found-button-input" type="submit" value="Поиск">
+			</form>
+		    <a href="{% url 'competitions' %}" style="text-decoration: none;"><button class="button-clear-filters">Отменить примененные фильтры</button></a>
+	</div>
+	{% endblock %}
 
 	{% block content %}
 
