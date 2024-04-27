@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from itmo_hh.forms import *
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
 
 
 def index(request):
@@ -68,16 +68,28 @@ class Projects(ListView):
     model = Startapps_and_projects
     template_name = 'itmo_hh/project.html'
     context_object_name = 'projects'
-    form = Filter_projects
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'проекты'
+        context['form'] = Filter_projects()
         return context
 
     def get_queryset(self):
-        return Startapps_and_projects.objects.filter(category_id=2)
+        qs = Startapps_and_projects.objects.filter(category_id=2)
+        form = Filter_projects(self.request.GET)
+        if form.is_valid():
+            experience = form.cleaned_data.get('experience')
+            education_level = form.cleaned_data.get('education_level')
+            sphere = form.cleaned_data.get('sphere')
 
+            if experience != 'none':
+                qs = qs.filter(experience=experience)
+            if education_level != 'none':
+                qs = qs.filter(education_level=education_level)
+            if sphere != '' and sphere != None and sphere != 'Не имеет значения':
+                qs = qs.filter(sphere=sphere)
+        return qs
 
 class Competitions(ListView):
     model = Startapps_and_projects
