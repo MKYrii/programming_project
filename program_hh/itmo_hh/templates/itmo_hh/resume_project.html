@@ -16,15 +16,19 @@
         </svg></a>
     </div>
     <div class="resume">
-        <form action="{% url 'resume_project' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-error">{{ form.non_field_errors }}</div>
-            {% for f in form %}
-                <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
-                <div class="form-error">{{ form.errors }}</div>
-            {% endfor %}
-            <button type="submit" class="make">Создать</button>
-        </form>
+
+        {% block forma %}
+            <form action="{% url 'resume_project' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-error">{{ form.non_field_errors }}</div>
+                {% for f in form %}
+                    <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+                    <div class="form-error">{{ form.errors }}</div>
+                {% endfor %}
+                <button type="submit" class="make">Создать</button>
+            </form>
+        {% endblock %}
+
         {% if form.errors %}
             <ul>
             {% for field in form %}

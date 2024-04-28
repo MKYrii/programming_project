@@ -52,7 +52,7 @@ class Startapps_and_projects(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.PROTECT)
     time_published = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255, verbose_name='Заголовок')
-    photo = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, default='#', null=True, verbose_name='Фото')
+    photo = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, null=True, verbose_name='Фото')
     header = models.CharField(max_length=255, verbose_name='Руководитель')
     sphere = models.ForeignKey('Sphere', on_delete=models.PROTECT, verbose_name='Сфера деятельности')
     experience = models.CharField(max_length=30, choices=experience_choice, verbose_name='Опыт работы')

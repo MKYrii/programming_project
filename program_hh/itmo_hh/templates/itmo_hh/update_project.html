@@ -1,0 +1,27 @@
+{% extends 'itmo_hh/resume_project.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProjectUpdate</title>
+    <link rel="stylesheet" href="{% static 'itmo_hh/css/resume_project.css' %}">
+</head>
+<body>
+{% block forma %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-error">{{ form.non_field_errors }}</div>
+
+        {% for f in form %}
+            <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+            <div class="form-error">{{ form.errors }}</div>
+        {% endfor %}
+
+        <input type="hidden" name="project_id" value="{{ project.id }}">
+        <button type="submit" class="make">Сохранить</button>
+    </form>
+{% endblock %}
+</body>
+</html>

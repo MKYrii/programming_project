@@ -15,7 +15,10 @@
     <p>{{resume.sphere}}</p>
     <p>{{resume.content}}</p>
     <p>{{resume.file}}</p>
-    <button>Редактировать</button>
-    <button>Удалить резюме</button>
+
+    <a href="{% url 'update' resume_id=resume.id %}"><button>Редактировать</button></a>
+
+    <a href="{% url 'delete' resume_id=resume.id %}"><button>Удалить резюме</button></a>
+
 </body>
 </html>

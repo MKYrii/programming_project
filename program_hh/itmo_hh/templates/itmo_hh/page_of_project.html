@@ -5,17 +5,25 @@
     <title>Project {{project.name}}</title>
 </head>
 <body>
-    {% if project.photo != '#' %}
+    {% if project.photo %}
         <img src="{{project.photo.url}}" alt=":(">
     {% endif %}
      <p>{{project.title}}</p>
-     <p>{{projrct.applied_users}}</p>
+     <p>{{project.applied_users}}</p>
      <p>{{project.header}}</p>
      <p>{{project.sphere}}</p>
      <p>{{project.education_level}}</p>
      <p>{{project.experience}}</p>
      <p>{{project.content}}</p>
      <p>{{project.file}}</p>
-    <button>Откликнуться</button>
+
+    {% if is_owner == True %}
+        <a href="{% url 'update-project' project_id=project.id %}"><button>Редактировать</button></a>
+        <a href="{% url 'delete-project' project_id=project.id %}"><button>Удалить</button></a>
+
+    {% else %}
+        <button>Откликнуться</button>
+    {% endif %}
+
 </body>
 </html>

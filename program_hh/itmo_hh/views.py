@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from itertools import chain
+
 from itmo_hh.forms import *
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView, UpdateView
 
 
 def index(request):
@@ -10,20 +11,28 @@ def index(request):
 
 
 class PersonalAccount(ListView):
-    paginate_by = 3
+    '''
+    Отображение личного аккаунта
+    '''
+
+    paginate_by = 4
     model = Resumes
     template_name = 'itmo_hh/personal_account.html'
     context_object_name = 'resumes'
 
-    # Для отображения только тех резюме, что создал пользователь
-    # def get_queryset(self):
-    #   return Resumes.objects.filter(user_id=self.request.user.id)
+    def get_queryset(self):
+        r = Resumes.objects.filter(user_id=self.request.user.id)
+        p = Startapps_and_projects.objects.filter(user_id=self.request.user.id)
+        res = list(chain(r, p))
+        res.sort(key=lambda x: x.time_published)
+        return res
 
 
 class MyOffers(ListView):
     '''
     Отображает резюме, которые откликнулись на твой проект
     '''
+
     model = My_otclics_and_offers
     template_name = 'itmo_hh/my_offers.html'
     context_object_name = 'offers'
@@ -36,6 +45,7 @@ class MyOtclics(ListView):
     '''
     Отображает на какие проекты ты послал свое резюме
     '''
+
     model = My_otclics_and_offers
     template_name = 'itmo_hh/my_otclics.html'
     context_object_name = 'otclics'
@@ -49,6 +59,10 @@ def registration(request):
 
 
 class Startapp(ListView):
+    '''
+    Отображение странички стартапов
+    '''
+
     paginate_by = 15
     paginate_orphans = 3
     model = Startapps_and_projects
@@ -79,6 +93,10 @@ class Startapp(ListView):
 
 
 class Projects(ListView):
+    '''
+    Отображение странички проектов
+    '''
+
     paginate_by = 15
     paginate_orphans = 3
     model = Startapps_and_projects
@@ -89,7 +107,6 @@ class Projects(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'проекты'
         context['form'] = Filter_projects()
-        context['pagename'] = 'project'
         return context
 
     def get_queryset(self):
@@ -109,6 +126,12 @@ class Projects(ListView):
         return qs
 
 class Competitions(ListView):
+    '''
+    Отображение странички конкурсов
+    '''
+
+    paginate_by = 15
+    paginate_orphans = 3
     model = Startapps_and_projects
     template_name = 'itmo_hh/competitions.html'
     context_object_name = 'projects'
@@ -135,12 +158,15 @@ class Competitions(ListView):
                 qs = qs.filter(sphere=sphere)
         return qs
 
-
 def summary(request):
     return render(request, 'itmo_hh/summary.html')
 
 @login_required
 def resume_project(request):
+    '''
+    Создание личного резюме
+    '''
+
     if request.method == "POST":
         form = AddResumeProject(request.POST, request.FILES)
         if form.is_valid():
@@ -160,6 +186,10 @@ def resume_project(request):
 
 @login_required
 def resume_person(request):
+    '''
+    Создание резюме проекта
+    '''
+
     if request.method == "POST":
         form = AddResumePerson(request.POST, request.FILES)
         if form.is_valid():
@@ -174,14 +204,75 @@ def resume_person(request):
 
 
 class PageOfProject(DetailView):
+    '''
+    Страница конкретного проекта
+    '''
+
     model = Startapps_and_projects
     template_name = 'itmo_hh/page_of_project.html'
     context_object_name = 'project'
     pk_url_kwarg = 'project_id'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project = self.get_object()
+        print("Project user_id:", project.user_id.id)
+        print("Current user id:", self.request.user.id)
+        # Проверка на то, что текущий пользователь создал проект
+        if project.user_id.id == self.request.user.id:
+            context['is_owner'] = True
+        else:
+            context['is_owner'] = False
+
+        return context
+
 
 class ResumePage(DetailView):
+    '''
+    Страница конкретного резюме
+    '''
+
     model = Resumes
     template_name = 'itmo_hh/resume_page.html'
     context_object_name = 'resume'
     pk_url_kwarg = 'resume_id'
+
+class UpdateResume(UpdateView):
+    '''
+    Редактирование личного резюме
+    '''
+
+    model = Resumes
+    template_name = 'itmo_hh/update_resume_person.html'
+    context_object_name = 'resume'
+    pk_url_kwarg = 'resume_id'
+    form_class = AddResumePerson
+
+class UpdateProject(UpdateView):
+    '''
+    Редактирование проекта
+    '''
+
+    model = Startapps_and_projects
+    template_name = 'itmo_hh/update_project.html'
+    context_object_name = 'project'
+    pk_url_kwarg = 'project_id'
+    form_class = AddResumeProject
+
+def delete_resume(request, resume_id):
+    '''
+    Удаление резюме
+    '''
+
+    resume = Resumes.objects.get(id=resume_id)
+    resume.delete()
+    return redirect('personal_account')
+
+def delete_project(request, project_id):
+    '''
+    Удаление прокта
+    '''
+
+    project = Startapps_and_projects.objects.get(id=project_id)
+    project.delete()
+    return redirect('personal_account')
