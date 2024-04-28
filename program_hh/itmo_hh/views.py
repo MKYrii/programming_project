@@ -223,7 +223,6 @@ class PageOfProject(DetailView):
             context['is_owner'] = True
         else:
             context['is_owner'] = False
-
         return context
 
 
