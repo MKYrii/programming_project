@@ -188,6 +188,11 @@ body{
     border: 2px solid #000000;
     flex-grow:2;
 }
+
+.resume:hover, .offers:hover, .replies:hover{
+    background-color: #d9d9d9;
+}
+
 .res_block{
     background-color: #87CEFA; 
     margin-left: 5px; 

@@ -92,3 +92,8 @@ input {
 .submit_btn:hover{
     color: #7c7c79;
 }
+
+.form-error{
+    font-size: 24px;
+    color: #800000;
+}
