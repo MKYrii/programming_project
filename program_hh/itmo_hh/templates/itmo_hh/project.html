@@ -40,33 +40,27 @@
    			<!-- <a href="{% url 'home' %}" class="dropdown-content">Контакты</a> -->
   	</div>
 
-	<div class="conteiner">
+	<div>
+		{% block pagename %}
 		<div class="filters">
 			<span class="in_filters" style="margin-top: 150px;">Фильтры</span>
 
-			<div class="experiance">
-				<span class="option_head">Требуемый опыт ></span>
-				<form id="experienceForm" class="experiance_form">
-					<label><input type="checkbox" name="experiance" value="no_experiance"> Нет опыта</label><br>
-					<label><input type="checkbox" name="experiance" value="less_then_1">Меньше года</label><br>
-					<label><input type="checkbox" name="experiance" value="from_1_yo_3">От 1 до 3</label><br>
-					<label><input type="checkbox" name="experiance" value="from_3_yo_5">От 3 до 5</label><br>
-					<label><input type="checkbox" name="experiance" value="5_and_more">5+</label>
-				</form>
+			<form action="" method="get">
+				{% csrf_token %}
+				<div class="form-error">{{ form.non_field_errors }}</div>
+				{% for f in form %}
+					<p><label class="experiance" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+					<div class="form-error">{{ form.errors }}</div>
+				{% endfor %}
 
-				<span class="option_head">Сфера деятельности ></span><br>
-
-				<span class="option_head">Требуймый уровень образования ></span>
-				<form class="experiance_form">
-					<label><input type="checkbox" name="education" value="bakalavr">Бакалавр</label><br>
-					<label><input type="checkbox" name="education" value="magistr">Магистр</label><br>
-					<label><input type="checkbox" name="education" value="aspiranr">Аспирант</label><br>
-				</form>
-			</div>
+				<input class="filter-found-button-input" type="submit" value="Поиск">
+			</form>
+				<a href="{% url 'project' %}" style="text-decoration: none;"><button class="button-clear-filters">Отменить примененные фильтры</button></a>
 		</div>
+		{% endblock %}
 
 		<div class="project">
-			<span class="p1">Вакансии: {{title}}</sapn>
+			<span class="p1">Вакансии: {{title}}</span>
 			<div class="project">
 				{% block content %}
 				{% for project in projects %}
@@ -74,13 +68,16 @@
 				{% if project.photo != '#' %}
 
 					<a href="{{project.get_absolute_url}}"><span class="project-title-p"><b>{{ project.title }}</b></span></a>
+
 					<span><img class="project-photo" src="{{project.photo.url}}" width="100%"></span>
+
 					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 30px;">{{ project.content|linebreaksbr|truncatewords:50 }}</pre>
 
 				{% else %}
 
 					<a href="{{ project.get_absolute_url }}"><p class="project-title"><b>{{ project.title }}</b></p></a>
-					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 40px;">{{ project.content|linebreaksbr|truncatewords:50 }}</pre>
+
+					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 20px; padding-bottom: 1em;">{{ project.content|linebreaksbr|truncatewords:50 }}</pre>
 
 				{% endif %}
 
@@ -88,6 +85,25 @@
 				{% endblock %}
 			</div>
 		</div>
+
+		<div class="paginator">
+	        {% if page_obj.has_other_pages %}
+	        <nav class="list-pages">
+	            <ul>
+	                {% for p in paginator.page_range %}
+	                    {% if page_obj.number == p %}
+	                        <span>{{ p }}</span>
+	                    {% else %}
+	                        <span>
+	                            <a href="?page={{ p }}">{{ p }}</a>
+	                        </span>
+	                    {% endif %}
+	                {% endfor %}
+	            </ul>
+	        </nav>
+	        {% endif %}
+	    </div>
+
 	</div>
 
 </body>

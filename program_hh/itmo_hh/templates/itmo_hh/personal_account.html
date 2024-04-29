@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -54,7 +55,26 @@
                         <p style="margin-left: 20px; margin-bottom: 30px; font-size: 20px;">{{resume.content|linebreaksbr|truncatewords:30}}</p>
                     {% endfor %}
                 {% endblock %}
-    </div>
-        <!-- </div> -->
+
+                <div class="paginator">
+                    {% if page_obj.has_other_pages %}
+                    <nav class="list-pages">
+                        <ul>
+                            {% for p in paginator.page_range %}
+                                {% if page_obj.number == p %}
+                                    <span>{{ p }}</span>
+                                {% else %}
+                                    <span>
+                                        <a href="?page={{ p }}">{{ p }}</a>
+                                    </span>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
     </body>
 </html>
