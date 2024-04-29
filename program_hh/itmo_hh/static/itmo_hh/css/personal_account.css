@@ -4,6 +4,126 @@ body{
     font-size: 24px;
     font-weight: 200;
     color: #393e46;
+    background-repeat:no-repeat;
+    position: relative;
+    margin: 0;
+}
+.top_line {
+	background: white;
+	height: 50px;
+	width: 98%;
+	border-radius: 25px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 1%;
+}
+
+.left_top, .right_top {
+    float: left;
+    width: 30%;
+	font-weight: normal;
+	font-family: Calibri;
+ }
+
+.right_top {
+    text-align: right;
+}
+
+.left_top {
+    margin-left: 1%;
+}
+
+.top_button1, .menu_button {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	left: 120%;
+	margin-top: 5px;
+	margin-left: 15px;
+	border: none;
+}
+
+.top_button1{
+	background-image: url("../img/person.png");
+	background-size: 100%;
+	transition: 0.5s;
+	z-index: 999;
+}
+.top_button1:hover{
+	transform: scale(1.2);
+}
+
+.menu_button {
+	background-image: url("../img/settings.png");
+	background-size: 100%;
+	transition: 0.5s;
+}
+
+.menu_button {
+    width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	left: 120%;
+	margin-top: 5px;
+	margin-left: 15px;
+	border: none;
+	z-index: 999;
+}
+
+.menu_button:hover, .menu_button:focus {
+    background-color: #2980B9;
+}
+
+.dropdown-content {
+	display: none;
+    background-color: white;
+    overflow: hidden;
+    position: absolute;
+    margin-left: 80%;
+  	width: 20%;
+	height: 100vh;
+	animation-name: line-to-rect;
+	animation-duration: 0.5s;
+	z-index: 10;
+	border-left: 2px solid black;
+}
+
+.dropdown-content a {
+    color: black;
+    display: block;
+	vertical-align: middle;
+	margin-left: 2px;
+	height: 40px;
+	width: 80%;
+	border-radius: 0px;
+	text-align: center;
+	text-decoration: none;
+	padding-top: 15px;
+	color: #000000;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 20px;
+	border-left: 2px solid white;
+}
+
+.fuktext {
+	margin-left: 50px;
+}
+
+.dropdown-content a:hover {
+	background-color: #e6e6e5;
+	border-left: 2px solid black;
+}
+
+.rz {
+	height: 50px;
+}
+
+
+.dropdown a:hover {
+	background-color: #ddd;
 }
 
 .show {display: block;}
@@ -28,12 +148,12 @@ body{
 
 #articles{
     position: absolute;
-    margin-top: 170px;
-    width: 98%;
+    margin-top: 6em;
+    width: 83%;
     height: 560px;
     background-color: #FFFFFF;
     border-radius: 20px;
-    margin-left: 10px;
+    margin-left: 5em;
 }
 
 .redaction{
@@ -47,11 +167,9 @@ body{
 }
 
 
-
-
 .btn_menu{
     position: absolute;
-    margin-top: 100px;
+    margin-top: 3.5em;
     width: 100%;
     text-align: center;
     display: flex;
@@ -59,16 +177,14 @@ body{
 }
 
 .resume, .offers, .replies{
-    width: 100px;
-    height: 20px;
     background-color: #FFFFFF;
     border-radius: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 30px;
-    padding-left: 30px;
-    margin-left: 50px;
-    margin-right: 50px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    padding-left: 1em;
+    margin-left: 6em;
+    margin-right: 6em;
     border: 2px solid #000000;
     flex-grow:2;
 }
