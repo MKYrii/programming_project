@@ -63,11 +63,11 @@
                         <ul>
                             {% for p in paginator.page_range %}
                                 {% if page_obj.number == p %}
-                                    <span>{{ p }}</span>
+                                    <span class="page-number">{{ p }}</span>
                                 {% else %}
-                                    <span>
+                                    <li class="page-number">
                                         <a href="?page={{ p }}">{{ p }}</a>
-                                    </span>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>

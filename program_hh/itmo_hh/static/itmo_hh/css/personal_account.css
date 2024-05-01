@@ -223,15 +223,19 @@ body{
 }
 
 /* Стили для пагинации */
-.paginator{
+.paginator {
     clear: both;
     float: none;
     margin-top: 10px;
 }
-.list-pages{
+.list-pages {
     margin-left: 30%;
 }
-.list-pages span{
+.page-number {
+    display: inline-block;
+    margin-right: 5px;
+}
+.page-number a {
     color: #00008B;
     text-decoration: none;
     font-size: 20px;
@@ -242,10 +246,7 @@ body{
     border-radius: 50%;
     border: 3px solid #87CEFA;
     text-align: center;
-    margin-right: 5px;
 }
-.list-pages a{
-    color: #00008B;
-    text-decoration: none;
-    font-size: 20px;
+.page-number a:hover {
+    background-color: lightblue;
 }

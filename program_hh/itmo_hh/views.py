@@ -19,7 +19,7 @@ class PersonalAccount(ListView):
     Отображение личного аккаунта
     '''
 
-    paginate_by = 4
+    paginate_by = 2
     model = Resumes
     template_name = 'itmo_hh/personal_account.html'
     context_object_name = 'resumes'
