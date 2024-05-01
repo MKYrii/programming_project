@@ -10,6 +10,7 @@ urlpatterns = [
     path('registration', registration, name='registration'),
     path('startapp', Startapp.as_view(), name='startapp'),
     path('project', Projects.as_view(), name='project'),
+    path('my_projects', MyProjects.as_view(), name='my_projects'),
     path('summary', summary, name='summary'),
     path('resume_project', resume_project, name='resume_project'),
     path('resume_person', resume_person, name='resume_person'),

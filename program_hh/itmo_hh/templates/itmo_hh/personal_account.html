@@ -41,6 +41,7 @@
         <!-- <div class="bott"> -->
     <div class="btn_menu">
                 <span class="resume"><a href="{% url 'personal_account' %}" style="color: #393e46; text-decoration: none">Мои резюме</a></span>
+                <span class="resume"><a href="{% url 'my_projects' %}" style="color: #393e46; text-decoration: none">Мои проекты</a></span>
                 <span class="offers"><a href="{% url 'my_offers' %}" style="color: #393e46; text-decoration: none">Мои предложения</a></span>
                 <span class="replies"><a href="{% url 'my_otclics' %}" style="color: #393e46; text-decoration: none">Мои отклики</a></span>
     </div>
@@ -62,11 +63,11 @@
                         <ul>
                             {% for p in paginator.page_range %}
                                 {% if page_obj.number == p %}
-                                    <span>{{ p }}</span>
+                                    <span class="page-number">{{ p }}</span>
                                 {% else %}
-                                    <span>
+                                    <li class="page-number">
                                         <a href="?page={{ p }}">{{ p }}</a>
-                                    </span>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
