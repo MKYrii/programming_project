@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from itertools import chain
 
@@ -90,6 +91,7 @@ class Startapp(ListView):
 
     def get_queryset(self):
         qs = Startapps_and_projects.objects.filter(category_id=3)
+        qs = qs.filter(~Q(user_id=self.request.user.id))
         form = Filter_projects(self.request.GET)
         if form.is_valid():
             experience = form.cleaned_data.get('experience')
@@ -124,6 +126,7 @@ class Projects(ListView):
 
     def get_queryset(self):
         qs = Startapps_and_projects.objects.filter(category_id=2)
+        qs = qs.filter(~Q(user_id=self.request.user.id))
         form = Filter_projects(self.request.GET)
         if form.is_valid():
             experience = form.cleaned_data.get('experience')
@@ -157,6 +160,7 @@ class Competitions(ListView):
 
     def get_queryset(self):
         qs = Startapps_and_projects.objects.filter(category_id=1)
+        qs = qs.filter(~Q(user_id=self.request.user.id))
         form = Filter_projects(self.request.GET)
         if form.is_valid():
             experience = form.cleaned_data.get('experience')
