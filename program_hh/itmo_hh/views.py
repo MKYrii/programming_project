@@ -25,11 +25,8 @@ class PersonalAccount(ListView):
     context_object_name = 'resumes'
 
     def get_queryset(self):
-        r = Resumes.objects.filter(user_id=self.request.user.id)
-        p = Startapps_and_projects.objects.filter(user_id=self.request.user.id)
-        res = list(chain(r, p))
-        res.sort(key=lambda x: x.time_published)
-        return res
+        r = Resumes.objects.filter(user_id=self.request.user.id).order_by('time_published')
+        return r
 
 
 class MyOffers(ListView):
@@ -57,6 +54,18 @@ class MyOtclics(ListView):
     def get_queryset(self):
         return My_otclics_and_offers.objects.filter(id_offer_user=self.request.user.id)
 
+class MyProjects(ListView):
+    '''
+    Отображение проектов, которые создал пользователь
+    '''
+
+    paginate_by = 4
+    model = Startapps_and_projects
+    template_name = 'itmo_hh/my_projects.html'
+    context_object_name = 'projects'
+
+    def get_queryset(self):
+        return Startapps_and_projects.objects.filter(user_id=self.request.user.id).order_by('time_published')
 
 def registration(request):
     return render(request, 'itmo_hh/registration.html')
