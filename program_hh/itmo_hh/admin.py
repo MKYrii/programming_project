@@ -8,4 +8,5 @@ admin.site.register(Sphere)
 admin.site.register(Napravlenie)
 admin.site.register(My_otclics_and_offers)
 admin.site.register(Love)
-
+admin.site.register(ProjectApplication)
+admin.site.register(ProjectInvitation)

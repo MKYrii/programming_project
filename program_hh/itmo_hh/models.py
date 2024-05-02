@@ -101,6 +101,12 @@ class Napravlenie(models.Model):
 
 
 class My_otclics_and_offers(models.Model):
+    # id_resume = models.ForeignKey()  # Номер резюме
+    # id_resume_owner = models.ForeignKey(User)  # Номер пользователя, которому принадлежит резюме
+    # id_project = models.ForeignKey()
+    # id_project_owner = models.ForeignKey(User)
+    # status = models.IntegerField(default=0)  # 0 - в рассмотрении, 1 - принято, 2 - отклонено
+
     id_offer_user = models.ForeignKey(User, related_name='offer_user', on_delete=models.CASCADE)
     id_to_whom_user = models.ForeignKey(User, related_name='to_whom_user', on_delete=models.CASCADE)
     time_published = models.DateTimeField(auto_now_add=True)
@@ -111,6 +117,28 @@ class My_otclics_and_offers(models.Model):
 
     def get_absolute_url(self):
         return reverse('otof', kwargs={'otof_id': self.pk})
+
+class ProjectApplication(models.Model):
+    project = models.ForeignKey('Startapps_and_projects', related_name='projects_application', on_delete=models.CASCADE)
+    resume = models.ForeignKey('Resumes', related_name='resumes_application', on_delete=models.CASCADE)
+    status_choices = (
+        (0, 'В рассмотрении'),
+        (1, 'Принято'),
+        (2, 'Отклонено')
+    )
+    status = models.IntegerField(default=0)
+
+    def get_absolute_url(self):
+        return reverse('project_application', kwargs={'project_id': self.project})
+class ProjectInvitation(models.Model):
+    project = models.ForeignKey('Startapps_and_projects', related_name='projects_invitation', on_delete=models.CASCADE)
+    resume = models.ForeignKey('Resumes', related_name='resumes_invitation', on_delete=models.CASCADE)
+    status_choices = (
+        (0, 'В рассмотрении'),
+        (1, 'Принято'),
+        (2, 'Отклонено')
+    )
+    status = models.IntegerField(default=0)
 
 
 class Love(models.Model):

@@ -27,9 +27,33 @@
         <a href="{% url 'update-project' project_id=project.id %}"><button>Редактировать</button></a>
         <a href="{% url 'delete-project' project_id=project.id %}"><button>Удалить</button></a>
 
+        <p>Откликнувшиеся резюме:</p>
+        {% for applied_resume in applied_resumes %}
+            <p><a href="{% url 'resume' resume_id=applied_resume.resume.id %}"><span>{{ applied_resume.resume.title }}</span></a>
+                {% if applied_resume.status == 0 %}
+                    <span>В рассмотрении</span>
+                {% elif applied_resume.status == 1 %}
+                    <span>Принято</span>
+                {% elif applied_resume.status == 2 %}
+                    <span>Отказано</span>
+                {% else %}
+                    <span>Неизвестный статус</span>
+                {% endif %}
+        {% endfor %}
+
+        <p>Приглашенные резюме:</p>
+
     {% else %}
-        <button>Откликнуться</button>
+
+<!--    Здесь как-то при нажатии на откликнуться должно появляться список резюме для выбора, и передаваться resume_id-->
+    <form action="{% url 'otclic_on_project' project_id=project.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="resume_id" value="{{ resume_id }}">
+        <button type="submit">Откликнуться</button>
+    </form>
     {% endif %}
+
+<!--    Добавить проверку на то, что данное резюме уже отправлено на этот проект, что бы не отправлялось несколько раз-->
 
 </body>
 </html>

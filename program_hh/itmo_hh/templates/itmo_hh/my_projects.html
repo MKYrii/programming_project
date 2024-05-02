@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <title>My Projects</title>
     <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/personal_account.css" />
-        <script type="text/javascript" src="{% static 'itmo_hh/js/drop_down.js' %}"></script>
+    <script type="text/javascript" src="{% static 'itmo_hh/js/drop_down.js' %}"></script>
 </head>
 <body>
     {% block content %}
         {% for project in projects %}
             <span class="res_block">
-                <a href="{{ resume.get_absolute_url }}" class="res_title">{{project.title}}</a>
+                <a href="{{ project.get_absolute_url }}" class="res_title">{{project.title}}</a>
                 <span style="padding-top: 2px; padding-bottom: 5px; font-size: 20px;">{{project.time_published}}</span>
             </span>
 

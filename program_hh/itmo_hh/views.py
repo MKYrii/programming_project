@@ -215,7 +215,7 @@ def resume_person(request):
             resume.save()
             return redirect('personal_account')
     else:
-        print('eror2')
+
         form = AddResumePerson()
     return render(request, 'itmo_hh/resume_person.html', {'form': form, 'title': 'Создать резюме/ личное резюме'})
 
@@ -233,14 +233,17 @@ class PageOfProject(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         project = self.get_object()
-        print("Project user_id:", project.user_id.id)
-        print("Current user id:", self.request.user.id)
+
         # Проверка на то, что текущий пользователь создал проект
         if project.user_id.id == self.request.user.id:
             context['is_owner'] = True
         else:
             context['is_owner'] = False
+
+        context['applied_resumes'] = ProjectApplication.objects.filter(project=project)
+
         return context
+
 
 
 class ResumePage(DetailView):
@@ -252,6 +255,20 @@ class ResumePage(DetailView):
     template_name = 'itmo_hh/resume_page.html'
     context_object_name = 'resume'
     pk_url_kwarg = 'resume_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        resume = self.get_object()
+
+        if self.request.user.id == resume.user_id.id:
+            context['is_owner'] = True
+        else:
+            context['is_owner'] = False
+
+        context['applied_resumes'] = ProjectApplication.objects.filter(resume=resume)
+
+        return context
+
 
 class UpdateResume(UpdateView):
     '''
@@ -319,4 +336,19 @@ class LoginUser(LoginView):
 
     def get_success_url(self):
         return 'personal_account'
+
+def Otclic_on_project(request, project_id):
+    '''
+    Отклик резюме на проект
+    '''
+
+    if request.method == 'POST':
+        # resume_id = request.POST.get('resume_id')
+        project_application = ProjectApplication(project_id=project_id, resume_id=1,
+                                                 status=0)
+        project_application.save()
+        return redirect('project')
+    else:
+        pass
+
 

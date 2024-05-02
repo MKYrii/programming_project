@@ -24,7 +24,8 @@ urlpatterns = [
     path('resume/<int:resume_id>/update/', UpdateResume.as_view(), name='update'),
     path('resume/<int:resume_id>/delete/', delete_resume, name='delete'),
     path('project/<int:project_id>/delete-project/', delete_project, name='delete-project'),
-    path('project/<int:project_id>/update-project/', UpdateProject.as_view(), name='update-project')
+    path('project/<int:project_id>/update-project/', UpdateProject.as_view(), name='update-project'),
+    path('project/<int:project_id>/otclic_on_project/', Otclic_on_project, name='otclic_on_project'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
