@@ -32,6 +32,8 @@
             <p><a href="{% url 'resume' resume_id=applied_resume.resume.id %}"><span>{{ applied_resume.resume.title }}</span></a>
                 {% if applied_resume.status == 0 %}
                     <span>В рассмотрении</span>
+                    <button>Принять резюме</button>
+                    <button>Отклонить резюме</button>
                 {% elif applied_resume.status == 1 %}
                     <span>Принято</span>
                 {% elif applied_resume.status == 2 %}
@@ -42,6 +44,18 @@
         {% endfor %}
 
         <p>Приглашенные резюме:</p>
+        {% for invited_resume in invited_resumes %}
+            <p><a href="{% url 'resume' resume_id=invited_resume.resume.id %}">{{invited_resume.resume.title}}</a></p>
+            {% if invited_resume.status == 0 %}
+                    <span>В рассмотрении</span>
+                {% elif invited_resume.status == 1 %}
+                    <span>Принято</span>
+                {% elif invited_resume.status == 2 %}
+                    <span>Отказано</span>
+                {% else %}
+                    <span>Неизвестный статус</span>
+                {% endif %}
+        {% endfor %}
 
     {% else %}
 

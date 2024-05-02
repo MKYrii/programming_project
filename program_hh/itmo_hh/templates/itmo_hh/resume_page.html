@@ -44,9 +44,29 @@
         {% endfor %}
 
         <p>Проекты, в которые меня пригласили:</p>
+        {% for invited_resume in invited_resumes %}
+            <p><a href="{% url 'project' project_id=invited_resume.project.id %}">{{invited_resume.project.title}}</a></p>
+            {% if invited_resume.status == 0 %}
+                    <span>В рассмотрении</span>
+                    <button>Принять приглашение</button>
+                    <button>Отклонить приглашение</button>
+                {% elif invited_resume.status == 1 %}
+                    <span>Принято</span>
+                {% elif invited_resume.status == 2 %}
+                    <span>Отказано</span>
+                {% else %}
+                    <span>Неизвестный статус</span>
+                {% endif %}
+        {% endfor %}
 
+<!--    Добавить проверку, что это резюме еще не было приглашено-->
+<!--Здесь при выборе проекта для отправки, нужно передавать его id!!!!-->
     {% else %}
-        <p>Пригласить</p>
+        <form action="{% url 'resume_invite' resume_id=resume.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="project_id" value="{{ project_id }}">
+            <button type="submit">Пригласить</button>
+        </form>
     {% endif %}
 
 </body>

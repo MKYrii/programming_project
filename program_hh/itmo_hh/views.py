@@ -175,8 +175,18 @@ class Competitions(ListView):
                 qs = qs.filter(sphere=sphere)
         return qs
 
-def summary(request):
-    return render(request, 'itmo_hh/summary.html')
+class FindResume(ListView):
+    '''
+    Отображение страницы для поиска резюме
+    '''
+    paginate_by = 15
+    paginate_orphans = 3
+    model = Resumes
+    template_name = 'itmo_hh/find_resume.html'
+    context_object_name = 'resumes'
+
+    def get_queryset(self):
+        return Resumes.objects.filter(~Q(user_id=self.request.user.id)).order_by('time_published')
 
 @login_required
 def resume_project(request):
@@ -241,6 +251,7 @@ class PageOfProject(DetailView):
             context['is_owner'] = False
 
         context['applied_resumes'] = ProjectApplication.objects.filter(project=project)
+        context['invited_resumes'] = ProjectInvitation.objects.filter(project=project)
 
         return context
 
@@ -266,6 +277,7 @@ class ResumePage(DetailView):
             context['is_owner'] = False
 
         context['applied_resumes'] = ProjectApplication.objects.filter(resume=resume)
+        context['invited_resumes'] = ProjectInvitation.objects.filter(resume=resume)
 
         return context
 
@@ -351,4 +363,14 @@ def Otclic_on_project(request, project_id):
     else:
         pass
 
-
+def resume_invite(request, resume_id):
+    '''
+    Приглашение резюме в проект
+    '''
+    if request.method == 'POST':
+        # project = request.POST.get('project_id')
+        project_invitation = ProjectInvitation(project_id=1, resume_id=resume_id, status=0)
+        project_invitation.save()
+        return redirect('resume', resume_id=resume_id)
+    else:
+        pass
