@@ -1,0 +1,46 @@
+{% extends 'itmo_hh/project.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal_account_my_resumes</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'itmo_hh/css/resume.css' %}" />
+</head>
+	{% block pagename %}
+	<div class="filters">
+			<span class="in_filters" style="margin-top: 150px;">Фильтры</span>
+
+			<form action="" method="get">
+				{% csrf_token %}
+				<div class="form-error">{{ form.non_field_errors }}</div>
+				{% for f in form %}
+					<p><label class="experiance" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+					<div class="form-error">{{ form.errors }}</div>
+				{% endfor %}
+
+				<input class="filter-found-button-input" type="submit" value="Поиск">
+			</form>
+		    <a href="{% url 'resume' %}" style="text-decoration: none;"><button class="button-clear-filters">Отменить примененные фильтры</button></a>
+	</div>
+	{% endblock %}
+
+	{% block content %}
+
+		{% for resume in resumes %}
+
+		{% if resume.photo != '#' %}
+
+			<a href="{{ resume.get_absolute_url }}"><span class="project-title-p"><b>{{ resume.title }}</b></span></a>
+			<span><img class="project-photo" src="{{resume.photo.url}}" width="100%"></span>
+			<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 30px;">{{ resume.content|linebreaksbr|truncatewords:30 }}</pre>
+
+		{% else %}
+
+			<a href="{{ resume.get_absolute_url }}"><p class="project-title"><b>{{ resume.title }}</b></p></a>
+			<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 40px;">{{ resume.content|linebreaksbr|truncatewords:30 }}</pre>
+
+		{% endif %}
+
+		{% endfor %}
+	{% endblock %}
