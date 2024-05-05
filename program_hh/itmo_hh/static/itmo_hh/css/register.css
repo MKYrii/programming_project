@@ -6,6 +6,7 @@ body{
     font-weight: 200;
     color: #000000;
     position: relative;
+    background-attachment: fixed;
 }
 
 .bi-x-circle{

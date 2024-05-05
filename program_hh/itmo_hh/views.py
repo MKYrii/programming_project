@@ -289,6 +289,19 @@ class ResumePage(DetailView):
     context_object_name = 'resume'
     pk_url_kwarg = 'resume_id'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project = self.get_object()
+        print("Project user_id:", project.user_id.id)
+        print("Current user id:", self.request.user.id)
+        # Проверка на то, что текущий пользователь создал проект
+        if project.user_id.id == self.request.user.id:
+            context['is_owner'] = True
+        else:
+            context['is_owner'] = False
+        return context
+
+
 class UpdateResume(UpdateView):
     '''
     Редактирование личного резюме

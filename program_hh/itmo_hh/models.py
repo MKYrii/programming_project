@@ -42,7 +42,7 @@ class Startapps_and_projects(models.Model):
         ('no_experience', 'Нет опыта'),
         ('1-3', '1-3 года'),
         ('3-5', '3-5 лет'),
-        ("5", "5+")
+        ("5", "5+ лет")
     )
     education_level_choice = (
         ('bakalavriat', 'Бакалавриат'),

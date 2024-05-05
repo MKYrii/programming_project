@@ -1,25 +1,36 @@
 body{
     background-image: url("../img/backend_building.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
+    /*background-size: 100%;*/
     font-size: 24px;
     font-weight: 200;
-    color: #000000;
+    background-attachment: fixed;
 }
 .bi-x-circle{
     color: #000000;
     background-color: #FFFFFF;
     border-radius: 50%;
-    margin-left: 710px;
+    /*margin-left: 710px;*/
 }
 .bi-x-circle:hover{
     background-color: #C0C0C0;
 }
 .image{
-    margin-left: 30px;
+    /*margin-left: 30px;*/
 }
 .title{
-    margin-left: 30px;
+    font-weight: bold;
+    font-family: Calibri;
+    font-size: 35px;
+    color: white;
+    flex-grow: 4;
+    text-align: center;
+}
+.top_line{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    vertical-align: center;
+    height: 70px;
 }
 .resume{
     background-color: #FFFFFF;

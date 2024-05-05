@@ -1,5 +1,5 @@
 body{
-    background-image: url("../img/backend_building.png");
+	background-image: url("../img/backend_building.png");
     background-size: 100%;
     font-size: 24px;
     font-weight: 200;
@@ -11,13 +11,13 @@ body{
 }
 
 .data{
-    font-family: Calibri;
-    font-size: 20px;
-    margin-left: 8%;
+	font-family: Calibri;
+	font-size: 20px;
+	margin-left: 8%;
 }
 
 .edit{
-    flex-grow: 3;
+	flex-grow: 3;
     margin-left: 5%;
     background: #FFFFFF;
     border: 2px solid black;

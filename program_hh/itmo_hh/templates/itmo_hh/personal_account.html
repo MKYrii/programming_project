@@ -29,7 +29,7 @@
             <p class="rz"></p>
             <a href="{% url 'resume_person' %}" class="dropdown-content"><span class="fuktext">Создать резюме</span></a>
             <p class="rz"></p>
-            <a href="{% url 'resume_person' %}" class="dropdown-content"><span class="fuktext">Создать проект</span></a>
+            <a href="{% url 'resume_project' %}" class="dropdown-content"><span class="fuktext">Создать проект</span></a>
             <p class="rz"></p>
             <a href="{% url 'project' %}" class="dropdown-content"><span class="fuktext">Поиск проектов</span></a>
             <p class="rz"></p>
@@ -50,7 +50,7 @@
                 <a href="{% url 'my_otclics' %}" class="resume">Мои отклики</a>
     </div>
             <br>
-            <div id="articles" style="padding-top: 10px;">
+            <div id="articles" style="padding-top: 10px; font-family: Calibri;">
                 {% block content %}
                     {% for resume in resumes %}
                     <span class="res_block">

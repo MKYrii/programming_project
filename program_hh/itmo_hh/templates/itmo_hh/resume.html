@@ -27,20 +27,37 @@
 
 	{% block content %}
 
-		{% for resume in resumes %}
+		{% for project in resumes %}
 
-		{% if resume.photo != '#' %}
+				{% if project.photo %}
+				<div class="project-line">
+					<a href="{{project.get_absolute_url}}" style="text-decoration: none;" class="project-title">{{ project.title }}</a>
+					<span class="project-tags1">{{ project.sphere|truncatechars:21 }}</span>
+					{% if project.experience != "no_experience" %}
+					<span class="project-tags2">{{ project.experience }}</span>
+					{% else %}
+					<span class="project-tags2">Нет опыта</span>
+					{% endif %}
+				</div>
 
-			<a href="{{ resume.get_absolute_url }}"><span class="project-title-p"><b>{{ resume.title }}</b></span></a>
-			<span><img class="project-photo" src="{{resume.photo.url}}" width="100%"></span>
-			<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 30px;">{{ resume.content|linebreaksbr|truncatewords:30 }}</pre>
+					<span><img class="project-photo" src="{{project.photo.url}}" width="100%"></span>
 
-		{% else %}
+					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 30px;">{{ project.content|linebreaksbr|truncatewords:50 }}</pre>
 
-			<a href="{{ resume.get_absolute_url }}"><p class="project-title"><b>{{ resume.title }}</b></p></a>
-			<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 40px;">{{ resume.content|linebreaksbr|truncatewords:30 }}</pre>
+				{% else %}
+				<div class="project-line">
+					<a href="{{ project.get_absolute_url }}" style="text-decoration: none;" class="project-title">{{ project.title }}</a>
+					<span class="project-tags1">{{ project.sphere|truncatechars:21 }}</span>
+					{% if project.experience != "no_experience" %}
+					<span class="project-tags2">{{ project.experience }}</span>
+					{% else %}
+					<span class="project-tags2">Нет опыта</span>
+					{% endif %}
+				</div>
+					<pre style="word-wrap: break-word; white-space: pre-line; font-size: 18px; margin-bottom: 20px; padding-bottom: 1em;">{{ project.content|linebreaksbr|truncatewords:50 }}</pre>
 
-		{% endif %}
+				{% endif %}
+				<br>
 
-		{% endfor %}
+				{% endfor %}
 	{% endblock %}
