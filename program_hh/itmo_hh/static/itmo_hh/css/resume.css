@@ -1,0 +1,24 @@
+
+.project-tags1{
+	flex-grow: 1;
+	margin-left: 17%;
+	font-family: Calibri;
+	background: #99ffff;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	border-radius: 15px;
+}
+
+.project-tags2{
+	flex-grow: 1;
+	margin-left: 17%;
+	font-family: Calibri;
+	background: #ffe066;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	border-radius: 15px;
+}

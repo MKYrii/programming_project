@@ -5,6 +5,7 @@ body{
     font-weight: 200;
     color: #393e46;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 .filters, .in_filters{
 	border-bottom: 2px solid black;
@@ -114,7 +115,7 @@ body{
     height: 90vh;
     padding: 10px;
 }
-.project-title{
+/*.project-title{
 	color: #3c4245;
 	font-size: 20px;
 	margin-top: -5px;
@@ -133,7 +134,7 @@ body{
 	float: left;
 	width: 15%;
 	margin-right: 10px;
-}
+}*/
 .filter-found-button-input{
 	display: block;
   	width: 30%;

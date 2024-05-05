@@ -9,6 +9,7 @@ body{
     background-repeat: no-repeat;
     position: relative;
     margin: 0;
+    background-attachment: fixed;
 }
 
 
@@ -87,7 +88,7 @@ body{
     position: absolute;
     margin-left: 80%;
   	width: 20%;
-	height: 100vh;
+	height: 110vh;
 	animation-name: line-to-rect;
 	animation-duration: 0.5s;
 	z-index: 10;
@@ -104,7 +105,7 @@ body{
 	border-radius: 0px;
 	text-align: center;
 	text-decoration: none;
-	padding-top: 15px;
+	padding-top: 10px;
 	color: #000000;
 	font-weight: normal;
 	font-family: Calibri;
@@ -122,7 +123,7 @@ body{
 }
 
 .rz {
-	height: 50px;
+	height: 40px;
 }
 
 
@@ -139,12 +140,12 @@ body{
 @keyframes line-to-rect {
   from {
     width: 280px;
-    height: 100vh;
+    height: 110vh;
     margin-left: 110%;
   }
   to {
     width: 280px;
-    height: 100vh;
+    height: 110vh;
     margin-left: 80%;
   }
 }
@@ -227,27 +228,71 @@ body{
 	right: 0;
 	padding: 10px;
 }
-.project-title{
-	color: #3c4245;
-	font-size: 20px;
-	margin-top: -5px;
-	margin-bottom: -2px;
-}
 
-.project-title-p{
-	color: #3c4245;
+
+.project-title, .project-title-p{
+	background: white;
+	height: 30px;
+	width: 50%;
+	border-radius: 15px;
+	text-align: center;
+	font-family: Calibri;
+	flex-grow: 4;
+	font-weight: bold;
 	font-size: 20px;
-	margin-top: -5px;
-	margin-bottom: -2px;
-	margin-left: 10px;
+	color: black;
 }
 
 .project-photo{
 	float: left;
 	width: 15%;
 	margin-right: 10px;
+	margin-top: 10px;
 }
 
+.project-line{
+	display: flex;
+	width: 90%;
+}
+
+.project-tags{
+	flex-grow: 1;
+	margin-left: 17%;
+	font-family: Calibri;
+	background: #99ffff;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	border-radius: 15px;
+}
+
+
+.project-tags1{
+	flex-grow: 1;
+	margin-left: 8%;
+	font-family: Calibri;
+	background: #99ffff;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	border-radius: 15px;
+	width: 30%;
+}
+
+.project-tags2{
+	flex-grow: 1;
+	margin-left: 2%;
+	font-family: Calibri;
+	background: #ffe066;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	border-radius: 15px;
+	width: 20%;
+}
 
 
 

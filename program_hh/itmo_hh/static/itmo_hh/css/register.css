@@ -6,7 +6,9 @@ body{
     font-weight: 200;
     color: #000000;
     position: relative;
+    background-attachment: fixed;
 }
+
 .bi-x-circle{
     color: #000000;
     background-color: #FFFFFF;
@@ -15,6 +17,12 @@ body{
 }
 .bi-x-circle:hover{
     background-color: #C0C0C0;
+}
+.x-btn{
+    position: absolute;
+    margin-left: -25%;
+    width: 35px;
+    height: 35px;
 }
 .image{
     margin-left: 30px;
@@ -31,19 +39,6 @@ body{
     font-weight: bold;
 }
 
-
-.make{
-    background-color: #87CEFA;
-    width: 200px;
-    height: 50px;
-    margin-bottom: 50px;
-    border-radius: 10px;
-    font-size: 20px;
-    margin-top: 10px;
-}
-.make:hover{
-    background-color: #6495ED;
-}
 
 .input_form {
     position: absolute;
@@ -82,18 +77,42 @@ input {
 }
 
 .submit_btn{
+    background: #FFFFFF;
     border: 2px solid black;
-    height: 30px;
+    height: 36px;
     width: 100px;
-    border-radius: 15px;
-    margin-top: 50px;
+    border-radius: 18px;
+    margin-top: 30px;
+    font-size: 20px;
+    font-family: Calibri;
 }
 
 .submit_btn:hover{
-    color: #7c7c79;
+    background: #d9d9d9;
 }
 
 .form-error{
     font-size: 24px;
     color: #800000;
+}
+
+.reloc_btn{
+    background: #FFFFFF;
+    border: 2px solid black;
+    height: 36px;
+    width: 230px;
+    border-radius: 18px;
+    margin-top: 10px;
+    font-size: 20px;
+    font-family: Calibri; 
+}
+
+.reloc_btn:hover{
+    background: #d9d9d9;
+}
+
+.message{
+    font-size: 26px;
+    font-family: Calibri;
+    margin-top: 10px;
 }

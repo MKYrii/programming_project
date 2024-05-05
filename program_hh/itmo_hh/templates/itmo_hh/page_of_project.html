@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Project {{project.name}}</title>
+    <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/page_of_project.css" />
 </head>
 <body>
 {% if is_owner == True %}
@@ -10,23 +11,32 @@
 {% else %}
     <a href="{% url 'project' %}?next={{ request.path }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAcFJREFUSEvFlotNBDEMRH2dQCVAJ1AJUAlQCVAJdAJ6aB3Nep0vOl2k1a1uY489GTs+2YXW6UK4tgJ8ZWa3Zsbv9xY4vx8zSYwCA3JvZo8N5w7+NhJED3gEMIvl1cyehZHDnhYwoO8bpW4InZ9bRryzx5+bjRXfCwN3NfAaMM6+JEycPAxQGIOt2tWAyRQBsaDsaUI48XjSzDPgF6FsFlTjI1gXI2cOY2VFYLIkWxaRXk9kGreSOUng80B5BNZsEUarNtm7yyIJUrWCL3z+rQiMoNh8oCY49QB75YiZ62XHoBoqza2zVVZGgPWsC4tqSGfCKQsKyTouBeVboU42xuPRhIrfGjCi8j7sPiNoTXeRBT3nwqRuUkoyYP3eEntG/09ksnbGNUVH8BGq0yNcEZeCz4qrMKmG1ZpLeHXwEeC0CqKh1lzvUgC818NV0bve0FLgf1umNg8vvVJqvUui18Fa6p66JHCkdypZM8r0KI0BKGjK3LkHgQPFtUtCI8+mCaLn8fHHGUJEjD4+PPB/c2rplcPqsNcdIHrAzgABME3QhWrL9YAgY58/2IwCawC8O6U+1J9toG+VzdK32YyXQDKjXxWyfB/hr400AAAAAElFTkSuQmCC"/></a>
 {% endif %}
+<br>
 
     {% if project.photo %}
-        <img src="{{project.photo.url}}" alt=":(">
+        <img src="{{project.photo.url}}" alt=":(" style="max-height: 20%; max-width: 20%; margin-top: 30px; margin-left: 8%;">
     {% endif %}
-     <p>{{project.title}}</p>
-     <p>{{project.applied_users}}</p>
-     <p>{{project.header}}</p>
-     <p>{{project.sphere}}</p>
-     <p>{{project.education_level}}</p>
-     <p>{{project.experience}}</p>
-     <p>{{project.content}}</p>
-     <p>{{project.file}}</p>
+    <br>
+     
+     <p class="data"><b>Название:</b>  {{project.title}}</p>
+     <p class="data"><b>Заголовок:</b>  {{project.header}}</p>
+     <p class="data"><b>Участники:</b>  {{project.applied_users}}</p>
+    <p class="data"><b>Уровень образования:</b>  {{project.education_level}}</p>
+    <p class="data"><b>Опыт работы:</b>  {{project.experience}}</p>
+    <p class="data"><b>Сфера деятельности:</b>  {{project.sphere}}</p>
+    <p class="data"><b>Описание:</b>  {{project.content}}</p>
+
+    {% if project.file %}
+    <p class="data"><b>Прикрепленный файл:</b>  {{project.file}}</p>
+    {% endif %}
 
     {% if is_owner == True %}
-        <a href="{% url 'update-project' project_id=project.id %}"><button>Редактировать</button></a>
-        <a href="{% url 'delete-project' project_id=project.id %}"><button>Удалить</button></a>
-
+    <br>
+    <br>
+    <div style="display: flex; width: 30%;">
+        <a href="{% url 'update-project' project_id=project.id %}" class="edit">Редактировать</a>
+        <a href="{% url 'delete-project' project_id=project.id %}" class="edit">Удалить</a>
+    </div>
     {% else %}
         <button>Откликнуться</button>
     {% endif %}

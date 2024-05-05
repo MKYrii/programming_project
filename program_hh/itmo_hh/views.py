@@ -85,7 +85,7 @@ class Startapp(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'стартапы'
+        context['title'] = 'Вакансии: стартапы'
         context['form'] = Filter_projects()
         return context
 
@@ -120,7 +120,7 @@ class Projects(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'проекты'
+        context['title'] = 'Вакансии: проекты'
         context['form'] = Filter_projects()
         return context
 
@@ -141,6 +141,42 @@ class Projects(ListView):
                 qs = qs.filter(sphere=sphere)
         return qs
 
+
+class Resume(ListView):
+    '''
+    Отображение странички резюме людей
+    '''
+
+    paginate_by = 15
+    paginate_orphans = 3
+    model = Resumes
+    template_name = 'itmo_hh/resume.html'
+    context_object_name = 'resumes'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Резюме'
+        context['form'] = Filter_resumes()
+        return context
+
+    def get_queryset(self):
+        qs = Resumes.objects.filter()
+        qs = qs.filter(~Q(user_id=self.request.user.id))
+        form = Filter_resumes(self.request.GET)
+        if form.is_valid():
+            experience = form.cleaned_data.get('experience')
+            education_level = form.cleaned_data.get('education_level')
+            sphere = form.cleaned_data.get('sphere')
+
+            if experience != 'none':
+                qs = qs.filter(experience=experience)
+            if education_level != 'none':
+                qs = qs.filter(education_level=education_level)
+            if sphere != '' and sphere != None and sphere != 'Не имеет значения':
+                qs = qs.filter(sphere=sphere)
+        return qs
+
+
 class Competitions(ListView):
     '''
     Отображение странички конкурсов
@@ -154,7 +190,7 @@ class Competitions(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'конкурсы'
+        context['title'] = 'Команды: конкурсы'
         context['form'] = Filter_projects()
         return context
 
@@ -252,6 +288,19 @@ class ResumePage(DetailView):
     template_name = 'itmo_hh/resume_page.html'
     context_object_name = 'resume'
     pk_url_kwarg = 'resume_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project = self.get_object()
+        print("Project user_id:", project.user_id.id)
+        print("Current user id:", self.request.user.id)
+        # Проверка на то, что текущий пользователь создал проект
+        if project.user_id.id == self.request.user.id:
+            context['is_owner'] = True
+        else:
+            context['is_owner'] = False
+        return context
+
 
 class UpdateResume(UpdateView):
     '''

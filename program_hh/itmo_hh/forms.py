@@ -32,8 +32,8 @@ from django.contrib.auth.models import User
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='password2', widget=forms.PasswordInput)
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Повторите пароль', widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -66,6 +66,25 @@ class AddResumeProject(forms.ModelForm):
         }
 
 class Filter_projects(forms.Form):
+    experience_choice = (
+        ('none', 'Не имеет значения'),
+        ('no_experience', 'Нет опыта'),
+        ('1-3', '1-3 года'),
+        ('3-5', '3-5 лет'),
+        ("5", "5+")
+    )
+    education_level_choice = (
+        ('none', 'Не имеет значения'),
+        ('bakalavriat', 'Бакалавриат'),
+        ('magistr', 'Магистратура'),
+        ('aspirantyra', 'Аспирантура')
+    )
+    experience = forms.ChoiceField(choices=experience_choice, label='Опыт')
+    sphere = forms.ModelChoiceField(queryset=Sphere.objects.all(), label='Сфера разработки', empty_label='Не имеет значения', required=False)
+    education_level = forms.ChoiceField(choices=education_level_choice, label='Уровень образования')
+
+
+class Filter_resumes(forms.Form):
     experience_choice = (
         ('none', 'Не имеет значения'),
         ('no_experience', 'Нет опыта'),
