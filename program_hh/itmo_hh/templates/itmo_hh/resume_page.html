@@ -55,12 +55,12 @@
             <p><a href="{% url 'project' project_id=invited_resume.project.id %}">{{invited_resume.project.title}}</a></p>
             {% if invited_resume.status == 0 %}
                     <span>В рассмотрении</span>
-                    <button>Принять приглашение</button>
-                    <button>Отклонить приглашение</button>
+                    <a href="{% url 'accept_invitation' resume_id=resume.id project_id=invited_resume.project.id %}"><button>Принять приглашение</button></a>
+                    <a href="{% url 'deny_invitation' resume_id=resume.id project_id=invited_resume.project.id %}"><button>Отклонить приглашение</button></a>
                 {% elif invited_resume.status == 1 %}
-                    <span>Принято</span>
+                    <span>Вы приняли приглашение</span>
                 {% elif invited_resume.status == 2 %}
-                    <span>Отказано</span>
+                    <span>Вы отказали в приглашении</span>
                 {% else %}
                     <span>Неизвестный статус</span>
                 {% endif %}
