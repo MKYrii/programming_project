@@ -261,7 +261,6 @@ def resume_person(request):
             resume.save()
             return redirect('personal_account')
     else:
-
         form = AddResumePerson()
     return render(request, 'itmo_hh/resume_person.html', {'form': form, 'title': 'Создать резюме/ личное резюме'})
 
@@ -411,3 +410,73 @@ def resume_invite(request, resume_id):
         return redirect('resume', resume_id=resume_id)
     else:
         pass
+
+def accept_invitation(request, resume_id, project_id):
+    '''
+    Когда ты принимаешь приглашение от проекта, то в твоем резюме меняется статус
+    :param resume_id: Номер твоего резюме
+    :param project_id: Номер проекта, который тебя пригласил
+    :return: Изменяет статус проекта на 1 - принято
+    '''
+    all = ProjectInvitation.objects.filter(resume_id=resume_id)
+    needed_record = all.get(project_id=project_id)
+    needed_record.status = 1
+    needed_record.save()
+    return redirect('resume', resume_id=resume_id)
+
+def deny_invitation(request, resume_id, project_id):
+    '''
+    Когды ты отказываешь в приглашении проекта, то в твоем резюме меняется статус
+    :param resume_id: Номер твоего резюме
+    :param project_id: Номер проекта, который тебя пригласил
+    :return: Изменяет статус проекта на 2 - отказано
+    '''
+    all = ProjectInvitation.objects.filter(resume_id=resume_id)
+    needed_record = all.get(project_id=project_id)
+    needed_record.status = 2
+    needed_record.save()
+    return redirect('resume', resume_id=resume_id)
+
+def accept_application(request, project_id, resume_id):
+    '''
+    Когда ты принимаешь откликнувшееся резюме в проект, у тебя меняется статус
+    :param project_id: Номер твоего проекта
+    :param resume_id: Номер откликнувшегося резюме
+    :return: Изменяет статус на 1 - принято
+    '''
+    all = ProjectApplication.objects.filter(project_id=project_id)
+    needed_resord = all.get(resume_id=resume_id)
+    needed_resord.status = 1
+    needed_resord.save()
+    return redirect('project', project_id=project_id)
+
+def deny_application(request, project_id, resume_id):
+    '''
+    Когда ты отказываешь откликнувшемуся резюме в проект, у тебя меняется статус
+    :param project_id: Номер твоего проекта
+    :param resume_id: Номер откликнувшегося резюме
+    :return: Изменяет статус на 2 - отказано
+    '''
+    all = ProjectApplication.objects.filter(project_id=project_id)
+    needed_resord = all.get(resume_id=resume_id)
+    needed_resord.status = 2
+    needed_resord.save()
+    return redirect('project', project_id=project_id)
+
+def recall_invitation(request, project_id, resume_id):
+    '''
+    Когда ты отзываешь приглашение для резюме, оно удаляется из бд
+    '''
+    all = ProjectInvitation.objects.filter(project_id=project_id)
+    needed_resord = all.get(resume_id=resume_id)
+    needed_resord.delete()
+    return redirect('project', project_id=project_id)
+
+def recall_application(request, resume_id, project_id):
+    '''
+    Когда ты отзываешь свой отклик на проект, он удаляется из бд
+    '''
+    all = ProjectApplication.objects.filter(resume_id=resume_id)
+    needed_record = all.get(project_id=project_id)
+    needed_record.delete()
+    return redirect('resume', resume_id=resume_id)

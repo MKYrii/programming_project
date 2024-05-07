@@ -130,7 +130,7 @@ class ProjectApplication(models.Model):
         return reverse('project_application', kwargs={'project_id': self.project})
 class ProjectInvitation(models.Model):
     '''
-    Здесь храняться приглашенния резюме в проект. Все по id
+    Здесь хранятся приглашения резюме в проект. Все по id
     '''
 
     project = models.ForeignKey('Startapps_and_projects', related_name='projects_invitation', on_delete=models.CASCADE)

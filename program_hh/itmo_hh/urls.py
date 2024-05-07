@@ -27,7 +27,13 @@ urlpatterns = [
     path('project/<int:project_id>/delete-project/', delete_project, name='delete-project'),
     path('project/<int:project_id>/update-project/', UpdateProject.as_view(), name='update-project'),
     path('project/<int:project_id>/otclic_on_project/', Otclic_on_project, name='otclic_on_project'),
-    path('resume/<int:resume_id>/resume_invite/', resume_invite, name='resume_invite')
+    path('resume/<int:resume_id>/resume_invite/', resume_invite, name='resume_invite'),
+    path('resume/<int:resume_id>/<int:project_id>/accept_invitation/', accept_invitation, name='accept_invitation'),
+    path('resume/<int:resume_id>/<int:project_id>/deny_invitation/', deny_invitation, name='deny_invitation'),
+    path('project/<int:project_id>/<int:resume_id>/accept_application/', accept_application, name='accept_application'),
+    path('project/<int:project_id>/<int:resume_id>/deny_application/', deny_application, name='deny_application'),
+    path('project/<int:project_id>/<int:resume_id>/recall_invitation/', recall_invitation, name='recall_invitation'),
+    path('resume/<int:resume_id>/<int:project_id>/recall_application/', recall_application, name='recall_application')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -43,12 +43,12 @@
             <p><a href="{% url 'resume' resume_id=applied_resume.resume.id %}"><span>{{ applied_resume.resume.title }}</span></a>
                 {% if applied_resume.status == 0 %}
                     <span>В рассмотрении</span>
-                    <button>Принять резюме</button>
-                    <button>Отклонить резюме</button>
+                    <a href="{% url 'accept_application' project_id=project.id resume_id=applied_resume.resume.id %}"><button>Принять резюме</button></a>
+                    <a href="{% url 'deny_application' project_id=project.id resume_id=applied_resume.resume.id %}"><button>Отклонить резюме</button></a>
                 {% elif applied_resume.status == 1 %}
-                    <span>Принято</span>
+                    <span>Вы приняли резюме</span>
                 {% elif applied_resume.status == 2 %}
-                    <span>Отказано</span>
+                    <span>Вы отказали резюме</span>
                 {% else %}
                     <span>Неизвестный статус</span>
                 {% endif %}
@@ -59,6 +59,7 @@
             <p><a href="{% url 'resume' resume_id=invited_resume.resume.id %}">{{invited_resume.resume.title}}</a></p>
             {% if invited_resume.status == 0 %}
                     <span>В рассмотрении</span>
+                    <a href="{% url 'recall_invitation' project_id=project.id resume_id=invited_resume.resume.id %}"><button>Отозвать приглашение</button></a>
                 {% elif invited_resume.status == 1 %}
                     <span>Принято</span>
                 {% elif invited_resume.status == 2 %}
