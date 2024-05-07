@@ -12,7 +12,7 @@ urlpatterns = [
     path('project', Projects.as_view(), name='project'),
     path('resume', Resume.as_view(), name='resume'),
     path('my_projects', MyProjects.as_view(), name='my_projects'),
-    path('summary', summary, name='summary'),
+    path('find_resume', FindResume.as_view(), name='find_resume'),
     path('resume_project', resume_project, name='resume_project'),
     path('resume_person', resume_person, name='resume_person'),
     path('project/<int:project_id>/', PageOfProject.as_view(), name='project'),
@@ -25,7 +25,9 @@ urlpatterns = [
     path('resume/<int:resume_id>/update/', UpdateResume.as_view(), name='update'),
     path('resume/<int:resume_id>/delete/', delete_resume, name='delete'),
     path('project/<int:project_id>/delete-project/', delete_project, name='delete-project'),
-    path('project/<int:project_id>/update-project/', UpdateProject.as_view(), name='update-project')
+    path('project/<int:project_id>/update-project/', UpdateProject.as_view(), name='update-project'),
+    path('project/<int:project_id>/otclic_on_project/', Otclic_on_project, name='otclic_on_project'),
+    path('resume/<int:resume_id>/resume_invite/', resume_invite, name='resume_invite')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
