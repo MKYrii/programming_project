@@ -1,10 +1,12 @@
 body{
     background-image: url("../img/backend_building.png");
-    /*background-size: 100%;*/
+    background-size: 100%;
     font-size: 24px;
     font-weight: 200;
     color: #000000;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    
 }
 .bi-x-circle{
     color: #000000;
