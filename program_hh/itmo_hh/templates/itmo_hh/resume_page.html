@@ -40,6 +40,7 @@
             <p><a href="{% url 'project' project_id=applied_resume.project.id %}"><span>{{ applied_resume.project.title }}</span></a>
                 {% if applied_resume.status == 0 %}
                     <span>В рассмотрении</span>
+                    <a href="{% url 'recall_application' resume_id=resume.id project_id=applied_resume.project.id %}"><button>Отозвать отклик</button></a>
                 {% elif applied_resume.status == 1 %}
                     <span>Принято</span>
                 {% elif applied_resume.status == 2 %}

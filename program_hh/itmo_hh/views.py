@@ -462,3 +462,21 @@ def deny_application(request, project_id, resume_id):
     needed_resord.status = 2
     needed_resord.save()
     return redirect('project', project_id=project_id)
+
+def recall_invitation(request, project_id, resume_id):
+    '''
+    Когда ты отзываешь приглашение для резюме, оно удаляется из бд
+    '''
+    all = ProjectInvitation.objects.filter(project_id=project_id)
+    needed_resord = all.get(resume_id=resume_id)
+    needed_resord.delete()
+    return redirect('project', project_id=project_id)
+
+def recall_application(request, resume_id, project_id):
+    '''
+    Когда ты отзываешь свой отклик на проект, он удаляется из бд
+    '''
+    all = ProjectApplication.objects.filter(resume_id=resume_id)
+    needed_record = all.get(project_id=project_id)
+    needed_record.delete()
+    return redirect('resume', resume_id=resume_id)
