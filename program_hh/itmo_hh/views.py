@@ -6,20 +6,21 @@ from itertools import chain
 from itmo_hh.forms import *
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from itmo_hh.models import *
 from django.views.generic import ListView, DetailView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
     return render(request, 'itmo_hh/index.html')
 
 
-class PersonalAccount(ListView):
+class PersonalAccount(LoginRequiredMixin, ListView):
     '''
     Отображение личного аккаунта
     '''
-
+    login_url = 'login'
     paginate_by = 2
     model = Resumes
     template_name = 'itmo_hh/personal_account.html'
@@ -30,11 +31,11 @@ class PersonalAccount(ListView):
         return r
 
 
-class MyOffers(ListView):
+class MyOffers(LoginRequiredMixin, ListView):
     '''
     Отображает резюме, которые откликнулись на твой проект
     '''
-
+    login_url = 'login'
     model = My_otclics_and_offers
     template_name = 'itmo_hh/my_offers.html'
     context_object_name = 'offers'
@@ -43,11 +44,11 @@ class MyOffers(ListView):
         return My_otclics_and_offers.objects.filter(id_to_whom_user=self.request.user.id)
 
 
-class MyOtclics(ListView):
+class MyOtclics(LoginRequiredMixin, ListView):
     '''
     Отображает на какие проекты ты послал свое резюме
     '''
-
+    login_url = 'login'
     model = My_otclics_and_offers
     template_name = 'itmo_hh/my_otclics.html'
     context_object_name = 'otclics'
@@ -55,11 +56,12 @@ class MyOtclics(ListView):
     def get_queryset(self):
         return My_otclics_and_offers.objects.filter(id_offer_user=self.request.user.id)
 
-class MyProjects(ListView):
+
+class MyProjects(LoginRequiredMixin, ListView):
     '''
     Отображение проектов, которые создал пользователь
     '''
-
+    login_url = 'login'
     paginate_by = 4
     model = Startapps_and_projects
     template_name = 'itmo_hh/my_projects.html'
@@ -67,6 +69,7 @@ class MyProjects(ListView):
 
     def get_queryset(self):
         return Startapps_and_projects.objects.filter(user_id=self.request.user.id).order_by('time_published')
+
 
 def registration(request):
     return render(request, 'itmo_hh/registration.html')
@@ -211,6 +214,7 @@ class Competitions(ListView):
                 qs = qs.filter(sphere=sphere)
         return qs
 
+
 class FindResume(ListView):
     '''
     Отображение страницы для поиска резюме
@@ -224,7 +228,8 @@ class FindResume(ListView):
     def get_queryset(self):
         return Resumes.objects.filter(~Q(user_id=self.request.user.id)).order_by('time_published')
 
-@login_required
+
+@login_required(login_url='login')
 def resume_project(request):
     '''
     Создание личного резюме
@@ -247,7 +252,7 @@ def resume_project(request):
     return render(request, 'itmo_hh/resume_project.html', {'form': form, 'title': 'Создать новый проект'})
 
 
-@login_required
+@login_required(login_url='login')
 def resume_person(request):
     '''
     Создание резюме проекта
@@ -265,6 +270,7 @@ def resume_person(request):
     return render(request, 'itmo_hh/resume_person.html', {'form': form, 'title': 'Создать резюме/ личное резюме'})
 
 
+# @login_required(login_url='login')
 class PageOfProject(DetailView):
     '''
     Страница конкретного проекта
@@ -291,7 +297,7 @@ class PageOfProject(DetailView):
         return context
 
 
-
+# @login_required(login_url='login')
 class ResumePage(DetailView):
     '''
     Страница конкретного резюме
@@ -318,6 +324,7 @@ class ResumePage(DetailView):
         return context
 
 
+# @login_required(login_url='login')
 class UpdateResume(UpdateView):
     '''
     Редактирование личного резюме
@@ -329,6 +336,8 @@ class UpdateResume(UpdateView):
     pk_url_kwarg = 'resume_id'
     form_class = AddResumePerson
 
+
+# @login_required(login_url='login')
 class UpdateProject(UpdateView):
     '''
     Редактирование проекта
@@ -340,6 +349,8 @@ class UpdateProject(UpdateView):
     pk_url_kwarg = 'project_id'
     form_class = AddResumeProject
 
+
+# @login_required(login_url='login')
 def delete_resume(request, resume_id):
     '''
     Удаление резюме
@@ -349,6 +360,8 @@ def delete_resume(request, resume_id):
     resume.delete()
     return redirect('personal_account')
 
+
+# @login_required(login_url='login')
 def delete_project(request, project_id):
     '''
     Удаление прокта
@@ -385,6 +398,7 @@ class LoginUser(LoginView):
     def get_success_url(self):
         return 'personal_account'
 
+
 def Otclic_on_project(request, project_id):
     '''
     Отклик резюме на проект
@@ -399,6 +413,7 @@ def Otclic_on_project(request, project_id):
     else:
         pass
 
+
 def resume_invite(request, resume_id):
     '''
     Приглашение резюме в проект
@@ -410,6 +425,7 @@ def resume_invite(request, resume_id):
         return redirect('resume', resume_id=resume_id)
     else:
         pass
+
 
 def accept_invitation(request, resume_id, project_id):
     '''
@@ -424,6 +440,7 @@ def accept_invitation(request, resume_id, project_id):
     needed_record.save()
     return redirect('resume', resume_id=resume_id)
 
+
 def deny_invitation(request, resume_id, project_id):
     '''
     Когды ты отказываешь в приглашении проекта, то в твоем резюме меняется статус
@@ -436,6 +453,7 @@ def deny_invitation(request, resume_id, project_id):
     needed_record.status = 2
     needed_record.save()
     return redirect('resume', resume_id=resume_id)
+
 
 def accept_application(request, project_id, resume_id):
     '''
@@ -450,6 +468,7 @@ def accept_application(request, project_id, resume_id):
     needed_resord.save()
     return redirect('project', project_id=project_id)
 
+
 def deny_application(request, project_id, resume_id):
     '''
     Когда ты отказываешь откликнувшемуся резюме в проект, у тебя меняется статус
@@ -463,6 +482,7 @@ def deny_application(request, project_id, resume_id):
     needed_resord.save()
     return redirect('project', project_id=project_id)
 
+
 def recall_invitation(request, project_id, resume_id):
     '''
     Когда ты отзываешь приглашение для резюме, оно удаляется из бд
@@ -472,6 +492,7 @@ def recall_invitation(request, project_id, resume_id):
     needed_resord.delete()
     return redirect('project', project_id=project_id)
 
+
 def recall_application(request, resume_id, project_id):
     '''
     Когда ты отзываешь свой отклик на проект, он удаляется из бд
@@ -480,3 +501,6 @@ def recall_application(request, resume_id, project_id):
     needed_record = all.get(project_id=project_id)
     needed_record.delete()
     return redirect('resume', resume_id=resume_id)
+
+
+LogoutView.template_name = 'itmo_hh/logout.html'

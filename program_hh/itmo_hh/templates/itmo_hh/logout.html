@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'itmo_hh/css/login.css' %}" />
+    <style type="text/css">
+	    .inf {
+	    font-size: 30px;
+	    font-weight: bold;
+	    color: white;
+	    font-family: Calibri;
+	    display: block;
+	    padding-top: 100px;
+	    text-align: center;
+	    width: 100%;
+		}
+	</style>
+</head>
+<body>
+<p class='inf'>Вы вышли из аккаунта</p>
+<a  href="{% url 'home' %}" class='inf'>На главную страницу</a>
+</body>
+</html>
