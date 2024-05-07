@@ -211,8 +211,18 @@ class Competitions(ListView):
                 qs = qs.filter(sphere=sphere)
         return qs
 
-def summary(request):
-    return render(request, 'itmo_hh/summary.html')
+class FindResume(ListView):
+    '''
+    Отображение страницы для поиска резюме
+    '''
+    paginate_by = 15
+    paginate_orphans = 3
+    model = Resumes
+    template_name = 'itmo_hh/find_resume.html'
+    context_object_name = 'resumes'
+
+    def get_queryset(self):
+        return Resumes.objects.filter(~Q(user_id=self.request.user.id)).order_by('time_published')
 
 @login_required
 def resume_project(request):
@@ -251,7 +261,7 @@ def resume_person(request):
             resume.save()
             return redirect('personal_account')
     else:
-        print('eror2')
+
         form = AddResumePerson()
     return render(request, 'itmo_hh/resume_person.html', {'form': form, 'title': 'Создать резюме/ личное резюме'})
 
@@ -269,14 +279,18 @@ class PageOfProject(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         project = self.get_object()
-        print("Project user_id:", project.user_id.id)
-        print("Current user id:", self.request.user.id)
+
         # Проверка на то, что текущий пользователь создал проект
         if project.user_id.id == self.request.user.id:
             context['is_owner'] = True
         else:
             context['is_owner'] = False
+
+        context['applied_resumes'] = ProjectApplication.objects.filter(project=project)
+        context['invited_resumes'] = ProjectInvitation.objects.filter(project=project)
+
         return context
+
 
 
 class ResumePage(DetailView):
@@ -291,14 +305,17 @@ class ResumePage(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        project = self.get_object()
-        print("Project user_id:", project.user_id.id)
-        print("Current user id:", self.request.user.id)
+        resume = self.get_object()
+
         # Проверка на то, что текущий пользователь создал проект
-        if project.user_id.id == self.request.user.id:
+        if self.request.user.id == resume.user_id.id:
             context['is_owner'] = True
         else:
             context['is_owner'] = False
+
+        context['applied_resumes'] = ProjectApplication.objects.filter(resume=resume)
+        context['invited_resumes'] = ProjectInvitation.objects.filter(resume=resume)
+
         return context
 
 
@@ -369,3 +386,28 @@ class LoginUser(LoginView):
     def get_success_url(self):
         return 'personal_account'
 
+def Otclic_on_project(request, project_id):
+    '''
+    Отклик резюме на проект
+    '''
+
+    if request.method == 'POST':
+        # resume_id = request.POST.get('resume_id')
+        project_application = ProjectApplication(project_id=project_id, resume_id=1,
+                                                 status=0)
+        project_application.save()
+        return redirect('project')
+    else:
+        pass
+
+def resume_invite(request, resume_id):
+    '''
+    Приглашение резюме в проект
+    '''
+    if request.method == 'POST':
+        # project = request.POST.get('project_id')
+        project_invitation = ProjectInvitation(project_id=1, resume_id=resume_id, status=0)
+        project_invitation.save()
+        return redirect('resume', resume_id=resume_id)
+    else:
+        pass
