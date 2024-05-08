@@ -270,7 +270,6 @@ def resume_person(request):
     return render(request, 'itmo_hh/resume_person.html', {'form': form, 'title': 'Создать резюме/ личное резюме'})
 
 
-# @login_required(login_url='login')
 class PageOfProject(DetailView):
     '''
     Страница конкретного проекта
@@ -297,7 +296,6 @@ class PageOfProject(DetailView):
         return context
 
 
-# @login_required(login_url='login')
 class ResumePage(DetailView):
     '''
     Страница конкретного резюме
@@ -324,7 +322,6 @@ class ResumePage(DetailView):
         return context
 
 
-# @login_required(login_url='login')
 class UpdateResume(UpdateView):
     '''
     Редактирование личного резюме
@@ -337,7 +334,6 @@ class UpdateResume(UpdateView):
     form_class = AddResumePerson
 
 
-# @login_required(login_url='login')
 class UpdateProject(UpdateView):
     '''
     Редактирование проекта
@@ -370,6 +366,15 @@ def delete_project(request, project_id):
     project = Startapps_and_projects.objects.get(id=project_id)
     project.delete()
     return redirect('personal_account')
+
+
+def delete_user(request):
+    # Удаление пользователя
+    print(request.user.id)
+    if request.user.id >= 2:
+        user = User.objects.get(request.user.id)
+        user.delete()
+    return redirect('home')
 
 
 def register(request):

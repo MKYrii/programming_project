@@ -13,7 +13,8 @@
     <a href="{% url 'resume' %}?next={{ request.path }}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAcFJREFUSEvFlotNBDEMRH2dQCVAJ1AJUAlQCVAJdAJ6aB3Nep0vOl2k1a1uY489GTs+2YXW6UK4tgJ8ZWa3Zsbv9xY4vx8zSYwCA3JvZo8N5w7+NhJED3gEMIvl1cyehZHDnhYwoO8bpW4InZ9bRryzx5+bjRXfCwN3NfAaMM6+JEycPAxQGIOt2tWAyRQBsaDsaUI48XjSzDPgF6FsFlTjI1gXI2cOY2VFYLIkWxaRXk9kGreSOUng80B5BNZsEUarNtm7yyIJUrWCL3z+rQiMoNh8oCY49QB75YiZ62XHoBoqza2zVVZGgPWsC4tqSGfCKQsKyTouBeVboU42xuPRhIrfGjCi8j7sPiNoTXeRBT3nwqRuUkoyYP3eEntG/09ksnbGNUVH8BGq0yNcEZeCz4qrMKmG1ZpLeHXwEeC0CqKh1lzvUgC818NV0bve0FLgf1umNg8vvVJqvUui18Fa6p66JHCkdypZM8r0KI0BKGjK3LkHgQPFtUtCI8+mCaLn8fHHGUJEjD4+PPB/c2rplcPqsNcdIHrAzgABME3QhWrL9YAgY58/2IwCawC8O6U+1J9toG+VzdK32YyXQDKjXxWyfB/hr400AAAAAElFTkSuQmCC"/></a>
 {% endif %}
 <br>
-
+    <div class="back">
+    <br>
     <p class="data"><b>Название:</b>  {{resume.title}}</p>
     <p class="data"><b>ФИО:</b>  {{resume.FIO}}</p>
     <p class="data"><b>Пол:</b>  {{resume.sex}}</p>
@@ -26,46 +27,52 @@
     {% if resume.file %}
     <p class="data"><b>Прикрепленный файл:</b>  {{resume.file}}</p>
     {% endif %}
-
+    <br>
+    </div>
+    <br> 
     {% if is_owner == True %}
-        <br>
-        <br>
-        <div style="display: flex; width: 30%;">
+        
+        <div style="display: flex; width: 40%; margin-left: 2%;">
             <a href="{% url 'update' resume_id=resume.id %}" class="edit">Редактировать</a>
             <a href="{% url 'delete' resume_id=resume.id %}" class="edit">Удалить резюме</a>
         </div>
-
-        <p>Проекты, на которые я откликнулся:</p>
+        <br>
+        <div class="back">
+            <br>
+        <p class="data"><b style="font-size: 25px;">Проекты, на которые я откликнулся:</b></p>
         {% for applied_resume in applied_resumes %}
-            <p><a href="{% url 'project' project_id=applied_resume.project.id %}"><span>{{ applied_resume.project.title }}</span></a>
+            <div style="display: flex; width: 60%;"><a href="{% url 'project' project_id=applied_resume.project.id %}" class="ans"><b>{{ applied_resume.project.title }}</b></a>
                 {% if applied_resume.status == 0 %}
-                    <span>В рассмотрении</span>
-                    <a href="{% url 'recall_application' resume_id=resume.id project_id=applied_resume.project.id %}"><button>Отозвать отклик</button></a>
+                    <span class="ans">В рассмотрении</span>
+                    <a href="{% url 'recall_application' resume_id=resume.id project_id=applied_resume.project.id %}" class="ans_btn">Отозвать отклик</a>
                 {% elif applied_resume.status == 1 %}
-                    <span>Принято</span>
+                    <span class="ans">Принято</span>
                 {% elif applied_resume.status == 2 %}
-                    <span>Отказано</span>
+                    <span class="ans">Отказано</span>
                 {% else %}
-                    <span>Неизвестный статус</span>
+                    <span class="ans">Неизвестный статус</span>
                 {% endif %}
-            </p>
+            </div>
         {% endfor %}
 
-        <p>Проекты, в которые меня пригласили:</p>
+        <p class="data"><b style="font-size: 25px;">Проекты, в которые меня пригласили:</b></p>
         {% for invited_resume in invited_resumes %}
-            <p><a href="{% url 'project' project_id=invited_resume.project.id %}">{{invited_resume.project.title}}</a></p>
+            <div style="display: flex; width: 60%;"><a href="{% url 'project' project_id=invited_resume.project.id %}" class="ans"><b>{{invited_resume.project.title}}</b></a>
             {% if invited_resume.status == 0 %}
-                    <span>В рассмотрении</span>
-                    <a href="{% url 'accept_invitation' resume_id=resume.id project_id=invited_resume.project.id %}"><button>Принять приглашение</button></a>
-                    <a href="{% url 'deny_invitation' resume_id=resume.id project_id=invited_resume.project.id %}"><button>Отклонить приглашение</button></a>
+                    <span class="ans">В рассмотрении</span>
+                    <a href="{% url 'accept_invitation' resume_id=resume.id project_id=invited_resume.project.id %}" class="ans_btn">Принять приглашение</a>
+                    <a href="{% url 'deny_invitation' resume_id=resume.id project_id=invited_resume.project.id %}" class="ans_btn">Отклонить приглашение</a>
                 {% elif invited_resume.status == 1 %}
-                    <span>Вы приняли приглашение</span>
+                    <span class="ans">Вы приняли приглашение</span>
                 {% elif invited_resume.status == 2 %}
-                    <span>Вы отказали в приглашении</span>
+                    <span class="ans">Вы отказали в приглашении</span>
                 {% else %}
-                    <span>Неизвестный статус</span>
+                    <span class="ans">Неизвестный статус</span>
                 {% endif %}
+            </div>
         {% endfor %}
+    <br>
+    <br>
 
 <!--    Добавить проверку, что это резюме еще не было приглашено-->
 <!--Здесь при выборе проекта для отправки, нужно передавать его id!!!!-->
@@ -75,6 +82,7 @@
             <input type="hidden" name="project_id" value="{{ project_id }}">
             <button type="submit">Пригласить</button>
         </form>
+    </div>
     {% endif %}
 
 </body>
