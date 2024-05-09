@@ -22,7 +22,7 @@
 
 		</div>
 	</div>
-
+ 
 	<div id="myDropdown" class="dropdown-content">
 			<p class="rz"></p>
 			{% if request.user.is_authenticated %}
@@ -61,13 +61,14 @@
 				{% csrf_token %}
 				<div class="form-error">{{ form.non_field_errors }}</div>
 				{% for f in form %}
-					<p><label class="experiance" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+					<p><label class="experiance" for="{{ f.id_for_label }}">{{ f.label }}:</label><span class="experiance_form">{{ f }}</span></p>
 					<div class="form-error">{{ form.errors }}</div>
 				{% endfor %}
 
-				<input class="filter-found-button-input" type="submit" value="Поиск">
+				<button class="filter-found-button-input" type="submit"><span>Поиск</span></button>
 			</form>
-				<a href="{% url 'project' %}" style="text-decoration: none;"><button class="button-clear-filters">Отменить примененные фильтры</button></a>
+			<br>
+				<a href="{% url 'project' %}" style="text-decoration: none;" class="button-clear-filters">Отменить примененные фильтры</a>
 		</div>
 		{% endblock %}
 

@@ -8,22 +8,23 @@
     <link rel="stylesheet" type="text/css" href="{% static 'itmo_hh/css/resume.css' %}" />
 </head>
 	{% block pagename %}
-	<div class="filters">
+		<div class="filters">
 			<span class="in_filters" style="margin-top: 150px;">Фильтры</span>
 
 			<form action="" method="get">
 				{% csrf_token %}
 				<div class="form-error">{{ form.non_field_errors }}</div>
 				{% for f in form %}
-					<p><label class="experiance" for="{{ f.id_for_label }}">{{ f.label }}:</label>{{ f }}</p>
+					<p><label class="experiance" for="{{ f.id_for_label }}">{{ f.label }}:</label><span class="experiance_form">{{ f }}</span></p>
 					<div class="form-error">{{ form.errors }}</div>
 				{% endfor %}
 
-				<input class="filter-found-button-input" type="submit" value="Поиск">
+				<button class="filter-found-button-input" type="submit"><span>Поиск</span></button>
 			</form>
-		    <a href="{% url 'resume' %}" style="text-decoration: none;"><button class="button-clear-filters">Отменить примененные фильтры</button></a>
-	</div>
-	{% endblock %}
+			<br>
+				<a href="{% url 'project' %}" style="text-decoration: none;" class="button-clear-filters">Отменить примененные фильтры</a>
+		</div>
+		{% endblock %}
 
 	{% block content %}
 
