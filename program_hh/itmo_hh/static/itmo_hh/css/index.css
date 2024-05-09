@@ -1,6 +1,4 @@
 body{
-    background: linear-gradient(180deg, #4781F2 0%, rgba(0, 0, 0, 0) 100%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, ##c2d1f0 98.87%);
     background-image: url("../img/backend_building.png");
     background-size: 100%;
     font-size: 24px;
@@ -10,6 +8,7 @@ body{
     position: relative;
     margin: 0;
     background-attachment: fixed;
+    overflow-x: hidden;
 }
 
 
@@ -20,7 +19,7 @@ body{
 	border-radius: 25px;
 	position: absolute;
 	margin-top: 7px;
-	margin-left: 1%;
+	left: 1%;
 }
 
  .left_top, .right_top {
@@ -161,17 +160,17 @@ body{
 }
 
 .main_header {
-    color: #e7f0fd;
+    color: white;
     font-family: 'Arial';
     font-style: normal;
-    font-size: 100px;
-    line-height: 120px;
-
+    font-size: 90px;
+    line-height: 110px;
+    font-weight: normal;
     position: absolute;
-    width: 1040px;
+    width: 100%;
     height: 224px;
     margin-top: 100px;
-    margin-left: 100px;
+    margin-left: 5%;
 }
 
 
@@ -190,7 +189,7 @@ body{
 /* Rectangle 13 */
 .top_menu {
     position: absolute;
-    width: 1280px;
+    width: 100%;
     height: 126px;
     left: 0px;
     top: 0px;
@@ -203,7 +202,7 @@ body{
 .menu_frame {
     display: inline-block;
     position: absolute;
-    width: 1174px;
+    width: 100%;
     height: 85px;
     left: 41px;
     top: 20px;
@@ -219,7 +218,7 @@ body{
     width: 256px;
     height: 189px;
     left: 970px;
-    top: 544px;
+    top: 514px;
 
     font-family: 'Arial';
     font-style: normal;
@@ -236,16 +235,53 @@ body{
 
 /* Rectangle 6 */
 
-.resume_frame {
+.resume_frame, .resume_frame1, .resume_frame2 {
     position: absolute;
-    width: 233px;
-    height: 58px;
-    left: 1012px;
+    width: 234px;
+    height: 44px;
+    left: 980px;
     top: 675px;
+    z-index: 10;
+    background: white;
+    border: 2px solid black;
+    border-radius: 26px;
+    font-family: Calibri;
+    font-size: 26px;
+    font-weight: bolder;
+    padding-top: 9px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
 
-    background: #FFFCFC;
-    border: 2px solid #313D35;
-    border-radius: 30px;
+.horizont_line{
+    position: absolute;
+    z-index: 8;
+    width: 1px;
+    height: 2px;
+    left: 979px;
+    top: 703px;
+    background: black;
+}
+
+.vertical_line{
+    position: absolute;
+    z-index: 8;
+    width: 1px;
+    height: 2px;
+    left: 1097px;
+    top: 676px;
+    background: black;
+    transform: rotate(-90deg);
+}
+
+.resume_frame1, .resume_frame2{
+    z-index: 9;
+}
+
+.resume_frame1:hover, .resume_frame2:hover{
+    z-index: 9;
+    background: #d9d9d9;
 }
 
 
@@ -285,21 +321,6 @@ body{
     top: 0px;
 }
 
-
-/* Rectangle 17 */
-
-.picture_3 {
-    position: absolute;
-    width: 232px;
-    height: 171px;
-    left: 0px;
-    top: 0px;
-
-    background: url("/programming_project/program_hh/itmo_hh/static/itmo_hh/img/backend_building.png");
-    border-radius: 45px;
-}
-
-
 /* Вакансии: стартапы */
 
 .text_3 {
@@ -321,7 +342,6 @@ body{
 }
 
 
-
 /* Frame 3 */
 .frame_2 {
     position: absolute;
@@ -329,20 +349,6 @@ body{
     height: 226px;
     left: 274px;
     top: 0px;
-}
-
-
-/* Rectangle 18 */
-
-.picture_2 {
-    position: absolute;
-    width: 232px;
-    height: 171px;
-    left: 0px;
-    top: 0px;
-
-    background: url("/programming_project/program_hh/itmo_hh/static/itmo_hh/img/backend_building.png");
-    border-radius: 45px;
 }
 
 /* Команды для участия в конкурсах */
@@ -375,22 +381,6 @@ body{
     top: 0px;
 }
 
-
-
-/* Rectangle 16 */
-.picture_1 {
-    position: absolute;
-    width: 232px;
-    height: 171px;
-    left: 0px;
-    top: 0px;
-
-    background: url("/programming_project/program_hh/itmo_hh/static/itmo_hh/img/backend_building.png");
-    border-radius: 45px;
-}
-
-/* Проекты студентов и выпускников */
-
 .text_1 {
     position: absolute;
     width: 217px;
@@ -406,4 +396,13 @@ body{
     letter-spacing: 0.05em;
 
     color: #000000;
+}
+
+.img1, .img2, .img3 {
+    width: 120px;
+    height: 120px;
+    margin-left: 20px;
+    position: absolute;
+    border-radius: 15px;
+    margin-top: 50px;
 }
