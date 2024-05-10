@@ -22,7 +22,7 @@ class PersonalAccount(LoginRequiredMixin, ListView):
     Отображение личного аккаунта
     '''
     login_url = 'login'
-    paginate_by = 2
+    paginate_by = 4
     model = Resumes
     template_name = 'itmo_hh/personal_account.html'
     context_object_name = 'resumes'
