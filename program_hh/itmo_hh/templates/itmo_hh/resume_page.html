@@ -69,7 +69,6 @@
                 {% endif %}
         {% endfor %}
 
-<!--    Добавить проверку, что это резюме еще не было приглашено-->
 <!--Здесь при выборе проекта для отправки, нужно передавать его id!!!!-->
     {% else %}
         <form action="{% url 'resume_invite' resume_id=resume.id %}" method="post">
@@ -79,5 +78,11 @@
         </form>
     {% endif %}
 
+    <!--    Добавить проверку, что это резюме еще не было приглашено-->
+    {% for message in messages %}
+        <div>
+            {{ message }}
+        </div>
+    {% endfor %}
 </body>
 </html>
