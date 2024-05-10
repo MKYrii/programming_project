@@ -21,14 +21,14 @@
      <p class="data"><b>Название:</b>  {{project.title}}</p>
      <p class="data"><b>Заголовок:</b>  {{project.header}}</p>
      <p class="data"><b>Участники:</b>  {{project.applied_users}}</p>
-    <p class="data"><b>Уровень образования:</b>  {{project.education_level}}</p>
-    <p class="data"><b>Опыт работы:</b>  {{project.experience}}</p>
-    <p class="data"><b>Сфера деятельности:</b>  {{project.sphere}}</p>
+    <p class="data"><b>Уровень образования:</b>  {{ project.get_education_level_display }}</p>
+    <p class="data"><b>Опыт работы:</b>  {{ project.get_experience_display }}</p>
+    <p class="data"><b>Сфера деятельности:</b>  {{ project.sphere }}</p>
     <p class="data"><b>Описание:</b>  {{project.content}}</p>
 
-    {% if project.file %}
-    <p class="data"><b>Прикрепленный файл:</b>  {{project.file}}</p>
-    {% endif %}
+        {% if project.file %}
+            <p class="data"><b>Прикрепленный файл:</b>  <a href="{{ project.file.url }}" download>Скачать файл</a></p>
+        {% endif %}
 
     {% if is_owner == True %}
     <br>

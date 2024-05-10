@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import FileResponse
 from django.shortcuts import render, redirect
 from itertools import chain
 
@@ -241,12 +242,7 @@ def resume_project(request):
             resume = form.save(commit=False)
             resume.user_id = request.user
             resume.save()
-            if resume.category_id == 2:
-                return redirect('project')
-            elif resume.category_id == 1:
-                return redirect('competitions')
-            else:
-                return redirect('startapp')
+            return redirect('my_projects')
     else:
         form = AddResumeProject()
     return render(request, 'itmo_hh/resume_project.html', {'form': form, 'title': 'Создать новый проект'})

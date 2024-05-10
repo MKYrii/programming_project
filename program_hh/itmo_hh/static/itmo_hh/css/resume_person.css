@@ -4,6 +4,7 @@ body{
     font-size: 24px;
     font-weight: 200;
     background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 .bi-x-circle{
     color: #000000;

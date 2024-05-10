@@ -20,8 +20,8 @@ class Resumes(models.Model):
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     time_published = models.DateTimeField(auto_now_add=True)
     FIO = models.CharField(max_length=255, verbose_name='ФИО')
-    sex = models.CharField(max_length=30, verbose_name='Пол')
-    birthday = models.DateField(verbose_name='День рождения')
+    sex = models.CharField(choices=(('women', 'Женский'), ('men', 'Мужской')), max_length=30, verbose_name='Пол')
+    birthday = models.DateField(verbose_name='День рождения', blank=True, null=True)
     napravlenie = models.ForeignKey('Napravlenie', on_delete=models.PROTECT, verbose_name='Направление обучения')
     education_level = models.CharField(max_length=100, choices=education_level_choice,
                                        verbose_name='Уровень образования')
