@@ -14,18 +14,20 @@
 {% endif %}
 <br>
 
-    <p class="data"><b>Название:</b>  {{resume.title}}</p>
-    <p class="data"><b>ФИО:</b>  {{resume.FIO}}</p>
-    <p class="data"><b>Пол:</b>  {{resume.sex}}</p>
-    <p class="data"><b>Дата рождения:</b>  {{resume.birthday}}</p>
-    <p class="data"><b>Направление обучения:</b>  {{resume.napravlenie}}</p>
-    <p class="data"><b>Уровень образования:</b>  {{resume.education_level}}</p>
-    <p class="data"><b>Опыт работы:</b>  {{resume.experience}}</p>
-    <p class="data"><b>Сфера деятельности:</b>  {{resume.sphere}}</p>
+    <p class="data"><b>Название:</b>  {{ resume.title }}</p>
+    <p class="data"><b>ФИО:</b>  {{ resume.FIO }}</p>
+    <p class="data"><b>Пол:</b>  {{ resume.get_sex_display }}</p>
+    <p class="data"><b>Дата рождения:</b>  {{ resume.birthday }}</p>
+    <p class="data"><b>Направление обучения:</b>  {{ resume.napravlenie }}</p>
+    <p class="data"><b>Уровень образования:</b>  {{ resume.get_education_level_display }}</p>
+    <p class="data"><b>Опыт работы:</b>  {{ resume.get_experience_display }}</p>
+    <p class="data"><b>Сфера деятельности:</b>  {{ resume.sphere }}</p>
     <p class="data"><b>Содержание:</b>  {{resume.content}}</p>
+
     {% if resume.file %}
-    <p class="data"><b>Прикрепленный файл:</b>  {{resume.file}}</p>
+        <p class="data"><b>Прикрепленный файл:</b> <a href="{{resume.file.url}}" download>Скачать</a></p>
     {% endif %}
+
 
     {% if is_owner == True %}
         <br>
@@ -67,7 +69,6 @@
                 {% endif %}
         {% endfor %}
 
-<!--    Добавить проверку, что это резюме еще не было приглашено-->
 <!--Здесь при выборе проекта для отправки, нужно передавать его id!!!!-->
     {% else %}
         <form action="{% url 'resume_invite' resume_id=resume.id %}" method="post">
@@ -77,5 +78,11 @@
         </form>
     {% endif %}
 
+    <!--    Проверка, что это резюме еще не было приглашено-->
+    {% for message in messages %}
+        <div>
+            {{ message }}
+        </div>
+    {% endfor %}
 </body>
 </html>
