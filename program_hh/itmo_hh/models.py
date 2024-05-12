@@ -56,7 +56,8 @@ class Startapps_and_projects(models.Model):
     header = models.CharField(max_length=255, verbose_name='Руководитель')
     sphere = models.ForeignKey('Sphere', on_delete=models.PROTECT, verbose_name='Сфера деятельности')
     experience = models.CharField(max_length=30, choices=experience_choice, verbose_name='Опыт работы')
-    education_level = models.CharField(max_length=100, choices=education_level_choice, verbose_name='Уровень образования')
+    education_level = models.CharField(max_length=100, choices=education_level_choice,
+                                       verbose_name='Уровень образования')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
     content = models.TextField(blank=True, verbose_name='Описание')
     file = models.FileField(upload_to='uploads/%Y/%m/%d/', blank=True, null=True, verbose_name='Файл')
@@ -99,6 +100,7 @@ class Napravlenie(models.Model):
     def get_absolute_url(self):
         return reverse('napravlenie', kwargs={'napravlenie_id': self.pk})
 
+
 # Можно удалить
 class My_otclics_and_offers(models.Model):
     id_offer_user = models.ForeignKey(User, related_name='offer_user', on_delete=models.CASCADE)
@@ -111,6 +113,7 @@ class My_otclics_and_offers(models.Model):
 
     def get_absolute_url(self):
         return reverse('otof', kwargs={'otof_id': self.pk})
+
 
 class ProjectApplication(models.Model):
     '''
@@ -128,6 +131,8 @@ class ProjectApplication(models.Model):
 
     def get_absolute_url(self):
         return reverse('project_application', kwargs={'project_id': self.project})
+
+
 class ProjectInvitation(models.Model):
     '''
     Здесь хранятся приглашения резюме в проект. Все по id
