@@ -15,7 +15,7 @@
                 <sapn>Вы откликнулись на проект: </sapn>
                 <a href="{% url 'project' otclic.project_id %}">{{ otclic.project.title }}</a>
                 <span>Своим резюме</span>
-                <span>{{  otclic.resume.title }}</span>
+                <a href="{% url 'resume' otclic.resume_id %}">{{  otclic.resume.title }}</a>
 
                 <sapn>Статус: </sapn>
                 {% if otclic.status == 0 %}
@@ -34,7 +34,7 @@
         {% for offer in offers_to_resumes %}
             <div class="otclic">
                 <span>Вы пригласили в проект: </span>
-                <span>{{ offer.project.title }}</span>
+                <a href="{% url 'project' offer.project_id %}">{{ offer.project.title }}</a>
                 <sapn>Резюме </sapn>
                 <a href="{% url 'resume' offer.resume_id %}">{{ offer.resume.title }}</a>
 

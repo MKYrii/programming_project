@@ -35,16 +35,21 @@ class PersonalAccount(LoginRequiredMixin, ListView):
 
 class MyOffers(LoginRequiredMixin, ListView):
     '''
-    Отображает резюме, которые откликнулись на твой проект
+    Отображает резюме, которые откликнулись на твой проект. Проекты, в которые тебя пригласили
     '''
 
     login_url = 'login'
-    model = My_otclics_and_offers
+    model = ProjectApplication
     template_name = 'itmo_hh/my_offers.html'
-    context_object_name = 'offers'
+    context_object_name = 'offers_for_my_project'
 
     def get_queryset(self):
-        return My_otclics_and_offers.objects.filter(id_to_whom_user=self.request.user.id)
+        print(self.request.user.id)
+        return ProjectApplication.objects.filter(project__user_id=self.request.user.id)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['offers_as_invite'] = ProjectInvitation.objects.filter(resume__user_id=self.request.user.id)
+        return context
 
 
 class MyOtclics(LoginRequiredMixin, ListView):
@@ -58,10 +63,10 @@ class MyOtclics(LoginRequiredMixin, ListView):
     context_object_name = 'otclics_on_projects'
 
     def get_queryset(self):
-        return ProjectApplication.objects.filter(resume_id=self.request.user.id)
+        return ProjectApplication.objects.filter(resume__user_id=self.request.user.id)
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['offers_to_resumes'] = ProjectInvitation.objects.filter(project_id=self.request.user.id)
+        context['offers_to_resumes'] = ProjectInvitation.objects.filter(project__user_id=self.request.user.id)
         return context
 
 
