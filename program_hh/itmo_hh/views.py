@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import FileResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from itertools import chain
 
 from itmo_hh.forms import *
@@ -456,8 +456,15 @@ def accept_invitation(request, resume_id, project_id):
     :param project_id: Номер проекта, который тебя пригласил
     :return: Изменяет статус проекта на 1 - принято
     '''
-    all = ProjectInvitation.objects.filter(resume_id=resume_id)
-    needed_record = all.get(project_id=project_id)
+
+    needed_record = get_object_or_404(ProjectInvitation, project_id=project_id, resume_id=resume_id)
+
+    if needed_record.status == 0:
+        project = needed_record.project
+        if project.applied_users > 0:
+            project.applied_users -= 1
+            project.save()
+
     needed_record.status = 1
     needed_record.save()
     return redirect('resume', resume_id=resume_id)
@@ -484,8 +491,14 @@ def accept_application(request, project_id, resume_id):
     :param resume_id: Номер откликнувшегося резюме
     :return: Изменяет статус на 1 - принято
     '''
-    all = ProjectApplication.objects.filter(project_id=project_id)
-    needed_resord = all.get(resume_id=resume_id)
+    needed_resord = get_object_or_404(ProjectApplication, project_id=project_id, resume_id=resume_id)
+
+    if needed_resord.status == 0:
+        project = needed_resord.project
+        if project.applied_users > 0:
+            project.applied_users -= 1
+            project.save()
+
     needed_resord.status = 1
     needed_resord.save()
     return redirect('project', project_id=project_id)
