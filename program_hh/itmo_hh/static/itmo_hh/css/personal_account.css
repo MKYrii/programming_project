@@ -265,7 +265,7 @@ body{
 }
 .otclic{
     padding-left: 2%;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
     font-size: 22px;
 }
 .offer_link{
@@ -282,6 +282,7 @@ body{
     display: inline-block;
     float: right;
     margin-right: 1.5%;
+    font-size: 20px;
 }
 .otclic_status_0{
     background-color: #FFFACD;
@@ -302,4 +303,9 @@ body{
     background-color: #A9A9A9;
     padding: 3px 7px 3px 7px;
     border-radius: 20px;
+}
+.otclic_date{
+    display: block;
+    float: right;
+    margin-right: 1.5%;
 }

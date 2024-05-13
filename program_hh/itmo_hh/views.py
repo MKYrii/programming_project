@@ -23,13 +23,13 @@ class PersonalAccount(LoginRequiredMixin, ListView):
     Отображение личного аккаунта
     '''
     login_url = 'login'
-    paginate_by = 4
+    paginate_by = 3
     model = Resumes
     template_name = 'itmo_hh/personal_account.html'
     context_object_name = 'resumes'
 
     def get_queryset(self):
-        r = Resumes.objects.filter(user_id=self.request.user.id).order_by('time_published')
+        r = Resumes.objects.filter(user_id=self.request.user.id).order_by('-time_published')
         return r
 
 
@@ -40,15 +40,15 @@ class MyOffers(LoginRequiredMixin, ListView):
 
     login_url = 'login'
     model = ProjectApplication
-    paginate_by = 4
+    paginate_by = 3
     template_name = 'itmo_hh/my_offers.html'
     context_object_name = 'offers_for_my_project'
 
     def get_queryset(self):
-        return ProjectApplication.objects.filter(project__user_id=self.request.user.id)
+        return ProjectApplication.objects.filter(project__user_id=self.request.user.id).order_by('-time_published')
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['offers_as_invite'] = ProjectInvitation.objects.filter(resume__user_id=self.request.user.id)
+        context['offers_as_invite'] = ProjectInvitation.objects.filter(resume__user_id=self.request.user.id).order_by('-time_published')
         return context
 
 
@@ -64,10 +64,10 @@ class MyOtclics(LoginRequiredMixin, ListView):
     context_object_name = 'otclics_on_projects'
 
     def get_queryset(self):
-        return ProjectApplication.objects.filter(resume__user_id=self.request.user.id)
+        return ProjectApplication.objects.filter(resume__user_id=self.request.user.id).order_by('-time_published')
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['offers_to_resumes'] = ProjectInvitation.objects.filter(project__user_id=self.request.user.id)
+        context['offers_to_resumes'] = ProjectInvitation.objects.filter(project__user_id=self.request.user.id).order_by('-time_published')
         return context
 
 
@@ -82,7 +82,7 @@ class MyProjects(LoginRequiredMixin, ListView):
     context_object_name = 'projects'
 
     def get_queryset(self):
-        return Startapps_and_projects.objects.filter(user_id=self.request.user.id).order_by('time_published')
+        return Startapps_and_projects.objects.filter(user_id=self.request.user.id).order_by('-time_published')
 
 
 def registration(request):
@@ -240,7 +240,7 @@ class FindResume(ListView):
     context_object_name = 'resumes'
 
     def get_queryset(self):
-        return Resumes.objects.filter(~Q(user_id=self.request.user.id)).order_by('time_published')
+        return Resumes.objects.filter(~Q(user_id=self.request.user.id)).order_by('-time_published')
 
 
 @login_required(login_url='login')
