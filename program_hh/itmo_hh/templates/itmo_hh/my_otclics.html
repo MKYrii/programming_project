@@ -9,6 +9,48 @@
 </head>
 <body>
     {% block content %}
+        <p>Мои отклики на проекты:</p>
+        {% for otclic in otclics_on_projects %}
+            <div class="otclic">
+                <sapn>Вы откликнулись на проект: </sapn>
+                <a href="{% url 'project' otclic.project_id %}">{{ otclic.project.title }}</a>
+                <span>Своим резюме</span>
+                <span>{{  otclic.resume.title }}</span>
+
+                <sapn>Статус: </sapn>
+                {% if otclic.status == 0 %}
+                    <span>В рассмотрении</span>
+                {% elif otclic.status == 1 %}
+                    <span>Принято</span>
+                {% elif otclic.status == 2 %}
+                    <span>Отклонено</span>
+                {% else %}
+                    <span>Неизвестный статус</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <p>Мои приглашенные резюме:</p>
+        {% for offer in offers_to_resumes %}
+            <div class="otclic">
+                <span>Вы пригласили в проект: </span>
+                <span>{{ offer.project.title }}</span>
+                <sapn>Резюме </sapn>
+                <a href="{% url 'resume' offer.resume_id %}">{{ offer.resume.title }}</a>
+
+                <sapn>Статус: </sapn>
+                {% if offer.status == 0 %}
+                    <span>В рассмотрении</span>
+                {% elif offer.status == 1 %}
+                    <span>Принято</span>
+                {% elif offer.status == 2 %}
+                    <span>Отклонено</span>
+                {% else %}
+                    <span>Неизвестный статус</span>
+                {% endif %}
+
+            </div>
+        {% endfor %}
     {% endblock %}
 </body>
 </html>

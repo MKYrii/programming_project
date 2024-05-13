@@ -37,6 +37,7 @@ class MyOffers(LoginRequiredMixin, ListView):
     '''
     Отображает резюме, которые откликнулись на твой проект
     '''
+
     login_url = 'login'
     model = My_otclics_and_offers
     template_name = 'itmo_hh/my_offers.html'
@@ -48,15 +49,20 @@ class MyOffers(LoginRequiredMixin, ListView):
 
 class MyOtclics(LoginRequiredMixin, ListView):
     '''
-    Отображает на какие проекты ты послал свое резюме
+    Отображает на какие проекты ты послал свое резюме, какие резюме ты пригласил в проект
     '''
+
     login_url = 'login'
-    model = My_otclics_and_offers
+    model = ProjectApplication
     template_name = 'itmo_hh/my_otclics.html'
-    context_object_name = 'otclics'
+    context_object_name = 'otclics_on_projects'
 
     def get_queryset(self):
-        return My_otclics_and_offers.objects.filter(id_offer_user=self.request.user.id)
+        return ProjectApplication.objects.filter(resume_id=self.request.user.id)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['offers_to_resumes'] = ProjectInvitation.objects.filter(project_id=self.request.user.id)
+        return context
 
 
 class MyProjects(LoginRequiredMixin, ListView):
