@@ -9,45 +9,49 @@
 </head>
 <body>
     {% block content %}
-        <p>Мои отклики на проекты:</p>
+        <p class="otclic_tem">Мои отклики на проекты:</p>
         {% for otclic in otclics_on_projects %}
             <div class="otclic">
                 <sapn>Вы откликнулись на проект: </sapn>
-                <a href="{% url 'project' otclic.project_id %}">{{ otclic.project.title }}</a>
-                <span>Своим резюме</span>
-                <a href="{% url 'resume' otclic.resume_id %}">{{  otclic.resume.title }}</a>
+                <a class="offer_link" href="{% url 'project' otclic.project_id %}">{{ otclic.project.title }}</a>
+                <span>своим резюме</span>
+                <a class="offer_link" href="{% url 'resume' otclic.resume_id %}">{{  otclic.resume.title }}</a>
 
-                <sapn>Статус: </sapn>
-                {% if otclic.status == 0 %}
-                    <span>В рассмотрении</span>
-                {% elif otclic.status == 1 %}
-                    <span>Принято</span>
-                {% elif otclic.status == 2 %}
-                    <span>Отклонено</span>
-                {% else %}
-                    <span>Неизвестный статус</span>
-                {% endif %}
+                <div class="otclic_status">
+                    <sapn>Статус: </sapn>
+                    {% if otclic.status == 0 %}
+                        <span class="otclic_status_0">В рассмотрении</span>
+                    {% elif otclic.status == 1 %}
+                        <span class="otclic_status_1">Принято</span>
+                    {% elif otclic.status == 2 %}
+                        <span class="otclic_status_2">Отклонено</span>
+                    {% else %}
+                        <span class="otclic_status_none">Неизвестный статус</span>
+                    {% endif %}
+                </div>
             </div>
         {% endfor %}
 
-        <p>Мои приглашенные резюме:</p>
+        <p class="otclic_tem">Мои приглашенные резюме:</p>
         {% for offer in offers_to_resumes %}
             <div class="otclic">
                 <span>Вы пригласили в проект: </span>
-                <a href="{% url 'project' offer.project_id %}">{{ offer.project.title }}</a>
+                <a class="offer_link" href="{% url 'project' offer.project_id %}">{{ offer.project.title }}</a>
                 <sapn>Резюме </sapn>
-                <a href="{% url 'resume' offer.resume_id %}">{{ offer.resume.title }}</a>
+                <a class="offer_link" href="{% url 'resume' offer.resume_id %}">{{ offer.resume.title }}</a>
 
-                <sapn>Статус: </sapn>
-                {% if offer.status == 0 %}
-                    <span>В рассмотрении</span>
-                {% elif offer.status == 1 %}
-                    <span>Принято</span>
-                {% elif offer.status == 2 %}
-                    <span>Отклонено</span>
-                {% else %}
-                    <span>Неизвестный статус</span>
-                {% endif %}
+                <div class="otclic_status">
+                    <sapn>Статус: </sapn>
+                    {% if offer.status == 0 %}
+                        <span class="otclic_status_0">В рассмотрении</span>
+                    {% elif offer.status == 1 %}
+                        <span class="otclic_status_1">Принято</span>
+                    {% elif offer.status == 2 %}
+                        <span class="otclic_status_2">Отклонено</span>
+                    {% else %}
+                        <span class="otclic_status_none">Неизвестный статус</span>
+                    {% endif %}
+                </div>
 
             </div>
         {% endfor %}

@@ -40,11 +40,11 @@ class MyOffers(LoginRequiredMixin, ListView):
 
     login_url = 'login'
     model = ProjectApplication
+    paginate_by = 4
     template_name = 'itmo_hh/my_offers.html'
     context_object_name = 'offers_for_my_project'
 
     def get_queryset(self):
-        print(self.request.user.id)
         return ProjectApplication.objects.filter(project__user_id=self.request.user.id)
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -58,6 +58,7 @@ class MyOtclics(LoginRequiredMixin, ListView):
     '''
 
     login_url = 'login'
+    paginate_by = 4
     model = ProjectApplication
     template_name = 'itmo_hh/my_otclics.html'
     context_object_name = 'otclics_on_projects'
