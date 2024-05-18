@@ -509,3 +509,5 @@ def recall_application(request, resume_id, project_id):
 
 
 LogoutView.template_name = 'itmo_hh/logout.html'
+
+
