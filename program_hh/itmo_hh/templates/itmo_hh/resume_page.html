@@ -1,9 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Resume page</title>
     <link rel="stylesheet" type="text/css" href="../../static/itmo_hh/css/resume_page.css" />
+    <script type="text/javascript" src="{% static 'itmo_hh/js/invite_btn.js' %}"></script>
 </head>
 <body>
 {% if is_owner == True %}
@@ -78,10 +80,10 @@
 
 <!--Здесь при выборе проекта для отправки, нужно передавать его id!!!!-->
     {% else %}
-        <form action="{% url 'resume_invite' resume_id=resume.id %}" method="post">
+        <form action="{% url 'resume_invite' resume_id=resume.id %}" method="post" id="myForm">
             {% csrf_token %}
             <input type="hidden" name="project_id" value="{{ project_id }}">
-            <button type="submit" class="invite">Пригласить</button>
+            <button type="submit" class="invite animate">Пригласить</button>
         </form>
     </div>
     {% endif %}

@@ -81,6 +81,22 @@ body{
     background-color: #6495ED;
 }
 
+.animate{
+  animation: animateButton 0.5s ease-in-out;
+}
+
+@keyframes animateButton {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .error_iviting{
     color: #800000;
     margin-left: 5%;
