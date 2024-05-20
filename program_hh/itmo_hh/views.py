@@ -1,5 +1,7 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import FileResponse
 from django.shortcuts import render, redirect
 from itertools import chain
 
@@ -21,7 +23,7 @@ class PersonalAccount(LoginRequiredMixin, ListView):
     Отображение личного аккаунта
     '''
     login_url = 'login'
-    paginate_by = 2
+    paginate_by = 4
     model = Resumes
     template_name = 'itmo_hh/personal_account.html'
     context_object_name = 'resumes'
@@ -241,12 +243,7 @@ def resume_project(request):
             resume = form.save(commit=False)
             resume.user_id = request.user
             resume.save()
-            if resume.category_id == 2:
-                return redirect('project')
-            elif resume.category_id == 1:
-                return redirect('competitions')
-            else:
-                return redirect('startapp')
+            return redirect('my_projects')
     else:
         form = AddResumeProject()
     return render(request, 'itmo_hh/resume_project.html', {'form': form, 'title': 'Создать новый проект'})
@@ -410,11 +407,19 @@ def Otclic_on_project(request, project_id):
     '''
 
     if request.method == 'POST':
-        # resume_id = request.POST.get('resume_id')
-        project_application = ProjectApplication(project_id=project_id, resume_id=1,
-                                                 status=0)
-        project_application.save()
-        return redirect('project')
+
+        # Проверка на то, что этот пользователь уже откликнулся на проект
+        if ProjectApplication.objects.filter(project_id=project_id, resume_id=1).exists():
+
+            messages.error(request, 'Вы уже откликнулись на этот проект')
+            return redirect('project', project_id=project_id)
+
+        else:
+            # resume_id = request.POST.get('resume_id')
+            project_application = ProjectApplication(project_id=project_id, resume_id=1,
+                                                     status=0)
+            project_application.save()
+            return redirect('project', project_id=project_id)
     else:
         pass
 
@@ -423,11 +428,16 @@ def resume_invite(request, resume_id):
     '''
     Приглашение резюме в проект
     '''
+
     if request.method == 'POST':
-        # project = request.POST.get('project_id')
-        project_invitation = ProjectInvitation(project_id=1, resume_id=resume_id, status=0)
-        project_invitation.save()
-        return redirect('resume', resume_id=resume_id)
+        if ProjectInvitation.objects.filter(resume_id=resume_id, project_id=1).exists():
+            messages.error(request, 'Вы уже пригласили это резюме')
+            return redirect('resume', resume_id=resume_id)
+        else:
+            # project = request.POST.get('project_id')
+            project_invitation = ProjectInvitation(project_id=1, resume_id=resume_id, status=0)
+            project_invitation.save()
+            return redirect('resume', resume_id=resume_id)
     else:
         pass
 
