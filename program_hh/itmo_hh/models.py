@@ -125,6 +125,7 @@ class ProjectApplication(models.Model):
         (2, 'Отклонено')
     )
     status = models.IntegerField(default=0)
+    time_published = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse('project_application', kwargs={'project_id': self.project})
@@ -141,6 +142,7 @@ class ProjectInvitation(models.Model):
         (2, 'Отклонено')
     )
     status = models.IntegerField(default=0)
+    time_published = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
 
 class Love(models.Model):

@@ -254,3 +254,58 @@ body{
 .page-number a:hover {
     background-color: lightblue;
 }
+
+/* Стили для my_otclics */
+.otclic_tem{
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 7px;
+    background-color: #87CEFA;
+    border-radius: 10px;
+}
+.otclic{
+    padding-left: 2%;
+    margin-bottom: 3%;
+    font-size: 22px;
+}
+.offer_link{
+    color: #3c4245;
+    text-decoration: none;
+    font-weight: 500;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.offer_link:hover{
+    color: #4682B4;
+}
+.otclic_status{
+    display: inline-block;
+    float: right;
+    margin-right: 1.5%;
+    font-size: 20px;
+}
+.otclic_status_0{
+    background-color: #FFFACD;
+    padding: 3px 7px 3px 7px;
+    border-radius: 20px;
+}
+.otclic_status_1{
+    background-color: #98FB98;
+    padding: 3px 7px 3px 7px;
+    border-radius: 20px;
+}
+.otclic_status_2{
+    background-color: #CD5C5C;
+    padding: 3px 7px 3px 7px;
+    border-radius: 20px;
+}
+.otclic_status_none{
+    background-color: #A9A9A9;
+    padding: 3px 7px 3px 7px;
+    border-radius: 20px;
+}
+.otclic_date{
+    display: block;
+    float: right;
+    margin-right: 1.5%;
+}

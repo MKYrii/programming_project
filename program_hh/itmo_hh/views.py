@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import FileResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from itertools import chain
 
 from itmo_hh.forms import *
@@ -23,40 +23,52 @@ class PersonalAccount(LoginRequiredMixin, ListView):
     Отображение личного аккаунта
     '''
     login_url = 'login'
-    paginate_by = 4
+    paginate_by = 3
     model = Resumes
     template_name = 'itmo_hh/personal_account.html'
     context_object_name = 'resumes'
 
     def get_queryset(self):
-        r = Resumes.objects.filter(user_id=self.request.user.id).order_by('time_published')
+        r = Resumes.objects.filter(user_id=self.request.user.id).order_by('-time_published')
         return r
 
 
 class MyOffers(LoginRequiredMixin, ListView):
     '''
-    Отображает резюме, которые откликнулись на твой проект
+    Отображает резюме, которые откликнулись на твой проект. Проекты, в которые тебя пригласили
     '''
+
     login_url = 'login'
-    model = My_otclics_and_offers
+    model = ProjectApplication
+    paginate_by = 3
     template_name = 'itmo_hh/my_offers.html'
-    context_object_name = 'offers'
+    context_object_name = 'offers_for_my_project'
 
     def get_queryset(self):
-        return My_otclics_and_offers.objects.filter(id_to_whom_user=self.request.user.id)
+        return ProjectApplication.objects.filter(project__user_id=self.request.user.id).order_by('-time_published')
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['offers_as_invite'] = ProjectInvitation.objects.filter(resume__user_id=self.request.user.id).order_by('-time_published')
+        return context
 
 
 class MyOtclics(LoginRequiredMixin, ListView):
     '''
-    Отображает на какие проекты ты послал свое резюме
+    Отображает на какие проекты ты послал свое резюме, какие резюме ты пригласил в проект
     '''
+
     login_url = 'login'
-    model = My_otclics_and_offers
+    paginate_by = 4
+    model = ProjectApplication
     template_name = 'itmo_hh/my_otclics.html'
-    context_object_name = 'otclics'
+    context_object_name = 'otclics_on_projects'
 
     def get_queryset(self):
-        return My_otclics_and_offers.objects.filter(id_offer_user=self.request.user.id)
+        return ProjectApplication.objects.filter(resume__user_id=self.request.user.id).order_by('-time_published')
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['offers_to_resumes'] = ProjectInvitation.objects.filter(project__user_id=self.request.user.id).order_by('-time_published')
+        return context
 
 
 class MyProjects(LoginRequiredMixin, ListView):
@@ -70,7 +82,7 @@ class MyProjects(LoginRequiredMixin, ListView):
     context_object_name = 'projects'
 
     def get_queryset(self):
-        return Startapps_and_projects.objects.filter(user_id=self.request.user.id).order_by('time_published')
+        return Startapps_and_projects.objects.filter(user_id=self.request.user.id).order_by('-time_published')
 
 
 def registration(request):
@@ -228,7 +240,7 @@ class FindResume(ListView):
     context_object_name = 'resumes'
 
     def get_queryset(self):
-        return Resumes.objects.filter(~Q(user_id=self.request.user.id)).order_by('time_published')
+        return Resumes.objects.filter(~Q(user_id=self.request.user.id)).order_by('-time_published')
 
 
 @login_required(login_url='login')
@@ -449,8 +461,15 @@ def accept_invitation(request, resume_id, project_id):
     :param project_id: Номер проекта, который тебя пригласил
     :return: Изменяет статус проекта на 1 - принято
     '''
-    all = ProjectInvitation.objects.filter(resume_id=resume_id)
-    needed_record = all.get(project_id=project_id)
+
+    needed_record = get_object_or_404(ProjectInvitation, project_id=project_id, resume_id=resume_id)
+
+    if needed_record.status == 0:
+        project = needed_record.project
+        if project.applied_users > 0:
+            project.applied_users -= 1
+            project.save()
+
     needed_record.status = 1
     needed_record.save()
     return redirect('resume', resume_id=resume_id)
@@ -477,8 +496,14 @@ def accept_application(request, project_id, resume_id):
     :param resume_id: Номер откликнувшегося резюме
     :return: Изменяет статус на 1 - принято
     '''
-    all = ProjectApplication.objects.filter(project_id=project_id)
-    needed_resord = all.get(resume_id=resume_id)
+    needed_resord = get_object_or_404(ProjectApplication, project_id=project_id, resume_id=resume_id)
+
+    if needed_resord.status == 0:
+        project = needed_resord.project
+        if project.applied_users > 0:
+            project.applied_users -= 1
+            project.save()
+
     needed_resord.status = 1
     needed_resord.save()
     return redirect('project', project_id=project_id)
