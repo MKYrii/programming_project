@@ -69,3 +69,21 @@ body{
     margin-left: 4%;
     border: 2px solid #0066ff;
 }
+.invite{
+    margin-left: 10%;
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-family: Calibri;
+    background-color: #e6f0ff;
+    margin-top: 2%;
+}
+
+.invite:hover{
+    background-color: #6495ED;
+}
+
+.error_iviting{
+    color: #800000;
+    margin-left: 5%;
+}

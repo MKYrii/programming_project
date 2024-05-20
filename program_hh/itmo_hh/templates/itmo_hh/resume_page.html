@@ -81,7 +81,7 @@
         <form action="{% url 'resume_invite' resume_id=resume.id %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="project_id" value="{{ project_id }}">
-            <button type="submit">Пригласить</button>
+            <button type="submit" class="invite">Пригласить</button>
         </form>
     </div>
     {% endif %}
@@ -89,7 +89,7 @@
     <!--    Проверка, что это резюме еще не было приглашено-->
     {% for message in messages %}
         <div>
-            {{ message }}
+            <p class="error_iviting">Ошибка: {{ message }}</p>
         </div>
     {% endfor %}
 </body>

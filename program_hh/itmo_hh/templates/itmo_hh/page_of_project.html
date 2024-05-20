@@ -84,7 +84,7 @@
     <form action="{% url 'otclic_on_project' project_id=project.id %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="resume_id" value="{{ resume_id }}">
-        <button type="submit">Откликнуться</button>
+        <button type="submit" class="invite">Откликнуться</button>
     </form>
     </div>
 
@@ -93,7 +93,7 @@
 <!--    Вывод ошибки, если пользователь уже отправлял отклик на проект-->
     {% for message in messages %}
         <div>
-            {{ message }}
+            <p class="error_iviting">Ошибка: {{ message }}</p>
         </div>
     {% endfor %}
 
