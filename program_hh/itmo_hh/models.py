@@ -128,6 +128,7 @@ class ProjectApplication(models.Model):
 
     def get_absolute_url(self):
         return reverse('project_application', kwargs={'project_id': self.project})
+
 class ProjectInvitation(models.Model):
     '''
     Здесь хранятся приглашения резюме в проект. Все по id
