@@ -24,7 +24,7 @@ from django.contrib.auth.models import User
                             input_formats=['%d/%m/%Y', '%d/%m/%y', '%d.%m.%Y', '%d.%m.%y'])
 
     napravlenie = forms.ModelChoiceField(queryset=Napravlenie.objects.all())
-    education_level = forms.ChoiceField(choices=education_level_choice, label='Уровень образования')
+    education_level = forms.ChoiceField(choices=education_level_choice, label='Уроень образования')
     experience = forms.ChoiceField(choices=experience_choice, label='Опыт')
     sphere = forms.ModelChoiceField(queryset=Sphere.objects.all())
     content = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 10}), label='Описание')
