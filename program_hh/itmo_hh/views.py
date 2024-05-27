@@ -29,7 +29,7 @@ class PersonalAccount(LoginRequiredMixin, ListView):
     context_object_name = 'resumes'
 
     def get_queryset(self):
-        r = Resumes.objects.filter(user_id=self.request.user.id).order_by('time_published')
+        r = Resumes.objects.filter(user_id=self.request.user.id).order_by('-time_published')
         return r
 
 
@@ -70,7 +70,7 @@ class MyProjects(LoginRequiredMixin, ListView):
     context_object_name = 'projects'
 
     def get_queryset(self):
-        return Startapps_and_projects.objects.filter(user_id=self.request.user.id).order_by('time_published')
+        return Startapps_and_projects.objects.filter(user_id=self.request.user.id).order_by('-time_published')
 
 
 def registration(request):
@@ -215,21 +215,6 @@ class Competitions(ListView):
             if sphere != '' and sphere != None and sphere != 'Не имеет значения':
                 qs = qs.filter(sphere=sphere)
         return qs
-
-
-class FindResume(ListView):
-    '''
-    Отображение страницы для поиска резюме
-    '''
-    paginate_by = 15
-    paginate_orphans = 3
-    model = Resumes
-    template_name = 'itmo_hh/find_resume.html'
-    context_object_name = 'resumes'
-
-    def get_queryset(self):
-        return Resumes.objects.filter(~Q(user_id=self.request.user.id)).order_by('time_published')
-
 
 @login_required(login_url='login')
 def resume_project(request):

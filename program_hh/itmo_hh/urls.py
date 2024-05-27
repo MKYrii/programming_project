@@ -12,7 +12,6 @@ urlpatterns = [
     path('project', Projects.as_view(), name='project'),
     path('resume', Resume.as_view(), name='resume'),
     path('my_projects', MyProjects.as_view(), name='my_projects'),
-    path('find_resume', FindResume.as_view(), name='find_resume'),
     path('resume_project', resume_project, name='resume_project'),
     path('resume_person', resume_person, name='resume_person'),
     path('project/<int:project_id>/', PageOfProject.as_view(), name='project'),

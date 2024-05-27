@@ -47,9 +47,6 @@ class TestUrls(TestCase):
         '''
         url = reverse('my_projects')
         self.assertEqual(resolve(url).func.view_class, MyProjects)
-    def test_find_resume(self):
-        url = reverse('find_resume')
-        self.assertEqual(resolve(url).func.view_class, FindResume)
 
     def test_resume_project(self):
         url = reverse('resume_project')
