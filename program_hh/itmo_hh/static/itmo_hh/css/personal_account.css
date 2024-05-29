@@ -148,10 +148,13 @@ body{
 
 
 #articles{
-    position: absolute;
+/*    position: absolute;*/
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     margin-top: 6em;
     width: 83%;
-    height: 560px;
+/*    height: 560px;*/
     background-color: #FFFFFF;
     border-radius: 20px;
     margin-left: 5em;
