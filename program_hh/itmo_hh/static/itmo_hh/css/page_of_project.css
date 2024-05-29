@@ -87,3 +87,55 @@ body{
     color: #800000;
     margin-left: 5%;
 }
+
+.search_btn {
+    display: block;
+    width: 100%;
+    background: white;
+    font-size: 21px;
+    font-family: Calibri;
+    font-weight: bolder;
+    border: 2px solid white;
+    text-align: center;
+}
+
+.search_btn:hover {
+    background: #d9d9d9;
+}
+
+.data_line {
+    height: 30px;
+}
+
+.otklik_btn {
+    position: absolute;
+    top: 20px;
+    left: 7%;
+    width: 200px;
+    height: 40px;
+    background: white;
+    font-size: 21px;
+    font-family: Calibri;
+    font-weight: bolder;
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.otclic_form {
+    position: relative;
+}
+
+.data_frame {
+    position: absolute;
+    left: 7%;
+    top: 20px;
+    background: white;
+    border-radius: 20px;
+    width: 200px;
+    height: 40px;
+    /*transform: scale(1, 0.5) ;*/
+    border: 2px solid black;
+}

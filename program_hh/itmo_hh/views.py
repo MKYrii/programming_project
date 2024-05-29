@@ -286,6 +286,8 @@ class PageOfProject(DetailView):
 
         context['applied_resumes'] = ProjectApplication.objects.filter(project=project)
         context['invited_resumes'] = ProjectInvitation.objects.filter(project=project)
+        context['resumes'] = Resumes.objects.filter(user_id=self.request.user.id)
+        context['resumes_length'] = len(Resumes.objects.filter(user_id=self.request.user.id))
 
         return context
 
@@ -404,16 +406,17 @@ def Otclic_on_project(request, project_id):
     '''
 
     if request.method == 'POST':
+        resume_id = request.POST.get("resume_id")
 
         # Проверка на то, что этот пользователь уже откликнулся на проект
-        if ProjectApplication.objects.filter(project_id=project_id, resume_id=1).exists():
+        if ProjectApplication.objects.filter(project_id=project_id, resume_id=resume_id).exists():
 
             messages.error(request, 'Вы уже откликнулись на этот проект')
             return redirect('project', project_id=project_id)
 
         else:
             # resume_id = request.POST.get('resume_id')
-            project_application = ProjectApplication(project_id=project_id, resume_id=1,
+            project_application = ProjectApplication(project_id=project_id, resume_id=resume_id,
                                                      status=0)
             project_application.save()
             return redirect('project', project_id=project_id)
