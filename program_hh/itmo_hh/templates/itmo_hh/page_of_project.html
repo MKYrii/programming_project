@@ -85,37 +85,39 @@
     <br>
 <div class="otclic_form">
 <!--    Здесь как-то при нажатии на откликнуться должно появляться список резюме для выбора, и передаваться resume_id-->
-    <form action="{% url 'otclic_on_project' project_id=project.id %}" method="post">
+
+    <form id="applyForm" action="{% url 'otclic_on_project' project_id=project.id %}" method="post">
         {% csrf_token %}
-        <div class="otklik_btn">
-            откликнуться
-        </div>
-        <div class="data_frame" id="data_frame">
-            {% for resume in resumes %}
-            <button id="search_btn" type="submit" name="resume_id" value={{resume.id}} class="search_btn" >{{ resume.title }}</button>
-            {% endfor %}
-        </div>
-
+        <input type="hidden" name="resume_id" id="resumeId">
+        <button type="button" onclick="chooseResume()" class="otklik_btn">Откликнуться</button>
     </form>
-</div>
+
+    <div id="resumeSelection" style="display: none; margin-left: 25%;">
+        <select id="resumeSelect">
+            {% for resume in resumes %}-->
+                <option value={{resume.id}}>{{resume.title}}</option>
+            {% endfor %}
+        </select>
+        <button onclick="submitResume()">Выбрать</button>
+    </div>
+
     <script>
-    
-        search_btn.style.left = 1000;
-        data_frame.style.left = 1000;
+    function chooseResume() {
+        document.getElementById('resumeSelection').style.display = 'block';
+    }
 
-        bac.style.background = #ff0000;
-    
-    alert('hello');
-
-</script>
-
-
+    function submitResume() {
+        var selectedResumeId = document.getElementById('resumeSelect').value;
+        document.getElementById('resumeId').value = selectedResumeId;
+        document.getElementById('applyForm').submit();
+    }
+    </script>
     {% endif %}
 
 <!--    Вывод ошибки, если пользователь уже отправлял отклик на проект-->
     {% for message in messages %}
         <div>
-            <p class="error_iviting">Ошибка: {{ message }}</p>
+            <p class="error_inviting">Ошибка: {{ message }}</p>
         </div>
     {% endfor %}
 
