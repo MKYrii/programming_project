@@ -79,7 +79,7 @@
             </div>
         {% endfor %}
         <br>
-
+    </div>
     {% else %}
     <br>
     <br>
@@ -87,13 +87,17 @@
 <!--    Здесь как-то при нажатии на откликнуться должно появляться список резюме для выбора, и передаваться resume_id-->
     <form action="{% url 'otclic_on_project' project_id=project.id %}" method="post">
         {% csrf_token %}
-        <div class="otklik_btn">откликнуться</div>
+        <div class="otklik_btn">
+            откликнуться
+        </div>
         <div class="data_frame" id="data_frame">
-        {% for resume in resumes %}
-        <button id="search_btn" type="submit" name="resume_id" value={{resume.id}} class="search_btn" >{{ resume.title }}</button>
-        {% endfor %}
+            {% for resume in resumes %}
+            <button id="search_btn" type="submit" name="resume_id" value={{resume.id}} class="search_btn" >{{ resume.title }}</button>
+            {% endfor %}
+        </div>
 
     </form>
+</div>
     <script>
     
         search_btn.style.left = 1000;
@@ -104,8 +108,7 @@
     alert('hello');
 
 </script>
-    </div>
-    </div>
+
 
     {% endif %}
 
