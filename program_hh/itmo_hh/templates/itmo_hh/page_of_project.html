@@ -84,21 +84,19 @@
     <br>
     <br>
 <div class="otclic_form">
-<!--    Здесь как-то при нажатии на откликнуться должно появляться список резюме для выбора, и передаваться resume_id-->
-
     <form id="applyForm" action="{% url 'otclic_on_project' project_id=project.id %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="resume_id" id="resumeId">
-        <button type="button" onclick="chooseResume()" class="otklik_btn">Откликнуться</button>
+        <button type="button" onclick="chooseResume()" class="invite animate">Откликнуться</button>
     </form>
 
-    <div id="resumeSelection" style="display: none; margin-left: 25%;">
-        <select id="resumeSelect">
-            {% for resume in resumes %}-->
+    <div id="resumeSelection" style="display: none; margin-left: 20%; margin-top: -4.5%;">
+        <select id="resumeSelect" style="border-radius: 10px; padding: 10px 10px 10px 10px;">
+            {% for resume in resumes %}
                 <option value={{resume.id}}>{{resume.title}}</option>
             {% endfor %}
         </select>
-        <button onclick="submitResume()">Выбрать</button>
+        <button onclick="submitResume()" class="invite animate" style="margin-left: 1%">Выбрать</button>
     </div>
 
     <script>
@@ -120,7 +118,7 @@
             <p class="error_inviting">Ошибка: {{ message }}</p>
         </div>
     {% endfor %}
-
+</div>
 
 
 

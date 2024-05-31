@@ -314,6 +314,7 @@ class ResumePage(DetailView):
 
         context['applied_resumes'] = ProjectApplication.objects.filter(resume=resume)
         context['invited_resumes'] = ProjectInvitation.objects.filter(resume=resume)
+        context['projects'] = Startapps_and_projects.objects.filter(user_id=self.request.user.id)
 
         return context
 
@@ -411,11 +412,10 @@ def Otclic_on_project(request, project_id):
         # Проверка на то, что этот пользователь уже откликнулся на проект
         if ProjectApplication.objects.filter(project_id=project_id, resume_id=resume_id).exists():
 
-            messages.error(request, 'Вы уже откликнулись на этот проект')
+            messages.error(request, 'Вы уже откликнулись на этот проект данным резюме')
             return redirect('project', project_id=project_id)
 
         else:
-            # resume_id = request.POST.get('resume_id')
             project_application = ProjectApplication(project_id=project_id, resume_id=resume_id,
                                                      status=0)
             project_application.save()
@@ -430,12 +430,12 @@ def resume_invite(request, resume_id):
     '''
 
     if request.method == 'POST':
-        if ProjectInvitation.objects.filter(resume_id=resume_id, project_id=1).exists():
-            messages.error(request, 'Вы уже пригласили это резюме')
+        project_id = request.POST.get('project_id')
+        if ProjectInvitation.objects.filter(resume_id=resume_id, project_id=project_id).exists():
+            messages.error(request, 'Вы уже пригласили это резюме на данный проект')
             return redirect('resume', resume_id=resume_id)
         else:
-            # project = request.POST.get('project_id')
-            project_invitation = ProjectInvitation(project_id=1, resume_id=resume_id, status=0)
+            project_invitation = ProjectInvitation(project_id=project_id, resume_id=resume_id, status=0)
             project_invitation.save()
             return redirect('resume', resume_id=resume_id)
     else:

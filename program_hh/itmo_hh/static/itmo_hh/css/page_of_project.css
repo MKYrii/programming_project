@@ -108,23 +108,6 @@ body{
     height: 30px;
 }
 
-.otklik_btn {
-    position: absolute;
-    top: 20px;
-    left: 7%;
-    width: 200px;
-    height: 40px;
-    background: white;
-    font-size: 21px;
-    font-family: Calibri;
-    font-weight: bolder;
-    border: 2px solid black;
-    border-radius: 20px;
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
 .otclic_form {
     position: relative;
 }
@@ -139,4 +122,21 @@ body{
     height: 40px;
     /*transform: scale(1, 0.5) ;*/
     border: 2px solid black;
+}
+
+.invite{
+    margin-left: 10%;
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-family: Calibri;
+    background-color: #e6f0ff;
+}
+
+.invite:hover{
+    background-color: #6495ED;
+}
+
+.animate{
+  animation: animateButton 0.5s ease-in-out;
 }

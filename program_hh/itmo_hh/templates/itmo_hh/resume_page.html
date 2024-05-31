@@ -41,7 +41,7 @@
             <a href="{% url 'delete' resume_id=resume.id %}" class="edit">Удалить резюме</a>
         </div>
         <br>
-        <div class="back">
+    <div class="back">
             <br>
         <p class="data"><b style="font-size: 25px;">Проекты, на которые я откликнулся:</b></p>
         {% for applied_resume in applied_resumes %}
@@ -77,14 +77,37 @@
         {% endfor %}
     <br>
     <br>
-
+    </div>
 <!--Здесь при выборе проекта для отправки, нужно передавать его id!!!!-->
     {% else %}
-        <form action="{% url 'resume_invite' resume_id=resume.id %}" method="post" id="myForm">
+    <div class="otclic_form">
+        <form action="{% url 'resume_invite' resume_id=resume.id %}" method="post" id="applyForm">
             {% csrf_token %}
-            <input type="hidden" name="project_id" value="{{ project_id }}">
-            <button type="submit" class="invite animate">Пригласить</button>
+            <input type="hidden" name="project_id" id="projectId">
+            <button type="button" onclick="chooseResume()" class="invite animate">Пригласить</button>
         </form>
+
+        <div id="projectSelection" style="display: none; margin-left: 20%; margin-top: -3%;">
+            <select id="projectSelect" style="border-radius: 10px; padding: 10px 10px 10px 10px;">
+                {% for project in projects %}
+                    <option value={{project.id}}>{{project.title}}</option>
+                {% endfor %}
+            </select>
+            <button onclick="submitResume()" class="invite animate" style="margin-left: 1%">Выбрать</button>
+        </div>
+
+        <script>
+        function chooseResume() {
+            document.getElementById('projectSelection').style.display = 'block';
+        }
+
+        function submitResume() {
+            var selectedResumeId = document.getElementById('projectSelect').value;
+            document.getElementById('projectId').value = selectedResumeId;
+            document.getElementById('applyForm').submit();
+        }
+        </script>
+
     </div>
     {% endif %}
 
