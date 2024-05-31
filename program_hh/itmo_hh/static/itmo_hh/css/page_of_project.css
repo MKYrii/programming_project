@@ -41,15 +41,33 @@ body{
     font-family: Calibri;
     flex-grow: 3;
     margin-left: 4%;
+    margin-top: 20px;
     color: black;
     font-size: 20px;
-    height: 30px;
+    height: 24px;
     text-align: center;
+}
+
+.otclic_status_0{
+    background-color: #FFFACD;
+    padding: 3px 7px 3px 7px;
+    border-radius: 20px;
+}
+.otclic_status_1{
+    background-color: #98FB98;
+    padding: 3px 7px 3px 7px;
+    border-radius: 20px;
+}
+.otclic_status_2{
+    background-color: #CD5C5C;
+    padding: 3px 7px 3px 7px;
+    border-radius: 20px;
 }
 
 .ans_btn{
     flex-grow: 3;
     margin-left: 5%;
+    margin-top: 20px;
     background: #FFFFFF;
     border: 2px solid black;
     height: 30px;
@@ -60,6 +78,10 @@ body{
     text-decoration: none;
     color: black;
     font-weight: bold;
+}
+
+.ans_btn:hover{
+    background: #d9d9d9;
 }
 
 .back{
@@ -131,6 +153,7 @@ body{
     font-size: 18px;
     font-family: Calibri;
     background-color: #e6f0ff;
+    flex-grow: 2;
 }
 
 .invite:hover{
@@ -139,4 +162,28 @@ body{
 
 .animate{
   animation: animateButton 0.5s ease-in-out;
+}
+
+@keyframes animateButton {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.resumeSelection {
+    display: none; 
+    margin-left: 10%; 
+ /*   margin-top: -4.5%;*/
+    flex-grow: 2;
+}
+
+.otclic-form{
+    display: flex;
+    width: 60%;
 }

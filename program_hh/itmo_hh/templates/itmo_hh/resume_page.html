@@ -45,14 +45,14 @@
             <br>
         <p class="data"><b style="font-size: 25px;">Проекты, на которые я откликнулся:</b></p>
         {% for applied_resume in applied_resumes %}
-            <div style="display: flex; width: 60%;"><a href="{% url 'project' project_id=applied_resume.project.id %}" class="ans"><b>{{ applied_resume.project.title }}</b></a>
+            <div style="display: flex; width: 80%;"><a href="{% url 'project' project_id=applied_resume.project.id %}" class="ans"><b>{{ applied_resume.project.title }}</b></a>
                 {% if applied_resume.status == 0 %}
-                    <span class="ans">В рассмотрении</span>
+                    <span class="ans otclic_status_0">В рассмотрении</span>
                     <a href="{% url 'recall_application' resume_id=resume.id project_id=applied_resume.project.id %}" class="ans_btn">Отозвать отклик</a>
                 {% elif applied_resume.status == 1 %}
-                    <span class="ans">Принято</span>
+                    <span class="ans otclic_status_1">Принято</span>
                 {% elif applied_resume.status == 2 %}
-                    <span class="ans">Отказано</span>
+                    <span class="ans otclic_status_2">Отказано</span>
                 {% else %}
                     <span class="ans">Неизвестный статус</span>
                 {% endif %}
@@ -61,15 +61,15 @@
 
         <p class="data"><b style="font-size: 25px;">Проекты, в которые меня пригласили:</b></p>
         {% for invited_resume in invited_resumes %}
-            <div style="display: flex; width: 60%;"><a href="{% url 'project' project_id=invited_resume.project.id %}" class="ans"><b>{{invited_resume.project.title}}</b></a>
+            <div style="display: flex; width: 90%;"><a href="{% url 'project' project_id=invited_resume.project.id %}" class="ans"><b>{{invited_resume.project.title}}</b></a>
             {% if invited_resume.status == 0 %}
                     <span class="ans">В рассмотрении</span>
                     <a href="{% url 'accept_invitation' resume_id=resume.id project_id=invited_resume.project.id %}" class="ans_btn">Принять приглашение</a>
                     <a href="{% url 'deny_invitation' resume_id=resume.id project_id=invited_resume.project.id %}" class="ans_btn">Отклонить приглашение</a>
                 {% elif invited_resume.status == 1 %}
-                    <span class="ans">Вы приняли приглашение</span>
+                    <span class="ans otclic_status_1">Вы приняли приглашение</span>
                 {% elif invited_resume.status == 2 %}
-                    <span class="ans">Вы отказали в приглашении</span>
+                    <span class="ans otclic_status_2">Вы отказали в приглашении</span>
                 {% else %}
                     <span class="ans">Неизвестный статус</span>
                 {% endif %}
@@ -87,7 +87,7 @@
             <button type="button" onclick="chooseResume()" class="invite animate">Пригласить</button>
         </form>
 
-        <div id="projectSelection" style="display: none; margin-left: 20%; margin-top: -3%;">
+        <div id="projectSelection" class="projectSelection">
             <select id="projectSelect" style="border-radius: 10px; padding: 10px 10px 10px 10px;">
                 {% for project in projects %}
                     <option value={{project.id}}>{{project.title}}</option>
@@ -117,5 +117,7 @@
             <p class="error_iviting">Ошибка: {{ message }}</p>
         </div>
     {% endfor %}
+    <br>
+    <br>
 </body>
 </html>

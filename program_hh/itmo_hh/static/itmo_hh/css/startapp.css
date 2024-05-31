@@ -1,3 +1,5 @@
+/*до 153 строчки - верхняя линия с тремя кнопками*/
+
 body{
     background-image: url("../img/backend_building.png");
     background-size: 100%;
@@ -5,38 +7,39 @@ body{
     font-weight: 200;
     color: #393e46;
     background-repeat: no-repeat;
+    position: relative;
+    margin: 0;
     background-attachment: fixed;
 }
-.filters, .in_filters{
-	border-bottom: 2px solid black;
-	font-weight: normal;
-	font-size: 24px;
-	color: #000000;
-	margin-left: 140px;
-	
-}
+
 
 .top_line {
 	background: white;
 	height: 50px;
-	width: 100%;
+	width: 98%;
 	border-radius: 25px;
-	position: fixed;
-	margin-right: 5px;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: 1%;
 }
 
  .left_top, .right_top {
     float: left;
-    width: 30%; 
+    width: 30%;
 	font-weight: normal;
+	font-family: Calibri;
  }
 
 .right_top {
-    text-align: right; 
+    text-align: right;
 }
 
-.top_button1, .top_button2 {
-	width: 40px; 
+.left_top {
+    margin-left: 1%;
+}
+
+.top_button1, .menu_button {
+	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	position: relative;
@@ -50,15 +53,104 @@ body{
 	background-image: url("../img/person.png");
 	background-size: 100%;
 	transition: 0.5s;
+	z-index: 999;
 }
 .top_button1:hover{
 	transform: scale(1.2);
 }
 
-.top_button2 {
+.menu_button {
 	background-image: url("../img/settings.png");
 	background-size: 100%;
+	transition: 0.5s;
 }
+
+.menu_button {
+    width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	left: 120%;
+	margin-top: 5px;
+	margin-left: 15px;
+	border: none;
+	z-index: 999;
+}
+
+.menu_button:hover, .menu_button:focus {
+    background-color: #2980B9;
+}
+
+.dropdown-content {
+	display: none;
+    background-color: white;
+    overflow: hidden;
+    position: absolute;
+    margin-left: 80%;
+  	width: 20%;
+	height: 110vh;
+	animation-name: line-to-rect;
+	animation-duration: 0.5s;
+	z-index: 10;
+	border-left: 2px solid black;
+}
+
+.dropdown-content a {
+    color: black;
+    display: block;
+	vertical-align: middle;
+	margin-left: 2px;
+	height: 40px;
+	width: 80%;
+	border-radius: 0px;
+	text-align: center;
+	text-decoration: none;
+	padding-top: 10px;
+	color: #000000;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 20px;
+	border-left: 2px solid white;
+}
+
+.fuktext {
+	margin-left: 50px;
+}
+
+.dropdown-content a:hover {
+	background-color: #e6e6e5;
+	border-left: 2px solid black;
+}
+
+.rz {
+	height: 40px;
+}
+
+
+.dropdown a:hover {
+	background-color: #ddd;
+}
+
+.show {display: block;}
+
+.menu_button:hover{
+	transform: scale(1.2);
+}
+
+@keyframes line-to-rect {
+  from {
+    width: 280px;
+    height: 110vh;
+    margin-left: 110%;
+  }
+  to {
+    width: 280px;
+    height: 110vh;
+    margin-left: 80%;
+  }
+}
+
+/*снизу уже конкретно под проект*/
 
 .p1 {
 	border-bottom: 2px solid black;
@@ -72,9 +164,30 @@ body{
 	white-space: nowrap;
 }
 
+.filters{
+	border-bottom: 2px solid black;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 24px;
+	color: #000000;
+	margin-left: 140px;
+	min-width: 340px;
+}
+
+.in_filters{
+	border-bottom: 2px solid black;
+	font-weight: normal;
+	font-family: Calibri;
+	font-size: 24px;
+	color: #000000;
+	margin-left: 34%;
+
+}
+
+
+
 .experiance{
-	padding-left: 0.3em;
-	padding-right: 0.5em;
+	padding-left: 10px;
 }
 
 .experiance span{
@@ -84,109 +197,135 @@ body{
 	font-size: 20px;
 }
 .experiance_form{
-	color: #000000;
 	font-weight: normal;
 	font-family: Calibri;
 	font-size: 16px;
-	margin-bottom: 10px;	
+	/*margin-bottom: 10px;*/
+	margin-left: 5px;
+	width: 90%;
+	height: 20px;
+	background: white;
+	border-radius: 5px;
+	border: 2px solid black;
+	vertical-align: center;
 }
+
 
 .filters, .project{
 	margin-top: 55px;
-	height: 100hv;
+	position: absolute;
 	top: 0;
+	width: 50%;
 	box-sizing: border-box;
 }
 .filters{
-	float: left;
-    width: 25%;
-    height: 90vh;
-    padding: 5px;
-    margin-top: 65px;
-    margin-left: 10px;
-    border-radius: 20px;
-    background-color: #4169E1;
-    position: fixed;
-    opacity: 0.8;
+	left: 0;
+	width: 25%;
+	height: 90%;
+	padding: 5px;
+	margin-top: 65px;
+	margin-left: 10px;
+	border-radius: 20px;
+	background-color: #4169E1;
+	height: 100vh;
 }
 .project{
-	float: right;
-    width: 85%;
-    height: 90vh;
-    padding: 10px;
-}
-/*.project-title{
-	color: #3c4245;
-	font-size: 20px;
-	margin-top: -5px;
-	margin-bottom: -2px;
+	width: 85%;
+	right: 0;
+	padding: 10px;
 }
 
-.project-title-p{
-	color: #3c4245;
+
+.project-title, .project-title-p{
+	background: white;
+	height: 30px;
+	width: 50%;
+	border-radius: 15px;
+	text-align: center;
+	font-family: Calibri;
+	flex-grow: 4;
+	font-weight: bold;
 	font-size: 20px;
-	margin-top: -5px;
-	margin-bottom: -2px;
-	margin-left: 10px;
+	color: black;
 }
 
 .project-photo{
 	float: left;
 	width: 15%;
 	margin-right: 10px;
-}*/
-.filter-found-button-input{
-	display: block;
-  	width: 30%;
-  	margin-left: 10em;
-  	margin-top: 4em;
-  	height: calc(2.25rem + 2px);
-  	background-color: #E0FFFF;
-  	border-radius: 10px;
-}
-.filter-found-button-input:hover{
-	background-color: #DCDCDC;
-}
-.button-clear-filters{
-	display: block;
-  	width: 50%;
-  	margin-left: 7.3em;
-  	margin-top: 2em;
-  	height: calc(2.25rem + 2px);
-  	background-color: #E0FFFF;
-  	border-radius: 10px;
-  	text-decoration: none;
-}
-.button-clear-filters:hover{
-	background-color: #DCDCDC;
-}
-
-
-/* Стили для пагинации */
-.paginator{
-	clear: both;
-	float: none;
 	margin-top: 10px;
-	padding-top: 1em;
 }
-.list-pages{
-	margin-left: 50%;
+
+.project-line{
+	display: flex;
+	width: 90%;
 }
-.list-pages span{
-	color: #000080;
-	text-decoration: none;
+
+.project-tags{
+	flex-grow: 1;
+	margin-left: 17%;
+	font-family: Calibri;
+	background: #99ffff;
 	font-size: 20px;
-	display: inline-block;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
-    border: 3px solid #000080;
-    text-align: center;
-    margin-right: 5px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	border-radius: 15px;
 }
-.list-pages a{
-	color: #000080;
-	text-decoration: none;
+
+
+.project-tags1{
+	flex-grow: 1;
+	margin-left: 8%;
+	font-family: Calibri;
+	background: #99ffff;
 	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	border-radius: 15px;
+	width: 30%;
 }
+
+.project-tags2{
+	flex-grow: 1;
+	margin-left: 2%;
+	font-family: Calibri;
+	background: #ffe066;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	height: 30px;
+	border-radius: 15px;
+	width: 20%;
+}
+
+
+.filter-found-button-input, .button-clear-filters{
+	margin-left: 3%;
+	height: 35px;
+	width: 160px;
+	color: black;
+	background: white;
+	border-radius: 12px;
+	border: 2px solid black;
+	font-family: Calibri;
+	font-size: 20px;
+	vertical-align: center;
+	text-align: center;
+
+}
+
+.button-clear-filters{
+	width: 310px;
+	padding-top: 0px;
+	margin-top: 5px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.filter-found-button-input:hover, .button-clear-filters:hover{
+	background-color: #DCDCDC;
+}
+
+
